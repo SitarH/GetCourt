@@ -1,7 +1,6 @@
 {
   "name": "notesserver",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "npm run client:install && npm run build:client && node server.js",
@@ -22,5 +21,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SitarH/GetCourt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SitarH/GetCourt/issues"
+  },
+  "homepage": "https://github.com/SitarH/GetCourt#readme",
+  "description": ""
 }

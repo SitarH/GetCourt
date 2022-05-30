@@ -5,7 +5,7 @@ class DB {
     dbName;
 
     constructor() {
-        this.client = new MongoClient(process.env.DB_URI);
+        this.client = new MongoClient(process.env.DB_URL);
         this.dbName = process.env.DB_NAME;
     }
 
