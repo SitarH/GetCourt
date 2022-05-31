@@ -15,7 +15,7 @@ server.use(express.static(path.join(__dirname, 'client/build/')));
 server.use('/api/notes', require('./controllers/noteController'));
 
 //Global Get Request
-server.get('*/*', async (req, res) => {
+server.get('*', async (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build/', 'index.html'));
 });
 
