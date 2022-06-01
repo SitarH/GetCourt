@@ -1,9 +1,9 @@
-const Note = require('../models/note');
-const NoteRouter = require('express').Router();
+const Court = require('../models/court');
+const CourtRouter = require('express').Router();
 
 //CRUD routes
 
-NoteRouter.get('/', async (req, res) => {
+CourtRouter.get('/', async (req, res) => {
     try {
         let allNotes = await new Note().GetAllActiveNotes();
         res.status(200).json(allNotes);
@@ -12,7 +12,7 @@ NoteRouter.get('/', async (req, res) => {
     }
 });
 
-NoteRouter.get('/:id', async (req, res) => {
+CourtRouter.get('/:id', async (req, res) => {
     let { id } = req.params;
 
     try {
