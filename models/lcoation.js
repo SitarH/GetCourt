@@ -1,12 +1,12 @@
 const DB = require('../utils/db');
 
 class Locaiton {
-    beach_name;
+    beachName;
     court;
     isActive;
 
-    constructor(beach_name = "", court = "") {
-        this.beach_name = beach_name;
+    constructor(beachName = "", court = "") {
+        this.beachName = beachName;
         this.court = court;
         this.isActive = true;
     }
@@ -62,4 +62,4 @@ class Locaiton {
     }
 }
 
-module.exports = Court;
+module.exports = Locaiton;
