@@ -55,7 +55,7 @@ class Locaiton {
 
     async DeleteCourt(id) {
         try {
-            return await new DB().DeactivateDocById('notes',id);
+            return await new DB().DeactivateDocById('location',id);
         } catch (error) {
             return error;
         }
