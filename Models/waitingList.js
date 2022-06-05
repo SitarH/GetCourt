@@ -4,7 +4,7 @@ class WaitingList {
     players;
     isActive;
 
-    constructor(players = []) {
+    constructor(players) {
         this.players = players;
         this.isActive = true;
     }

@@ -12,7 +12,10 @@ server.use(express.json()); //add json support for POST, GET, PUT, DELETE
 server.use(express.static(path.join(__dirname, 'client/build/')));
 
 //routes
-server.use('/api/getCourt', require('./Controllers/courtController'));
+server.use('/api/GetCourt', require('./Controllers/courtController'));
+server.use('/api/GetCourt', require('./Controllers/productController'));
+server.use('/api/GetCourt', require('./Controllers/gameOrderController'));
+server.use('/api/GetCourt', require('./Controllers/waitingListController'));
 
 //Global Get Request
 server.get('*', async (req, res) => {

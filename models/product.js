@@ -1,5 +1,5 @@
 
-const DB = require('../utils/db');
+const DB = require('../Utils/db');
 
 class Product {
     name;
@@ -11,10 +11,11 @@ class Product {
     description;
     isActive;
 
-    constructor(name = "", price = 0, category = "", sku = 0, stock = 0, description = "") {
+    constructor(name, price, category, size, sku, stock, description) {
         this.name = name;
         this.price = price;
         this.category = category;
+        this.size = size;
         this.sku = sku;
         this.stock = stock;
         this.description = description;

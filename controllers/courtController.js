@@ -3,7 +3,7 @@ const CourtRouter = require('express').Router();
 
 //CRUD routes
 
-CourtRouter.get('/', async (req, res) => {
+CourtRouter.get('/court', async (req, res) => {
     try {
         let allCourts = await new Court().GetAllActiveCourts();
         res.status(200).json(allCourts);
@@ -12,7 +12,7 @@ CourtRouter.get('/', async (req, res) => {
     }
 });
 
-CourtRouter.get('/:id', async (req, res) => {
+CourtRouter.get('court/:id', async (req, res) => {
     let { id } = req.params;
 
     try {
@@ -29,7 +29,7 @@ CourtRouter.get('/:id', async (req, res) => {
     }
 });
 
-CourtRouter.post('/add', async (req, res) => {
+CourtRouter.post('court/add', async (req, res) => {
     /*
      * setp 0: make sure to require the model class
      * step 1: get the data from the req.body 
@@ -48,7 +48,7 @@ CourtRouter.post('/add', async (req, res) => {
     }
 });
 
-CourtRouter.put('/:id', async (req, res) => {
+CourtRouter.put('court/:id', async (req, res) => {
     let {id} = req.params;
     let { courtId, availableHours} = req.body;
     try {
@@ -59,7 +59,7 @@ CourtRouter.put('/:id', async (req, res) => {
     }
 });
 
-CourtRouter.delete('/:id', async (req, res) => {
+CourtRouter.delete('court/:id', async (req, res) => {
     let {id} = req.params;
     try {
         let result = await new Court().DeleteCourt(id);

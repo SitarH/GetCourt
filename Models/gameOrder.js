@@ -1,4 +1,4 @@
-const DB = require('../utils/db');
+const DB = require('../Utils/db');
 
 class GameOrder {
     date;
@@ -9,7 +9,7 @@ class GameOrder {
     location;
     isActive;
 
-    constructor(date = "", time = "", type = "", players = [], court = "", location = "") {
+    constructor(date, time, type, players, court, location) {
         this.date = date;
         this.time = time;
         this.type = type;
@@ -44,7 +44,7 @@ class GameOrder {
         }
     }
 
-    async InsertNewGameOrders() {
+    async InsertNewGameOrder() {
         try {
             return await new DB().Insert('gameOrder', this); 
         } catch (error) {
@@ -52,7 +52,7 @@ class GameOrder {
         } 
     }
 
-    async UpdateGameOrdersById(id) {
+    async UpdateGameOrderById(id) {
         try {
             return await new DB().UpdateDocById('gameOrder', id, this);
         } catch (error) {
@@ -61,7 +61,7 @@ class GameOrder {
         } 
     }
 
-    async DeleteGameOrders(id) {
+    async DeleteGameOrder(id) {
         try {
             return await new DB().DeactivateDocById('gameOrder',id);
         } catch (error) {
