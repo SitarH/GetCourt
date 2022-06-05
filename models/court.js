@@ -1,5 +1,5 @@
 
-const DB = require('../utils/db');
+const DB = require('../Utils/db');
 
 class Court {
     courtId;
@@ -14,6 +14,7 @@ class Court {
 
     async GetAllActiveCourts() {
         try {
+            console.log("court class")
             return await new DB().FindAll('court', { isActive: true });
         } catch (error) {
             return error;

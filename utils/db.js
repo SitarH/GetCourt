@@ -10,8 +10,10 @@ class DB {
     }
 
     async FindAll(collection, options = {}) {
+        console.log("findall func")
         try {
             await this.client.connect();
+            console.log("connect db")
             return await this.client.db(this.dbName).collection(collection).find(options).toArray();
         } catch (error) {
 
