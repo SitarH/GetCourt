@@ -1,13 +1,13 @@
 const DB = require('../utils/db');
 
-class Locaiton {
+class Location {
     beachName;
-    court;
+    courtNum;
     isActive;
 
-    constructor(beachName = "", court = "") {
+    constructor(beachName, courtNum) {
         this.beachName = beachName;
-        this.court = court;
+        this.courtNum = courtNum;
         this.isActive = true;
     }
 
@@ -27,7 +27,7 @@ class Locaiton {
         }
     }
 
-    async GetCourtByID(id) {
+    async GetLocationByID(id) {
         try {
             return await new DB().FindByID('location', id);
         } catch (error) {
@@ -36,7 +36,7 @@ class Locaiton {
         }
     }
 
-    async InsertNewCourt() {
+    async InsertNewLocation() {
         try {
             return await new DB().Insert('location', this); 
         } catch (error) {
@@ -44,7 +44,7 @@ class Locaiton {
         } 
     }
 
-    async UpdateCourtById(id) {
+    async UpdateLocationById(id) {
         try {
             return await new DB().UpdateDocById('location', id, this);
         } catch (error) {
@@ -53,7 +53,7 @@ class Locaiton {
         } 
     }
 
-    async DeleteCourt(id) {
+    async DeleteLocation(id) {
         try {
             return await new DB().DeactivateDocById('location',id);
         } catch (error) {
@@ -62,4 +62,4 @@ class Locaiton {
     }
 }
 
-module.exports = Locaiton;
+module.exports = Location;

@@ -13,8 +13,8 @@ class User {
     level;
     isActive;
 
-    constructor(email = "", firstName = "", lastName = "", password = "", dateOfBirth = "", friendsList = [],
-                image = "", gamesList = [], ordersList = [], level = "") 
+    constructor(email, firstName, lastName, password, dateOfBirth, friendsList,
+                image, gamesList, ordersList, level) 
                 {
                     this.email = email;
                     this.firstName = firstName;
@@ -45,7 +45,7 @@ class User {
         }
     }
 
-    async GeUserByID(id) {
+    async GetUserByID(id) {
         try {
             return await new DB().FindByID('user', id);
         } catch (error) {

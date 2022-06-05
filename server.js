@@ -16,6 +16,8 @@ server.use('/api/GetCourt', require('./Controllers/courtController'));
 server.use('/api/GetCourt', require('./Controllers/productController'));
 server.use('/api/GetCourt', require('./Controllers/gameOrderController'));
 server.use('/api/GetCourt', require('./Controllers/waitingListController'));
+server.use('/api/GetCourt', require('./Controllers/locationController'));
+server.use('/api/GetCourt', require('./Controllers/userController'));
 
 //Global Get Request
 server.get('*', async (req, res) => {
