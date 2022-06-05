@@ -6,7 +6,7 @@ class Court {
     availableHours;
     isActive;
 
-    constructor(courtId = 0, availableHours = []) {
+    constructor(courtId , availableHours) {
         this.courtId = courtId;
         this.availableHours = availableHours;
         this.isActive = true;
@@ -31,9 +31,10 @@ class Court {
 
     async GetCourtByID(id) {
         try {
-            return await new DB().FindByID('court', id);
+            console.log("get court by ID")
+            return await new DB().FindByID('court', id );
         } catch (error) {
-            console.log(error);
+            console.log('111');
             return error;
         }
     }

@@ -23,6 +23,7 @@ class DB {
     }
 
     async FindByID(collection, id) {
+        console.log('find by id db');
         try {
             await this.client.connect();
             return await this.client.db(this.dbName).collection(collection).findOne({ _id: ObjectId(id) });

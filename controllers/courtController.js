@@ -5,7 +5,6 @@ const CourtRouter = require('express').Router();
 
 CourtRouter.get('/', async (req, res) => {
     try {
-        console.log("controller")
         let allCourts = await new Court().GetAllActiveCourts();
         res.status(200).json(allCourts);
     } catch (error) {
@@ -17,17 +16,20 @@ CourtRouter.get('/:id', async (req, res) => {
     let { id } = req.params;
 
     try {
-        let note = await new Court().GetNoteByID(id);
-        if (note.title == undefined) 
-            res.status(404).json({ message: 'note not found', note });
+        console.log("get id")
+        let court = await new Court().GetCourtByID(id);
+        if (court.court_id === undefined) 
+            res.status(404).json({ message: 'court not found', court });
         else
-            res.status(200).json(note);
+            res.status(200).json(court);
     } catch (error) {
-        res.status(500).json({ error });
+        console.log('error2')
+        res.status(500).json({message : 'undefine' });
+        
     }
 });
 
-NoteRouter.post('/add', async (req, res) => {
+CourtRouter.post('/add', async (req, res) => {
     /*
      * setp 0: make sure to require the model class
      * step 1: get the data from the req.body 
@@ -35,32 +37,32 @@ NoteRouter.post('/add', async (req, res) => {
      * step 3: connect to DB
      * step 4: insert the record
      */
-    let { title, description } = req.body;
-    let note = new Court(title, description);
+    let { courtId, availableHours } = req.body;
+    let court = new Court(courtId, availableHours);
 
     try {
-        let result = await note.InsertNewNote();
+        let result = await court.InsertNewCourt();
         res.status(201).json(result);
     } catch (error) {
         res.status(500).json({ error })
     }
 });
 
-NoteRouter.put('/:id', async (req, res) => {
+CourtRouter.put('/:id', async (req, res) => {
     let {id} = req.params;
-    let {title, description} = req.body;
+    let { courtId, availableHours} = req.body;
     try {
-        let result = await new Note(title, description).UpdateNoteById(id);
+        let result = await new Court( courtId, availableHours).UpdateCourtById(id);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error });
     }
 });
 
-NoteRouter.delete('/:id', async (req, res) => {
+CourtRouter.delete('/:id', async (req, res) => {
     let {id} = req.params;
     try {
-        let result = await new Note().DeleteNote(id);
+        let result = await new Court().DeleteCourt(id);
         res.status(200).json(result);
     } catch (error) {
         es.status(500).json({ error });
