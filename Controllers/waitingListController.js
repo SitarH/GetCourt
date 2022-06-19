@@ -3,6 +3,8 @@ const WaitingListRouter = require('express').Router();
 
 //CRUD routes
 
+//need to fixxxxx
+
 WaitingListRouter.get('/waitingList', async (req, res) => {
     try {
         let waitingList = await new WaitingList().GetAllWaitingList();
@@ -22,8 +24,7 @@ WaitingListRouter.get('/waitingList/:id', async (req, res) => {
         else
             res.status(200).json(waitingList);
     } catch (error) {
-        console.log('error2')
-        res.status(500).json({message : 'undefine waiting list' });
+        res.status(500).json({message : 'undefine waiting list'});
         
     }
 });
