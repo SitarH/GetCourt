@@ -14,7 +14,6 @@ class Court {
 
     async GetAllActiveCourts() {
         try {
-            console.log("court class")
             return await new DB().FindAll('court', { isActive: true });
         } catch (error) {
             return error;
@@ -31,10 +30,8 @@ class Court {
 
     async GetCourtByID(id) {
         try {
-            console.log("get court by ID")
             return await new DB().FindByID('court', id );
         } catch (error) {
-            console.log('111');
             return error;
         }
     }
