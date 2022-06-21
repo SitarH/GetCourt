@@ -24,7 +24,6 @@ exports.CourtsGetById = async (req, res) => {
      }
  }
 
-
  exports.AddCourt = async (req, res) => {
     /*
       * setp 0: make sure to require the model class

@@ -17,18 +17,17 @@ exports.LocationGetAllActive = async (req, res) => {
         let { id } = req.params;
    
         try {
-            let gameOrder = await new GameOrder().GetGameOrdersByID(id);
-            if (gameOrder === undefined) 
-                res.status(404).json({ message: 'location not found', gameOrder });
+            let location = await new Location().GetLocationByID(id);
+            if (location === undefined) 
+                res.status(404).json({ message: 'location not found', location });
             else
-                res.status(200).json(gameOrder);
+                res.status(200).json(location);
         } catch (error) {
-            console.log('error2')
             res.status(500).json({message : 'undefine game' });
            
         }
     };
-
+   
     exports.AddLocation = async (req, res) => {
              /*
               * setp 0: make sure to require the model class
@@ -48,7 +47,7 @@ exports.LocationGetAllActive = async (req, res) => {
              }
          };
 
-
+        
          exports.UpdateLocation =  async (req, res) => {
                  let {id} = req.params;
                  let { beachName, courtNum} = req.body;
@@ -60,7 +59,7 @@ exports.LocationGetAllActive = async (req, res) => {
                  }
              };
 
-
+         
              exports.DeleteLocation = async (req, res) => {
                      let {id} = req.params;
                      try {
@@ -71,7 +70,7 @@ exports.LocationGetAllActive = async (req, res) => {
                      }
                  };
 
-
+               
 
 
 

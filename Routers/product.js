@@ -3,14 +3,14 @@ const ProductRouter = express.Router();
 
 const ProductController = require('../Controllers/productController');
 
-ProductRouter.get("/", ProductController.LocationGetAllActive); 
+ProductRouter.get("/", ProductController.ProductGetAllActive); 
 
-ProductRouter.get("/:id", ProductController.LocationGetById);
+ProductRouter.get("/:id", ProductController.ProductGetById);
 
-ProductRouter.post("/add", ProductController.AddLocation); 
+ProductRouter.post("/add", ProductController.AddProduct); 
 
-ProductRouter.put("/:id", ProductController.UpdateLocation); 
+ProductRouter.put("/:id", ProductController.UpdateProduct); 
 
-ProductRouter.delete("/:id", ProductController.DeleteLocation);
+ProductRouter.delete("/:id", ProductController.DeleteProduct);
 
 module.exports = ProductRouter;

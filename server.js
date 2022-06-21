@@ -13,15 +13,17 @@ server.use(express.static(path.join(__dirname, 'client/build/')));
 
 //routes
 server.use('/api/GetCourt/court', require('./Routers/court'));
+
 server.use('/api/GetCourt/gameOrder', require('./Routers/gameOrder'));
+
 server.use('/api/GetCourt/location', require('./Routers/location'));
+
 server.use('/api/GetCourt/product', require('./Routers/product'));
+
 server.use('/api/GetCourt/user', require('./Routers/user'));
-// server.use('/api/GetCourt', require('./Controllers/productController'));
-// server.use('/api/GetCourt', require('./Controllers/gameOrderController'));
+
 // server.use('/api/GetCourt', require('./Controllers/waitingListController'));
-// server.use('/api/GetCourt', require('./Controllers/locationController'));
-// server.use('/api/GetCourt', require('./Controllers/userController'));
+
 
 //Global Get Request
 server.get('*', async (req, res) => {
