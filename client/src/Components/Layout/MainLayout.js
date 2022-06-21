@@ -7,8 +7,8 @@ function MainLayout() {
     return (
         <div>
             <Header />
-                <Navigation />
-            <Footer/>
+            <Navigation />
+            <Footer />
         </div>
     )
 }

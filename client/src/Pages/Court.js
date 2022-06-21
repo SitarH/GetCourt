@@ -2,7 +2,7 @@ import React from 'react'
 
 function Court() {
   return (
-    <div>Court</div>
+    <div>Court #1</div>
   )
 }
 
