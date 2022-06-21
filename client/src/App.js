@@ -1,12 +1,13 @@
 
-import './App.css';
-import Login from './Components/Forms/Login'
+import MainLayout from './Components/Layout/MainLayout';
+import { BrowserRouter } from 'react-router-dom';
+import Register from './Components/Forms/Register';
 
 function App() {
   return (
-    <div className="App">
-     <Login/>
-    </div>
+    <BrowserRouter>
+      <MainLayout />
+    </BrowserRouter>
   );
 }
 
