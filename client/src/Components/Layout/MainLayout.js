@@ -6,9 +6,9 @@ import Footer from '../Footer';
 function MainLayout() {
     return (
         <div>
-            <Header />
-            <Navigation />
-            <Footer />
+            <Header/>
+            <Navigation/>
+            <Footer/>
         </div>
     )
 }
