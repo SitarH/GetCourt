@@ -1,4 +1,4 @@
-const Location = require('../models/location');
+const Location = require('../Models/location');
 // const LocationRouter = require('express').Router();
 
 //CRUD routes
@@ -17,13 +17,12 @@ exports.LocationGetAllActive = async (req, res) => {
         let { id } = req.params;
    
         try {
-            let gameOrder = await new GameOrder().GetGameOrdersByID(id);
-            if (gameOrder === undefined) 
-                res.status(404).json({ message: 'location not found', gameOrder });
+            let location = await new Location().GetLocationByID(id);
+            if (location === undefined) 
+                res.status(404).json({ message: 'location not found', location });
             else
-                res.status(200).json(gameOrder);
+                res.status(200).json(location);
         } catch (error) {
-            console.log('error2')
             res.status(500).json({message : 'undefine game' });
            
         }

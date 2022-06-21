@@ -1,4 +1,4 @@
-const DB = require('../utils/db');
+const DB = require('../Utils/db');
 
 class Location {
     beachName;
@@ -29,7 +29,9 @@ class Location {
 
     async GetLocationByID(id) {
         try {
+            console.log('hi');
             return await new DB().FindByID('location', id);
+            
         } catch (error) {
             console.log(error);
             return error;
