@@ -3,17 +3,24 @@ import useInput from '../../Hooks/useInput';
 
 function Login() {
     const { value: enteredEmail,
+        isValid: enteredEmailIsValid,
         InputChangeHandler: EmailChangeHandler,
         InputBlurHandler: EmailBlurHandler,
         Reset: ResetEmail
     } = useInput(value=> value.includes('@'));
 
     const { value: enteredPassword,
+        isValid: enteredPasswordIsValid,
         InputChangeHandler: PasswordChangeHandler,
         InputBlurHandler: PasswordBlurHandler,
         Reset: ResetPassword
-    } = useInput(value=> value);
+    } = useInput(value=> value.trim() !== '');
 
+    let formIsValid = false;
+
+    if(enteredEmailIsValid && enteredPasswordIsValid){
+        formIsValid = true;
+    }
 
     const FormSubmitHandler = (event) =>{
         event.preventDefault();
@@ -38,7 +45,7 @@ function Login() {
             onChange={PasswordChangeHandler} 
             onBlur={PasswordBlurHandler}/>
 
-            <button>Submit</button>
+            <button disabled={!formIsValid}>Submit</button>
         </form>
     )
 }

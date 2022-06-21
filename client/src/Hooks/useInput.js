@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 
-function useInput(inputValue) {
+function useInput(ValidateValue) {
 
     const [enteredValue, setEnteredValue] = useState('');
     const [isTouched, setIsTouched] = useState(false);
+
+    const valueIsValid = ValidateValue(enteredValue);
 
     const InputChangeHandler = (event) => {
         setEnteredValue(event.target.value);
@@ -23,6 +25,7 @@ function useInput(inputValue) {
     return (
         {
             value: enteredValue,
+            isValid: valueIsValid,
             InputChangeHandler,
             InputBlurHandler,
             Reset
