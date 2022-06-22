@@ -11,7 +11,7 @@ exports.CourtsGetAllActive = async (req, res) => {
 
 exports.CourtsGetById = async (req, res) => {
     let { id } = req.params;
-
+    console.log(id)
     try {
          let court = await new Court().GetCourtByID(id);
          if (court.courtId === undefined) 

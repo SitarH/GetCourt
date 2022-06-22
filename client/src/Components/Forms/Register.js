@@ -60,12 +60,25 @@ function Register() {
 
     const FormSubmitHandler = (event) => {
         event.preventDefault();
-        console.log('email->', enteredEmail)
-        console.log('pass->', enteredPassword)
-        console.log('first name', enteredFirstName)
-        console.log('last name', enteredLastName)
-        console.log('dob', enteredBirthDate)
-        console.log('level', enteredLevel)
+
+        fetch('http://localhost:5008/api/GetCourt/user/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: enteredEmail,
+                firstName: enteredFirstName,
+                lastName: enteredLastName,
+                password: enteredPassword,
+                dateOfBirth: enteredBirthDate,
+                friendsList: [],
+                gamesList: [],
+                ordersList: [],
+                level: enteredLevel
+            })
+        })
+
         ResetFirstName();
         ResetLastName();
         ResetEmail();
@@ -107,10 +120,13 @@ function Register() {
                 onBlur={BirthDateBlurHandler} />
 
             <label>Level :</label>
-            <input type="text"
-                value={enteredLevel}
+            <select value={enteredLevel}
                 onChange={LevelChangeHandler}
-                onBlur={LevelBlurHandler} />
+                onBlur={LevelBlurHandler}>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+            </select>
 
             <button disabled={!formIsValid}>Submit</button>
         </form>

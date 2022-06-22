@@ -7,7 +7,7 @@ import Register from '../Components/Forms/Register';
 import Shop from '../Pages/Shop';
 import Profile from '../Pages/Profile';
 import Location from '../Pages/Location';
-import Court from '../Pages/Court';
+import Courts from '../Pages/Courts';
 import ManageProduct from '../Pages/ManageProduct'
 import Admin from './Admin/Admin';
 import ErrorPage from '../Pages/ErrorPage';
@@ -24,7 +24,7 @@ function Navigation() {
       <Route path="/shop" element={<Shop />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/location" element={<Location />} />
-      <Route path="/court" element={<Court />} />
+      <Route path="/courts" element={<Courts />} />
       <Route path="/profile/manageProduct" element={<ManageProduct />} />
     </Routes>
   )

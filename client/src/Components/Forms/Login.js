@@ -1,7 +1,11 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import useInput from '../../Hooks/useInput';
 
 function Login() {
+
+    const navigate = useNavigate();
+
     const { value: enteredEmail,
         isValid: enteredEmailIsValid,
         InputChangeHandler: EmailChangeHandler,
@@ -22,12 +26,25 @@ function Login() {
         formIsValid = true;
     }
 
-    const FormSubmitHandler = (event) =>{
+    const FormSubmitHandler = async (event) =>{
         event.preventDefault();
-        console.log('email->', enteredEmail)
-        console.log('pass->', enteredPassword)
+        const currentUser = await fetchdata();
+        console.log(currentUser)
+        if(!currentUser)
+            alert('user not found')
+        else
+            navigate('/');
+
         ResetEmail();
         ResetPassword();
+        
+    }
+
+    const fetchdata = async () =>{
+        const response = await fetch('http://localhost:5008/api/GetCourt/user');
+        const data = await response.json();
+        const exist = data.find(user => user.email ===enteredEmail && user.password === enteredPassword);
+        return exist;
     }
 
 

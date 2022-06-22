@@ -1,9 +1,37 @@
-import React from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react';
 
-function home() {
+function Home() {
+
+  // why render twice????
+
+  const [locations, setLocations] = useState([])
+
+  useEffect(() => {
+
+    fetchLocations()
+
+  }, [])
+
+  const fetchLocations = async () => {
+    const respone = await fetch('http://localhost:5008/api/GetCourt/location');
+    const data = await respone.json();
+    setLocations(data)
+
+  }
+
+
+
   return (
-    <div>choose court </div>
+    <>
+      {locations.map((location, index) => {
+        return <button key={index} location={location}>
+          {location.beachName}
+        </button>
+      })}
+    </>
+
   )
 }
 
-export default home
+export default Home
