@@ -3,99 +3,134 @@ import useInput from '../../Hooks/useInput';
 
 function Register() {
 
-  const { value: enteredFirstName,
-    InputChangeHandler: FirstNameChangeHandler,
-    InputBlurHandler: FirstNameBlurHandler,
-    Reset: ResetFirstName
-  } = useInput(value => value);
+    const { value: enteredFirstName,
+        isValid: enteredFirstNameisValid,
+        InputChangeHandler: FirstNameChangeHandler,
+        InputBlurHandler: FirstNameBlurHandler,
+        Reset: ResetFirstName
+    } = useInput(value => value);
 
-  const { value: enteredLastName,
-    InputChangeHandler: LastNameChangeHandler,
-    InputBlurHandler: LastNameBlurHandler,
-    Reset: ResetLastName
-  } = useInput(value => value);
+    const { value: enteredLastName,
+        isValid: enteredLastNameIsValid,
+        InputChangeHandler: LastNameChangeHandler,
+        InputBlurHandler: LastNameBlurHandler,
+        Reset: ResetLastName
+    } = useInput(value => value);
 
-  const { value: enteredEmail,
-    InputChangeHandler: EmailChangeHandler,
-    InputBlurHandler: EmailBlurHandler,
-    Reset: ResetEmail
-  } = useInput(value => value.includes('@'));
+    const { value: enteredEmail,
+        isValid: enteredEmailIsValid,
+        InputChangeHandler: EmailChangeHandler,
+        InputBlurHandler: EmailBlurHandler,
+        Reset: ResetEmail
+    } = useInput(value => value.includes('@'));
 
-  const { value: enteredPassword,
-    InputChangeHandler: PasswordChangeHandler,
-    InputBlurHandler: PasswordBlurHandler,
-    Reset: ResetPassword
-  } = useInput(value => value);
+    const { value: enteredPassword,
+        isValid: enteredPasswordIsValid,
+        InputChangeHandler: PasswordChangeHandler,
+        InputBlurHandler: PasswordBlurHandler,
+        Reset: ResetPassword
+    } = useInput(value => value);
 
-  const { value: enteredBirthDate,
-    InputChangeHandler: BirthDateChangeHandler,
-    InputBlurHandler: BirthDateBlurHandler,
-    Reset: ResetBirthDate
-  } = useInput(value => value);
+    const { value: enteredBirthDate,
+        isValid: enteredBirthDateIsValid,
+        InputChangeHandler: BirthDateChangeHandler,
+        InputBlurHandler: BirthDateBlurHandler,
+        Reset: ResetBirthDate
+    } = useInput(value => value);
 
-  const { value: enteredLevel,
-    InputChangeHandler: LevelChangeHandler,
-    InputBlurHandler: LevelBlurHandler,
-    Reset: ResetLevel
-  } = useInput(value => value);
+    const { value: enteredLevel,
+        isValid: enteredLevelsValid,
+        InputChangeHandler: LevelChangeHandler,
+        InputBlurHandler: LevelBlurHandler,
+        Reset: ResetLevel
+    } = useInput(value => value);
 
-  const FormSubmitHandler = (event) => {
-    event.preventDefault();
-    console.log('email->', enteredEmail)
-    console.log('pass->', enteredPassword)
-    console.log('first name', enteredFirstName)
-    console.log('last name', enteredLastName)
-    console.log('dob', enteredBirthDate)
-    console.log('level', enteredLevel)
-    ResetFirstName();
-    ResetLastName();
-    ResetEmail();
-    ResetPassword();
-    ResetBirthDate();
-    ResetLevel();
-  }
+    let formIsValid = false;
 
-  return (
-    <form onSubmit={FormSubmitHandler}>
-      <label>First Name :</label>
-      <input type="text"
-        value={enteredFirstName}
-        onChange={FirstNameChangeHandler}
-        onBlur={FirstNameBlurHandler} />
+    if (enteredFirstNameisValid &&
+        enteredLastNameIsValid &&
+        enteredEmailIsValid &&
+        enteredPasswordIsValid &&
+        enteredBirthDateIsValid &&
+        enteredLevelsValid) {
 
-      <label>Last Name :</label>
-      <input type="text"
-        value={enteredLastName}
-        onChange={LastNameChangeHandler}
-        onBlur={LastNameBlurHandler} />
+        formIsValid = true;
+    }
 
-      <label>Email:</label>
-      <input type="email"
-        value={enteredEmail}
-        onChange={EmailChangeHandler}
-        onBlur={EmailBlurHandler} />
 
-      <label>Password:</label>
-      <input type="password"
-        value={enteredPassword}
-        onChange={PasswordChangeHandler}
-        onBlur={PasswordBlurHandler} />
+    const FormSubmitHandler = (event) => {
+        event.preventDefault();
 
-      <label>Birth Date :</label>
-      <input type="date"
-        value={enteredBirthDate}
-        onChange={BirthDateChangeHandler}
-        onBlur={BirthDateBlurHandler} />
+        fetch('http://localhost:5008/api/GetCourt/user/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: enteredEmail,
+                firstName: enteredFirstName,
+                lastName: enteredLastName,
+                password: enteredPassword,
+                dateOfBirth: enteredBirthDate,
+                friendsList: [],
+                gamesList: [],
+                ordersList: [],
+                level: enteredLevel
+            })
+        })
 
-      <label>Level :</label>
-      <input type="text"
-        value={enteredLevel}
-        onChange={LevelChangeHandler}
-        onBlur={LevelBlurHandler} />
+        ResetFirstName();
+        ResetLastName();
+        ResetEmail();
+        ResetPassword();
+        ResetBirthDate();
+        ResetLevel();
+    }
 
-      <button>Submit</button>
-    </form>
-  )
+    return (
+        <form onSubmit={FormSubmitHandler}>
+            <label>First Name :</label>
+            <input type="text"
+                value={enteredFirstName}
+                onChange={FirstNameChangeHandler}
+                onBlur={FirstNameBlurHandler} />
+
+            <label>Last Name :</label>
+            <input type="text"
+                value={enteredLastName}
+                onChange={LastNameChangeHandler}
+                onBlur={LastNameBlurHandler} />
+
+            <label>Email:</label>
+            <input type="email"
+                value={enteredEmail}
+                onChange={EmailChangeHandler}
+                onBlur={EmailBlurHandler} />
+
+            <label>Password:</label>
+            <input type="password"
+                value={enteredPassword}
+                onChange={PasswordChangeHandler}
+                onBlur={PasswordBlurHandler} />
+
+            <label>Birth Date :</label>
+            <input type="date"
+                value={enteredBirthDate}
+                onChange={BirthDateChangeHandler}
+                onBlur={BirthDateBlurHandler} />
+
+            <label>Level :</label>
+            <select value={enteredLevel}
+                onChange={LevelChangeHandler}
+                onBlur={LevelBlurHandler}>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+            </select>
+
+            <button disabled={!formIsValid}>Submit</button>
+        </form>
+    )
 }
 
 export default Register

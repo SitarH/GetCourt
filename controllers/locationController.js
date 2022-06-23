@@ -6,7 +6,6 @@ const Location = require('../Models/location');
 exports.LocationGetAllActive = async (req, res) => {
          try {
              let allLocation = await new Location().GetAllActiveLocation();
-             console.log("all active loc")
              res.status(200).json(allLocation);
          } catch (error) {
              res.status(500).json({ error });

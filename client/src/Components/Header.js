@@ -1,15 +1,9 @@
 import React from 'react'
-import NavBar from './NavBar/NavBar';
-import Shop from './Shop';
+import { slide as Menu } from 'react-burger-menu';
 
 function Header() {
   return (
-    <div>
-      <h1>header </h1>
-      <Shop/>
-      <NavBar />
-      
-    </div>
+    <p>Header</p>
   )
 }
 
