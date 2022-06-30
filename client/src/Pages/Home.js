@@ -2,7 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Location from '../Components/Location'
-import Courts from './CourtList'
+import Courts from './CourtList';
+import Wrapper from '../Components/UI/Wrapper';
 
 function Home() {
 
@@ -27,14 +28,15 @@ function Home() {
   
 
   return (
-    <>
+  
+    <Wrapper>
       {locations.map((location) => {
         return <Location 
         key={location._id} 
         location={location} 
       />
       })}
-    </>
+    </Wrapper>
 
   )
 }

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Wrapper from '../Components/UI/Wrapper';
+import Card from '../Components/UI/Card';
+import Title from '../Components/UI/Title';
 
 
 function Courts() {
@@ -32,16 +35,16 @@ function Courts() {
   }
 
   return (
-    <>
+    <Wrapper>
       {courtsNumbers.map((courtNumber, index) => {
-        return <button
+        return <Card
           key={index}
           onClick={() => navigate('/court', { state: { value: courtNumber } })}
         >
-          {courtNumber.courtId}
-        </button>
+          <Title>{courtNumber.courtId}</Title>
+        </Card>
       })}
-    </>
+    </Wrapper>
   )
 }
 

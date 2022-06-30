@@ -1,7 +1,8 @@
 import React from 'react'
 import Navigation from '../Navigation';
-import Header from '../Header';
+// import Header from '../Header';
 import Footer from '../Footer';
+import Header from '../UI/Header';
 
 function MainLayout() {
     return (
