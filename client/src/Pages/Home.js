@@ -17,11 +17,23 @@ function Home() {
 
   
   const fetchLocations = async () => {
-    const respone = await fetch('http://localhost:5008/api/GetCourt/location');
-    const data = await respone.json();
-    console.log(data);
 
-    setLocations(data)
+    try {
+      const respone = await fetch('http://localhost:5008/api/GetCourt/location');
+      if(respone.status === 200){
+        const data = await respone.json();
+        console.log(data)
+        setLocations(data)
+      }
+    } catch (error) {
+      console.log(error)
+      
+    }
+    // const respone = await fetch('http://localhost:5008/api/GetCourt/location');
+    // const data = await respone.json();
+    // console.log(data);
+
+    
 
   }
 

@@ -5,8 +5,8 @@ display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
 align-items: center; 
-margin-right: 20%;
-margin-left: 20%
+ margin-right: 10%;
+ margin-left: 10%
 `;
 
 export default Wrapper;

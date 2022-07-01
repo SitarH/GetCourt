@@ -7,6 +7,8 @@ CourtRouter.get("/", CourtController.CourtsGetAllActive);
 
 CourtRouter.get("/:id", CourtController.CourtsGetById);
 
+CourtRouter.get("/arr/:arr", CourtController.CourtsGetByArr);
+
 CourtRouter.post("/add", CourtController.AddCourt); 
 
 CourtRouter.put("/:id", CourtController.UpdateCourt); 

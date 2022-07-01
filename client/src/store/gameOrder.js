@@ -15,16 +15,16 @@ const gameOrderSlice = createSlice({
     name: 'gameOrder',
     initialState,
     reducers: {
-        InsertIntoValue(state, action){
-            // const field = action.field;
+        InsertIntoValue(initialState, action){
+            // insert values to state to create game order
             const value = action.payload.value;
             const field = action.payload.field;
-            console.log(value);
-            console.log(field);
-            state.action.payload.field = value;
-            console.log(state.gameOrder.time)
+            
+            initialState[field] = value
         },
         AddNewGame(){
+            //add game to user's game list
+            // add game to gameOrder collection in db- for admin
 
         },
         UpdateGameOrder(){
@@ -37,7 +37,7 @@ const gameOrderSlice = createSlice({
 
     }
 })
-
+console.log(gameOrderSlice)
 export const gameOrderActions = gameOrderSlice.actions;
 
-export default gameOrderSlice.reducer
+export default gameOrderSlice.reducer;

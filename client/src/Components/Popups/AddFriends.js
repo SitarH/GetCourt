@@ -1,13 +1,28 @@
-import React from 'react'
+import React from 'react';
+import Button from '../UI/Button';
 
-function AddFriends() {
+function AddFriends({toggleVal, setToggle}) {
+
+  const AddFriendHandler = (event) =>{
+    if(event === 'yes'){
+
+    }
+    else{
+      setToggle(!toggleVal);
+    }
+  }
+
   return (
     <>
     <div>would you like to invite friends?</div>
-    <button>Yes</button>
-    <button>No</button>
+    <Button value={'yes'} 
+    onClick={(event)=>AddFriendHandler(event.target.value)}>Yes
+    </Button>
+    <Button value={'no'} 
+    onClick={(event)=>AddFriendHandler(event.target.value)}>No
+    </Button>
     </>
   )
 }
 
-export default AddFriends
+export default AddFriends;

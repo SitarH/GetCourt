@@ -1,5 +1,7 @@
 
 const DB = require('../Utils/db');
+const ObjectId = require('mongodb').ObjectId;
+
 
 class Court {
     courtId;
@@ -23,6 +25,21 @@ class Court {
     async GetAllCourts() {
         try {
             return await new DB().FindAll('court');
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async GetAllCourtsByArray(arr) {
+        try {
+            let courtsId = new Array();
+            for (let index = 0; index < arr.length; index++) {
+                courtsId.push(ObjectId(arr[index]));
+            }
+            let options = {
+                _id: {$in: courtsId}
+            }
+            return await new DB().FindAll('court', options);
         } catch (error) {
             return error;
         }
