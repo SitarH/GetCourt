@@ -7,7 +7,7 @@ import Register from '../../Pages/Register';
 import Shop from '../../Pages/Shop';
 import Profile from '../../Pages/Profile';
 import Location from '../../Pages/Location';
-import Court from '../../Pages/Court';
+import Court from '../../Pages/Courts';
 import ManageProduct from '../../Pages/ManageProduct';
 import Friends from '../../Pages/Friends';
 import Payments from '../../Pages/Payments';

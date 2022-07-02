@@ -1,19 +1,19 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa';
+import { MdPayment } from "react-icons/md";
+import { CgProfile } from 'react-icons/cg';
 import * as AiIcons from 'react-icons/ai';
 
 export const SidebarData = [
   {
     title: 'Profile',
     path: '/Profile',
-    icon: <FaIcons.FaUserAlt />,
-
+    icon: <CgProfile/>
   },
   {
     title: 'Payments',
     path: '/Payments',
-    icon: <FaIcons.FaRegCreditCard />,
-
+    icon: <MdPayment />,
   },
   {
     title: 'History',
