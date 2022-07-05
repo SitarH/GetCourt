@@ -22,7 +22,6 @@ exports.UserGetById = async (req, res) => {
         else
             res.status(200).json(user);
     } catch (error) {
-        console.log('error user')
         res.status(500).json({ message: 'undefine' });
     }
 };
@@ -42,6 +41,20 @@ exports.AddUser = async (req, res) => {
          gamesList, ordersList, level);
 
     try {
+        let result = await user.InsertNewUser();
+        res.status(201).json(result);
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+};
+
+//add object into array in user object
+exports.AddGameToUser = async (req, res) => {
+    // { $push: { <field1>: <value1>, ... } }
+    let { field, value } = req.body;
+    
+
+    try {  
         let result = await user.InsertNewUser();
         res.status(201).json(result);
     } catch (error) {

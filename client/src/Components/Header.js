@@ -2,22 +2,23 @@ import React from 'react'
 import NavBar from './NavBar/NavBar';
 import { GoThreeBars } from "react-icons/go";
 import { useState } from 'react';
+import HeaderUI from './UI/HeaderUI';
 
 
 function Header() {
 
-  const [toggleNav, SetToggleNav] = useState(false);
+  const [toggleNav, setToggleNav] = useState(false);
 
   return (
     <>
-      <p>
-        <GoThreeBars onClick={()=>SetToggleNav(!toggleNav)}/>
-        Header
+      <HeaderUI>
+        <GoThreeBars togglenavbar={toggleNav} setToggleNav={setToggleNav} onClick={()=>setToggleNav(!toggleNav)}/>
+       
         {toggleNav && <NavBar /> }
         
-      </p>
+      </HeaderUI>
     </>
   )
 }
 
-export default Header
+export default Header;

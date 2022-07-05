@@ -25,7 +25,8 @@ function Court() {
     const SelectionHandler = (fieldVal, value) =>{
         console.log(value)
         dispatch(gameOrderActions.InsertIntoValue({field: fieldVal, value: value}))
-        setTogglePopUp(true)
+        if (fieldVal === 'time')
+            setTogglePopUp(true)
     }
 
     const PurchaseGameHandler = () =>{
@@ -33,14 +34,14 @@ function Court() {
     }
 
     return (
-        <Wrapper>
+        <Wrapper className={'column'}>
             <Title>Court {currentCourt.courtId}</Title>
             <input type="date" 
             id="date" 
             onChange={(event)=>SelectionHandler('date',event.target.value)}
             ></input>
 
-            <Title>Playing for?</Title>
+            <h2>Playing for?</h2>
             <Wrapper>
             {currentCourt.gameType.map((gameType, index) => {
                 return <Button
@@ -52,7 +53,7 @@ function Court() {
             )}
             </Wrapper>
           
-            <Title>Available Hours</Title>
+            <h2>Available Hours</h2>
             <Wrapper>
             {currentCourt.availableHours.map((hour, index) => {
                 return <Button

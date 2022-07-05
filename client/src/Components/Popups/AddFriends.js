@@ -1,27 +1,41 @@
 import React from 'react';
 import Button from '../UI/Button';
+import PopUp from '../UI/PopUp';
+import { useState } from 'react';
+import FriendsList from './FriendsList'
 
-function AddFriends({toggleVal, setToggle}) {
+function AddFriends({ toggleVal, setToggle }) {
 
-  const AddFriendHandler = (event) =>{
-    if(event === 'yes'){
+  const [toggleList, setToggleList] = useState(false);
+
+  const AddFriendHandler = (event) => {
+
+    if (event.target.outerText === 'Yes') {
+      setToggleList(!toggleList);
 
     }
-    else{
+    else {
       setToggle(!toggleVal);
     }
   }
 
   return (
     <>
-    <div>would you like to invite friends?</div>
-    <Button value={'yes'} 
-    onClick={(event)=>AddFriendHandler(event.target.value)}>Yes
-    </Button>
-    <Button value={'no'} 
-    onClick={(event)=>AddFriendHandler(event.target.value)}>No
-    </Button>
+      {toggleList ? <FriendsList
+        toggleVal={toggleVal}
+        setToggle={setToggle}>
+      </FriendsList> :
+        <PopUp>
+          <h2>would you like to invite friends?</h2>
+          <Button value={"yes"}
+            onClick={AddFriendHandler}>Yes
+          </Button>
+          <Button value={"no"}
+            onClick={AddFriendHandler}>No
+          </Button>
+        </PopUp>}
     </>
+
   )
 }
 

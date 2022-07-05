@@ -10,6 +10,7 @@ const Button = styled.div`
     width: 150px;
     text-align: center;
     cursor: pointer;
+    margin-right: 10px;
 `;
 
 

@@ -12,6 +12,7 @@ const PurchseButton = styled.div`
     width: 200px;
     text-align: center;
     cursor: pointer;
+    margin-top: 20px;
 `;
 
 

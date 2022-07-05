@@ -20,7 +20,7 @@ const gameOrderSlice = createSlice({
             const value = action.payload.value;
             const field = action.payload.field;
             
-            initialState[field] = value
+            initialState[field] = value;
         },
         AddNewGame(){
             //add game to user's game list

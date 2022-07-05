@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import useInput from '../../Hooks/useInput';
+import Form from '../UI/Form';
+import Title from '../UI/Title';
+import PurchaseButton from '../UI/PurchaseButton';
 
 function Login() {
 
@@ -49,21 +52,21 @@ function Login() {
 
 
     return (
-        <form onSubmit={FormSubmitHandler}>
-            <label>Email:</label>
-            <input type="email" 
+        <Form onSubmit={FormSubmitHandler}>
+           <Title>Login</Title>
+            <input type="email" placeholder='Email' 
             value={enteredEmail} 
             onChange={EmailChangeHandler} 
             onBlur={EmailBlurHandler}/>
            
-            <label>Password:</label>
-            <input type="password" 
+            
+            <input type="password" placeholder='Password' 
             value={enteredPassword} 
             onChange={PasswordChangeHandler} 
             onBlur={PasswordBlurHandler}/>
 
-            <button disabled={!formIsValid}>Submit</button>
-        </form>
+            <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
+        </Form>
     )
 }
 
