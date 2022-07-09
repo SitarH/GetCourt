@@ -4,6 +4,7 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
+import Card from '../UI/Card';
 
 function Login() {
 
@@ -52,6 +53,7 @@ function Login() {
 
 
     return (
+        <Card>
         <Form onSubmit={FormSubmitHandler}>
            <Title>Login</Title>
             <input type="email" placeholder='Email' 
@@ -67,6 +69,7 @@ function Login() {
 
             <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
+        </Card>
     )
 }
 

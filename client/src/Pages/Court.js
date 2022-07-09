@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import AddFriends from '../Components/Popups/AddFriends';
 import {useDispatch} from 'react-redux';
 import {gameOrderActions} from '../store/gameOrder';
@@ -12,6 +12,7 @@ import PurchaseButton from '../Components/UI/PurchaseButton';
 function Court() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const court = useLocation();
     const currentCourt = court.state.value;
 
@@ -30,7 +31,7 @@ function Court() {
     }
 
     const PurchaseGameHandler = () =>{
-        dispatch(gameOrderActions.AddNewGame())
+        navigate('/checkout');
     }
 
     return (

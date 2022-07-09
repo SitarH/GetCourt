@@ -6,6 +6,8 @@ const HeaderUI = styled.header`
     align-items: center;
     font-size: 40px;
     color: #4EB69F;
+    justify-content: space-between;
+    
 
 `;
 

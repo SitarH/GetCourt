@@ -2,27 +2,29 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     
-        date:'',
-        time:'',
-        location:'',
-        court:'',
-        type:'',
-        players:'',
+        name: '',
+        email: '',
+        _id: '',
+        registerStatus: '',
+        registerError: '',
+        loginStatus: '',
+        loginError: '',
+        isLoggedIn: false,
        
 };
 
-const gameOrderSlice = createSlice({
-    name: 'gameOrder',
+const authSlice = createSlice({
+    name: 'auth',
     initialState,
     reducers: {
-        InsertIntoValue(initialState, action){
+        AddNewUser(initialState, action){
             // insert values to state to create game order
             const value = action.payload.value;
             const field = action.payload.field;
             
             initialState[field] = value;
         },
-        AddNewGame(){
+        LogIn(){
             //add game to user's game list
             // add game to gameOrder collection in db- for admin
 
@@ -37,7 +39,7 @@ const gameOrderSlice = createSlice({
 
     }
 })
-console.log(gameOrderSlice)
-export const gameOrderActions = gameOrderSlice.actions;
 
-export default gameOrderSlice.reducer;
+export const authActions = authSlice.actions;
+
+export default authSlice.reducer;

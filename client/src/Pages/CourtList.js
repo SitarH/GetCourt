@@ -52,7 +52,7 @@ function Courts() {
   return (
     <Wrapper>
       {courtsNumbers.map((courtNumber, index) => {
-        return <Card
+        return <Card height={'200px'}
           key={index}
           onClick={() => navigate('/court', { state: { value: courtNumber } })}
         >

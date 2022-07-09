@@ -15,32 +15,32 @@ import { SidebarData } from './SidebarData';
 
 
 function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
-    console.log(togglenavbar);
+    
     const navigate = useNavigate();
     const { window } = props;
     const [open, setOpen] = useState(true);
 
     const handleDrawerToggle = () => {
         setOpen((prev) => !prev);
-        setToggleNav((prev) => !prev)
+        // setToggleNav((prev) => !prev)
     };
 
     const drawer = (
         <>
-            <Divider />
+            <Divider/>
             <List>
                 {SidebarData.map((item, index) => (
                     <ListItem key={index} >
                         {item.icon}
                         <ListItemButton 
-                        onClick={() => { setToggleNav((prev) => !prev); 
-                        navigate(`/${item.title}`)}}>
+                        onClick={() => {  
+                        navigate(`${item.path}`)}}>
                             <ListItemText primary={item.title} />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            <Divider/>
 
         </>
     );

@@ -9,7 +9,7 @@ function Location({ location }) {
   const navigate = useNavigate();
 
   return (
-    <Card>
+    <Card height={'200px'}>
     <Title onClick={() => navigate('/courts', { state: {value: location} })}>
       {location.beachName}
     </Title>

@@ -93,6 +93,7 @@ function Register() {
     return (
         <Form onSubmit={FormSubmitHandler}>
             <Title>Register</Title>
+
             <input type="text" placeholder="First Name"
                 value={enteredFirstName}
                 onChange={FirstNameChangeHandler}
@@ -126,7 +127,7 @@ function Register() {
                 <option>Intermediate</option>
                 <option>Advanced</option>
             </select>
-
+            
             <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
     )
