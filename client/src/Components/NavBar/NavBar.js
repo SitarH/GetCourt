@@ -2,6 +2,8 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import AccountBox from '@mui/icons-material/AccountBox';
+import Profile from '@mui/icons-material/Person';
+import PaymentIcon from '@mui/icons-material/Payment';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -14,6 +16,8 @@ import { useState } from 'react';
 
 
 function ResponsiveDrawer(props) {
+
+    const arr = ['Profile', 'Payments', 'History', 'Friends', 'Contact', 'Settings'];
 
     const navigate = useNavigate();
 
@@ -29,9 +33,10 @@ function ResponsiveDrawer(props) {
             {/* <Toolbar /> */}
             <Divider />
             <List>
-                {['Profile', 'Payments', 'History', 'Friends', 'Contact', 'Settings'].map((text, index) => (
+                {arr.map((text, index) => (
                     <ListItem key={text} >
-                        {text[index]= <AccountBox/>}
+                        {arr[text[index]]= <AccountBox/>}
+                        
                         <ListItemButton onClick={() => {handleDrawerToggle() ; navigate(`/${text}`)}}>
                             <ListItemText primary={text} />
                         </ListItemButton>

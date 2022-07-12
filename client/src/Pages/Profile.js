@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Profile from '../Components/Profile';
+import PlayerContext from '../Context/PlayerContext';
+import {useContext} from 'react';
 
-function Profile() {
+function ProfilePage() {
+
+  const {currentUser} = useContext(PlayerContext);
   return (
-    <div>Profile page</div>
+   
+    <Profile data={currentUser}></Profile>
   )
 }
 
-export default Profile
+export default ProfilePage

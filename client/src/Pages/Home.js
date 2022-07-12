@@ -14,7 +14,7 @@ function Home() {
   }, [])
 
   const fetchLocations = async () => {
-    const respone = await fetch('http://localhost:5008/api/GetCourt/location');
+    const respone = await fetch('http://localhost:5008/api/GetCourt');
     const data = await respone.json();
     setLocations(data)
 
