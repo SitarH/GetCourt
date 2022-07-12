@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
+import ProductList from '../Components/ProductList';
+
 
 function Shop() {
   return (
-    <div>Shop</div>
+   <ProductList/>
   )
 }
 

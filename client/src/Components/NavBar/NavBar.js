@@ -1,59 +1,56 @@
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import AccountBox from '@mui/icons-material/AccountBox';
-import Profile from '@mui/icons-material/Person';
-import PaymentIcon from '@mui/icons-material/Payment';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import PropTypes from 'prop-types';
-import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { SidebarData } from './SidebarData';
 
 
-function ResponsiveDrawer(props) {
 
-    const arr = ['Profile', 'Payments', 'History', 'Friends', 'Contact', 'Settings'];
-
+function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
+    
     const navigate = useNavigate();
-
     const { window } = props;
     const [open, setOpen] = useState(true);
 
     const handleDrawerToggle = () => {
         setOpen((prev) => !prev);
+        // setToggleNav((prev) => !prev)
     };
 
     const drawer = (
-        <div>
-            {/* <Toolbar /> */}
-            <Divider />
+        <>
+            <Divider/>
             <List>
-                {arr.map((text, index) => (
-                    <ListItem key={text} >
-                        {arr[text[index]]= <AccountBox/>}
-                        
-                        <ListItemButton onClick={() => {handleDrawerToggle() ; navigate(`/${text}`)}}>
-                            <ListItemText primary={text} />
+                {SidebarData.map((item, index) => (
+                    <ListItem key={index} >
+                        {item.icon}
+                        <ListItemButton 
+                        onClick={() => {  
+                        navigate(`${item.path}`)}}>
+                            <ListItemText primary={item.title} />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            <Divider/>
 
-        </div>
+        </>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <Box >
-            {open ?
-                <>
+            {/* {open && */}
+                {/* <> */}
                     <Toolbar>
                         {/* <IconButton
                             aria-label="open drawer"
@@ -71,7 +68,7 @@ function ResponsiveDrawer(props) {
                             {drawer}
                         </Drawer>
                     </Box>
-                </> : null }
+                {/* </> } */}
                 
             {/* {open ? 
             <Toolbar>

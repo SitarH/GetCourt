@@ -9,16 +9,29 @@ exports.CourtsGetAllActive = async (req, res) => {
     }
 }
 
+exports.CourtsGetByArr = async (req, res) => {
+    let {arr} = req.params;
+    console.log(arr.split(','));
+    try {
+        let allCourts = await new Court().GetAllCourtsByArray(arr.split(','));
+        res.status(200).json(allCourts);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+}
+
 exports.CourtsGetById = async (req, res) => {
     let { id } = req.params;
-    console.log(id)
+    console.log("id=",id);
     try {
          let court = await new Court().GetCourtByID(id);
-         if (court.courtId === undefined) 
+         console.log(court)
+         if (court === null || court.courtId === undefined) 
             res.status(404).json({ message: 'court not found', court });
          else
              res.status(200).json(court);
      } catch (error) {
+        console.log(error);
          res.status(500).json({message : 'undefine' });
         
      }

@@ -1,5 +1,8 @@
 import React from 'react'
 import useInput from '../../Hooks/useInput';
+import Form from '../UI/Form';
+import Title from '../UI/Title';
+import PurchaseButton from '../UI/PurchaseButton';
 
 function Register() {
 
@@ -88,48 +91,45 @@ function Register() {
     }
 
     return (
-        <form onSubmit={FormSubmitHandler}>
-            <label>First Name :</label>
-            <input type="text"
+        <Form onSubmit={FormSubmitHandler}>
+            <Title>Register</Title>
+
+            <input type="text" placeholder="First Name"
                 value={enteredFirstName}
                 onChange={FirstNameChangeHandler}
                 onBlur={FirstNameBlurHandler} />
 
-            <label>Last Name :</label>
-            <input type="text"
+            <input type="text" placeholder="Last Name"
                 value={enteredLastName}
                 onChange={LastNameChangeHandler}
                 onBlur={LastNameBlurHandler} />
 
-            <label>Email:</label>
-            <input type="email"
+            <input type="email" placeholder="Email"
                 value={enteredEmail}
                 onChange={EmailChangeHandler}
                 onBlur={EmailBlurHandler} />
 
-            <label>Password:</label>
-            <input type="password"
+            <input type="password" placeholder="Password"
                 value={enteredPassword}
                 onChange={PasswordChangeHandler}
                 onBlur={PasswordBlurHandler} />
 
-            <label>Birth Date :</label>
-            <input type="date"
+            <input type="date" placeholder="Birth Date"
                 value={enteredBirthDate}
                 onChange={BirthDateChangeHandler}
                 onBlur={BirthDateBlurHandler} />
 
-            <label>Level :</label>
             <select value={enteredLevel}
                 onChange={LevelChangeHandler}
                 onBlur={LevelBlurHandler}>
+                <option value={"disable"} selected hidden>Choose level</option>
                 <option>Beginner</option>
                 <option>Intermediate</option>
                 <option>Advanced</option>
             </select>
-
-            <button disabled={!formIsValid}>Submit</button>
-        </form>
+            
+            <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
+        </Form>
     )
 }
 

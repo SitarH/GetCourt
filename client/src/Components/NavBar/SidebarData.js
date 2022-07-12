@@ -29,14 +29,21 @@ export const SidebarData = [
   },
   {
     title: 'Contact',
-    path: '../Contact',
+    path: '/Contact',
     icon: <AiIcons.AiFillContacts />,
 
   },
   {
+    title: 'Shop',
+    path: '/shop',
+    icon: <AiIcons.AiFillShop />,
+    
+  },
+  {
     title: 'Settings',
-    path: '../Settings',
+    path: '/Settings',
     icon: <AiIcons.AiFillSetting />,
     
   }
+
 ];
