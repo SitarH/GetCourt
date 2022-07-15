@@ -7,14 +7,13 @@ class User {
     password;
     dateOfBirth;
     friendsList;
-    image;
     gamesList;
     ordersList;
     level;
     isActive;
 
     constructor(email, firstName, lastName, password, dateOfBirth, friendsList,
-                image, gamesList, ordersList, level) 
+                gamesList, ordersList, level) 
                 {
                     this.email = email;
                     this.firstName = firstName;
@@ -22,7 +21,6 @@ class User {
                     this.password = password;
                     this.dateOfBirth = dateOfBirth;
                     this.friendsList = friendsList;
-                    this.image = image;
                     this.gamesList = gamesList;
                     this.ordersList = ordersList;
                     this.level = level;
@@ -62,14 +60,15 @@ class User {
         } 
     }
 
-    async UpdateUserById(id) {
+    async UpdateUserById(id, user=null) {
         try {
-            return await new DB().UpdateDocById('user', id, this);
+            return await new DB().UpdateDocById('user', id, !user ? this : user);
         } catch (error) {
             console.log(error);
             return error;
         } 
     }
+
 
     async DeleteUser(id) {
         try {

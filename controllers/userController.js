@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const GameOrder = require('../models/gameOrder');
 // const UserRouter = require('express').Router();
 
 //CRUD routes
@@ -71,6 +72,22 @@ exports.UpdateUser = async (req, res) => {
         let result = await new User(email, firstName, lastName, password, dateOfBirth, friendsList,
             image, gamesList, ordersList, level).UpdateUserById(id);
         res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
+exports.AddGameToUser = async (req, res) => {
+    let { id } = req.params;
+    let { date,time,location,court,type,players } = req.body;
+    try {
+        let u = new User();
+        let game = new GameOrder(date,time,location,court,type,players);
+        let user = await u.GetUserByID(id);
+        user.gamesList.push(game);
+
+        await u.UpdateUserById(id, user);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ error });
     }

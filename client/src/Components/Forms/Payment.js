@@ -5,9 +5,8 @@ import Form from '../UI/Form';
 import PurchaseButton from '../UI/PurchaseButton';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { gameOrderActions } from '../store/gameOrder';
+import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom';
-
 
 
 function Payment() {
@@ -16,7 +15,7 @@ function Payment() {
     const navigate = useNavigate();
 
     const PurchaseHandler = () => {
-        //dispatch(gameOrderActions.AddNewGame({field: 'location', value: location.state.value.beachName}));
+        dispatch(gameOrderActions.AddNewGame());
         navigate('/confirmation');
 
     }

@@ -3,19 +3,19 @@ const DB = require('../Utils/db');
 class GameOrder {
     date;
     time;
+    location;
+    court;
     type;
     players;
-    court;
-    location;
     isActive;
 
-    constructor(date, time, type, players, court, location) {
+    constructor(date, time, location, court, type, players ) {
         this.date = date;
         this.time = time;
+        this.location = location;
+        this.court = court;
         this.type = type;
         this.players = players;
-        this.court = court;
-        this.location = location;
         this.isActive = true;
     }
 

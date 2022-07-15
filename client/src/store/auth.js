@@ -18,21 +18,48 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         AddNewUser(initialState, action){
-            // insert values to state to create game order
-            const value = action.payload.value;
-            const field = action.payload.field;
-            
-            initialState[field] = value;
+
+            fetch('http://localhost:5008/api/GetCourt/user/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: action.payload.enteredEmail,
+                    firstName: action.payload.enteredFirstName,
+                    lastName: action.payload.enteredLastName,
+                    password: action.payload.enteredPassword,
+                    dateOfBirth: action.payload.enteredBirthDate,
+                    friendsList: [],
+                    gamesList: [],
+                    ordersList: [],
+                    level: action.payload.enteredLevel
+                })
+            })
         },
-        LogIn(){
-            //add game to user's game list
-            // add game to gameOrder collection in db- for admin
+        LogIn(initialState, action){
+
+            const logIn = async () =>{
+            try {
+                const response = await fetch('http://localhost:5008/api/GetCourt/user');
+                if (response.status === 200){
+                    const data = await response.json();
+                    const isExist = data.find(user => user.email ===action.payload.enteredEmail && user.password === action.payload.enteredPassword);
+                    return isExist;
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        const isLogged = logIn();
+        console.log(isLogged)
+        return isLogged;
 
         },
-        UpdateGameOrder(){
+        UpdateUser(){
 
         },
-        DeleteGameOrder(){
+        DeleteUser(){
 
         }
 

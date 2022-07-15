@@ -5,9 +5,12 @@ import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
 import Card from '../UI/Card';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth';
 
 function Login() {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { value: enteredEmail,
@@ -32,9 +35,10 @@ function Login() {
 
     const FormSubmitHandler = async (event) =>{
         event.preventDefault();
-        const currentUser = await fetchdata();
-        console.log(currentUser)
-        if(!currentUser)
+
+        const isLoggedIn = dispatch(authActions.LogIn({enteredEmail, enteredPassword}));
+        console.log(isLoggedIn)
+        if(!isLoggedIn)
             alert('user not found')
         else
             navigate('/');
@@ -44,12 +48,6 @@ function Login() {
         
     }
 
-    const fetchdata = async () =>{
-        const response = await fetch('http://localhost:5008/api/GetCourt/user');
-        const data = await response.json();
-        const exist = data.find(user => user.email ===enteredEmail && user.password === enteredPassword);
-        return exist;
-    }
 
 
     return (

@@ -3,8 +3,12 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth';
 
 function Register() {
+
+    const dispatch = useDispatch();
 
     const { value: enteredFirstName,
         isValid: enteredFirstNameisValid,
@@ -64,23 +68,12 @@ function Register() {
     const FormSubmitHandler = (event) => {
         event.preventDefault();
 
-        fetch('http://localhost:5008/api/GetCourt/user/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: enteredEmail,
-                firstName: enteredFirstName,
-                lastName: enteredLastName,
-                password: enteredPassword,
-                dateOfBirth: enteredBirthDate,
-                friendsList: [],
-                gamesList: [],
-                ordersList: [],
-                level: enteredLevel
-            })
-        })
+        dispatch(authActions.AddNewUser({enteredEmail,
+            enteredFirstName,
+            enteredLastName,
+            enteredPassword,
+            enteredBirthDate,
+            enteredLevel}));
 
         ResetFirstName();
         ResetLastName();
@@ -127,8 +120,8 @@ function Register() {
                 <option>Intermediate</option>
                 <option>Advanced</option>
             </select>
-            
-            <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
+
+            <PurchaseButton type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
     )
 }

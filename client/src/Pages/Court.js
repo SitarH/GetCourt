@@ -21,6 +21,14 @@ function Court() {
     useEffect(() => {
         dispatch(gameOrderActions.InsertIntoValue({field: 'court', value: currentCourt.courtId}))
     }, [])
+
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate() + 1).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
     
 
     const SelectionHandler = (fieldVal, value) =>{
@@ -38,7 +46,8 @@ function Court() {
         <Wrapper className={'column'}>
             <Title>Court {currentCourt.courtId}</Title>
             <input type="date" 
-            id="date" 
+            id= "date" 
+            min= {disablePastDate()}
             onChange={(event)=>SelectionHandler('date',event.target.value)}
             ></input>
 
@@ -54,7 +63,7 @@ function Court() {
             )}
             </Wrapper>
           
-            <h2>Available Hours</h2>
+            <h2>Available hours</h2>
             <Wrapper>
             {currentCourt.availableHours.map((hour, index) => {
                 return <Button

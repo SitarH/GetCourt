@@ -5,10 +5,13 @@ import { useState } from 'react';
 import HeaderUI from './UI/HeaderUI';
 import { FaShoppingCart } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
-import Logo from '../Asset/Images/logo2.png'
+import Logo from '../Asset/Images/logo2.png';
+import {useNavigate} from 'react-router-dom';
 
 
 function Header() {
+
+  const navigate = useNavigate();
 
   const [toggleNav, setToggleNav] = useState(false);
 
@@ -24,7 +27,7 @@ function Header() {
         {/* <img src={Logo}></img> */}
         <div className="icons">
         <FaHeart />
-        <FaShoppingCart />
+        <FaShoppingCart onClick={()=> navigate('/cart')} />
         </div>
 
       </HeaderUI>

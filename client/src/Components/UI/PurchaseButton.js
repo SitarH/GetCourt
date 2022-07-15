@@ -1,7 +1,7 @@
 
 import styled from 'styled-components';
 
-const PurchseButton = styled.div`
+const PurchseButton = styled.button`
     background-color: #F2C67D;
     border: 5px solid #4EB69F;
     padding: 10px;

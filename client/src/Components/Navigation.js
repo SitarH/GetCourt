@@ -14,6 +14,8 @@ import Admin from './Admin/Admin';
 import ErrorPage from '../Pages/ErrorPage';
 import Checkout from './Checkout';
 import Confirmation from './Confirmation';
+import Cart from '../Pages/Cart';
+
 
 function Navigation() {
   //const { token } = useContext(UserContext);
@@ -32,6 +34,8 @@ function Navigation() {
       <Route path="/profile/manageProduct" element={<ManageProduct />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/confirmation" element={<Confirmation />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   )
 }
