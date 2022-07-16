@@ -16,11 +16,9 @@ function Header() {
     <>
       <HeaderUI>
         
-        <GoThreeBars togglenavbar={toggleNav} 
-        setToggleNav={setToggleNav} 
-        onClick={() => setToggleNav(!toggleNav)} />
+        <GoThreeBars onClick={() => setToggleNav(!toggleNav)}/>
 
-        {toggleNav && <NavBar />}
+        {toggleNav && <NavBar togglenavbar={toggleNav} setToggleNav={setToggleNav} />}
         {/* <img src={Logo}></img> */}
         <div className="icons">
         <FaHeart />

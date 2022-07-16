@@ -17,7 +17,7 @@ exports.UserGetById = async (req, res) => {
 
     try {
         let user = await new User().GetUserByID(id);
-        if (user.id === undefined)
+        if (user._id === undefined)
             res.status(404).json({ message: 'user not found', user });
         else
             res.status(200).json(user);

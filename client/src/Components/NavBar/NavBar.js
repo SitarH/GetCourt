@@ -14,10 +14,10 @@ import { SidebarData } from './SidebarData';
 
 
 
-function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
+function ResponsiveDrawer(props) {
     
     const navigate = useNavigate();
-    const { window } = props;
+    const { window, togglenavbar, setToggleNav } = props;
     const [open, setOpen] = useState(true);
 
     const handleDrawerToggle = () => {
@@ -33,7 +33,8 @@ function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
                     <ListItem key={index} >
                         {item.icon}
                         <ListItemButton 
-                        onClick={() => {  
+                        onClick={() => { 
+                            setToggleNav(false);
                         navigate(`${item.path}`)}}>
                             <ListItemText primary={item.title} />
                         </ListItemButton>

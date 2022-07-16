@@ -33,11 +33,8 @@ function Home() {
     // const data = await respone.json();
     // console.log(data);
 
-    
-
   }
 
-  
 
   return (
   
