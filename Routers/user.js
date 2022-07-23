@@ -11,6 +11,8 @@ UserRouter.post("/add", UserController.AddUser);
 
 UserRouter.put("/:id", UserController.UpdateUser);
 
+UserRouter.post("/payment/:id", UserController.AddPaymentToUser);
+
 UserRouter.delete("/:id", UserController.DeleteUser);
 
 module.exports = UserRouter;

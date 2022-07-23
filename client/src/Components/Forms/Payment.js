@@ -18,9 +18,7 @@ function Payment() {
     const PurchaseHandler = () => {
         //dispatch(gameOrderActions.AddNewGame({field: 'location', value: location.state.value.beachName}));
         navigate('/confirmation');
-
     }
-
 
     return (
         <Card height={'350px'}>
@@ -36,9 +34,6 @@ function Payment() {
 
             </Form>
             <PurchaseButton onClick={PurchaseHandler}>Confirm</PurchaseButton>
-
-
-
 
         </Card>
     )

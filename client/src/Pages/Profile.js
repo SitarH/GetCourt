@@ -1,11 +1,12 @@
 import React from 'react';
 import Wrapper from '../Components/UI/Wrapper';
 import { useState, useEffect } from 'react';
-
+import EditProfile from '../Components/Forms/EditProfile';
 
 function Profile() {
 
-  const [profile, setProfile] = useState(null)
+  const [profile, setProfile] = useState(null);
+  const [toggleEdit, setToggleEdit] = useState(false);
 
   useEffect(() => {
     fetchProfile()
@@ -23,10 +24,6 @@ function Profile() {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  const Edit = () => {
-
   }
 
   return (
@@ -48,8 +45,13 @@ function Profile() {
             : <p>user not found</p>
         }
       </Wrapper>
-      <br/>
-      <Wrapper><button onClick={Edit}>Edit</button></Wrapper>
+      <br />
+      <Wrapper><button onClick={() => {
+        setToggleEdit(prev=>!prev);
+        
+      }}>Edit </button></Wrapper>
+      
+      {toggleEdit ? <EditProfile/> : null }
     </>
   )
 }

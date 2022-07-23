@@ -52,7 +52,6 @@ exports.AddUser = async (req, res) => {
 exports.AddGameToUser = async (req, res) => {
     // { $push: { <field1>: <value1>, ... } }
     let { field, value } = req.body;
-    
 
     try {  
         let result = await user.InsertNewUser();
@@ -62,14 +61,28 @@ exports.AddGameToUser = async (req, res) => {
     }
 };
 
+exports.AddPaymentToUser = async (req, res) => {
+    // { $push: { <field1>: <value1>, ... } }
+    let {  enteredCreditCard, enteredExpirationDate, enteredCVV } = req.body;
+
+    console.log('hi from server')
+    try {  
+        let result = await user.InsertNewUser();
+        res.status(201).json(result);
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+};
 
 exports.UpdateUser = async (req, res) => {
     let { id } = req.params;
+    console.log('hi')
     let { email, firstName, lastName, password, dateOfBirth, friendsList,
-        image, gamesList, ordersList, level } = req.body;
+        gamesList, ordersList, level } = req.body;
     try {
         let result = await new User(email, firstName, lastName, password, dateOfBirth, friendsList,
-            image, gamesList, ordersList, level).UpdateUserById(id);
+            
+             gamesList, ordersList, level).UpdateUserById(id);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error });

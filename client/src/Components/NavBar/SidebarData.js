@@ -12,7 +12,7 @@ export const SidebarData = [
   },
   {
     title: 'Payments',
-    path: '/Payments',
+    path: '/UserPayments',
     icon: <MdPayment />,
   },
   {
@@ -35,7 +35,7 @@ export const SidebarData = [
   },
   {
     title: 'Shop',
-    path: '/shop',
+    path: '/Shop',
     icon: <AiIcons.AiFillShop />,
     
   },

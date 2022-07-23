@@ -12,8 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SidebarData } from './SidebarData';
 
-
-
 function ResponsiveDrawer(props) {
     
     const navigate = useNavigate();
@@ -50,8 +48,6 @@ function ResponsiveDrawer(props) {
 
     return (
         <Box >
-            {/* {open && */}
-                {/* <> */}
                     <Toolbar>
                         {/* <IconButton
                             aria-label="open drawer"
@@ -69,35 +65,7 @@ function ResponsiveDrawer(props) {
                             {drawer}
                         </Drawer>
                     </Box>
-                {/* </> } */}
                 
-            {/* {open ? 
-            <Toolbar>
-                <IconButton
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={handleDrawerToggle} >
-                    <MenuIcon />
-                </IconButton>
-            </Toolbar> : null}
-            <Box >
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={open}
-                    onClose={handleDrawerToggle} >
-                    {open ?
-                        <Toolbar>
-                            <IconButton
-                                aria-label="close drawer"
-                                edge="start"
-                                onClick={handleDrawerToggle}>
-                                <MenuIcon />
-                            </IconButton>
-                        </Toolbar> : null}
-                    {drawer}
-                </Drawer>
-            </Box> */}
         </Box>
     );
 }
