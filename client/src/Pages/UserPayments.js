@@ -29,20 +29,25 @@ function UserPayments() {
 
   // if (enteredCreditCard) { formIsValid = true; }
 
-  const Fetch = () => { fetch('http://localhost:5008/api/GetCourt/user/payment/62b1b8d25ac79c104dcfcbae', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      enteredCreditCard, enteredExpirationDate, enteredCVV
-    })
-  });}
+  const Fetch = async () => {
+    let res = await fetch('http://localhost:5008/api/GetCourt/user/payment/62b1b8d25ac79c104dcfcbae', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        enteredCreditCard, enteredExpirationDate, enteredCVV
+      })
+    });
+    let data = await res.json();
+    console.log(data);
+  }
   const PurchaseHandler = (event) => {
     event.preventDefault();
     console.log('credit card saved :) ')
 
     Fetch();
+    Reset();
     // fetch('http://localhost:5008/api/GetCourt/user/payment/62b1b8d25ac79c104dcfcbae', {
     //   method: 'POST',
     //   headers: {
@@ -54,32 +59,36 @@ function UserPayments() {
     // })
   }
 
-  ResetCreditCard();
-  ResetExpirationDate();
-  ResetCVV();
+  const Reset = () => {
+    ResetCreditCard();
+    ResetExpirationDate();
+    ResetCVV();
+  }
+
 
   return (
 
     <Card height={'350px'}>
       <Form onSubmit={PurchaseHandler}>
 
-        <input type="text" placeholder='Card number' 
+        <input type="text" placeholder='Card number'
           value={enteredCreditCard}
           onChange={CreditCardChangeHandler}
           onBlur={CreditCardBlurHandler} />
 
-        <input type="text" placeholder='Expiration Date' 
+        <input type="text" placeholder='Expiration Date'
           value={enteredExpirationDate}
           onChange={ExpirationDateChangeHandler}
           onBlur={ExpirationDateBlurHandler} />
 
-        <input type="text" placeholder='CVV' 
+        <input type="text" placeholder='CVV'
           value={enteredCVV}
           onChange={CVVChangeHandler}
           onBlur={CVVBlurHandler} />
 
+        <PurchaseButton type='submit'>Add your card</PurchaseButton>
       </Form>
-      <PurchaseButton  >Add your card</PurchaseButton>
+
 
     </Card>
   )
