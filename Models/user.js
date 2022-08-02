@@ -1,7 +1,7 @@
 const DB = require('../utils/db');
 
 class User {
-    email; 
+    phoneNumber; 
     firstName;
     lastName;
     password;
@@ -12,10 +12,10 @@ class User {
     level;
     isActive;
 
-    constructor(email, firstName, lastName, password, dateOfBirth, friendsList,
+    constructor(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
                 gamesList, ordersList, level) 
                 {
-                    this.email = email;
+                    this.phoneNumber = phoneNumber;
                     this.firstName = firstName;
                     this.lastName = lastName;
                     this.password = password;
@@ -46,6 +46,16 @@ class User {
     async GetUserByID(id) {
         try {
             return await new DB().FindByID('user', id);
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    }
+
+    
+    async UserLogin(phoneNum, password) {
+        try {
+            return await new DB().FindForLogin('user', phoneNum, password);
         } catch (error) {
             console.log(error);
             return error;

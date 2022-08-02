@@ -25,6 +25,7 @@ server.use('/api/GetCourt/user', require('./Routers/user'));
 // server.use('/api/GetCourt', require('./Controllers/waitingListController'));
 
 
+
 //Global Get Request
 server.get('*', async (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build/', 'index.html'));

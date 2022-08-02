@@ -5,10 +5,13 @@ import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
+import { sendRegisterData }  from '../../store/authActions';
+import {useNavigate} from 'react-router-dom'
 
 function Register() {
-
+    
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { value: enteredFirstName,
         isValid: enteredFirstNameisValid,
@@ -24,11 +27,11 @@ function Register() {
         Reset: ResetLastName
     } = useInput(value => value);
 
-    const { value: enteredEmail,
-        isValid: enteredEmailIsValid,
-        InputChangeHandler: EmailChangeHandler,
-        InputBlurHandler: EmailBlurHandler,
-        Reset: ResetEmail
+    const { value: enteredPhoneNumber,
+        isValid: enteredPhoneNumberIsValid,
+        InputChangeHandler: PhoneNumberChangeHandler,
+        InputBlurHandler: PhoneNumberBlurHandler,
+        Reset: ResetPhoneNumber
     } = useInput(value => value.includes('@'));
 
     const { value: enteredPassword,
@@ -56,7 +59,7 @@ function Register() {
 
     if (enteredFirstNameisValid &&
         enteredLastNameIsValid &&
-        enteredEmailIsValid &&
+        enteredPhoneNumberIsValid &&
         enteredPasswordIsValid &&
         enteredBirthDateIsValid &&
         enteredLevelsValid) {
@@ -68,7 +71,7 @@ function Register() {
     const FormSubmitHandler = (event) => {
         event.preventDefault();
 
-        dispatch(authActions.AddNewUser({enteredEmail,
+        dispatch(sendRegisterData({enteredPhoneNumber,
             enteredFirstName,
             enteredLastName,
             enteredPassword,
@@ -77,11 +80,14 @@ function Register() {
 
         ResetFirstName();
         ResetLastName();
-        ResetEmail();
+        ResetPhoneNumber();
         ResetPassword();
         ResetBirthDate();
         ResetLevel();
+
+        navigate('/login');
     }
+    
 
     return (
         <Form onSubmit={FormSubmitHandler}>
@@ -97,10 +103,10 @@ function Register() {
                 onChange={LastNameChangeHandler}
                 onBlur={LastNameBlurHandler} />
 
-            <input type="email" placeholder="Email"
-                value={enteredEmail}
-                onChange={EmailChangeHandler}
-                onBlur={EmailBlurHandler} />
+            <input type="PhoneNumber" placeholder="Phone Number"
+                value={enteredPhoneNumber}
+                onChange={PhoneNumberChangeHandler}
+                onBlur={PhoneNumberBlurHandler} />
 
             <input type="password" placeholder="Password"
                 value={enteredPassword}

@@ -32,6 +32,17 @@ class DB {
         }
     }
 
+    async FindForLogin(collection, phoneNum, password) {
+        try {
+            await this.client.connect();
+            return await this.client.db(this.dbName).collection(collection).findOne({ email: phoneNum, password: password});
+        } catch (error) {
+
+        } finally {
+            await this.client.close();
+        }
+    }
+
     async Insert(collection, doc) {
         try {
             await this.client.connect();

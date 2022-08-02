@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -9,14 +9,64 @@ import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import PopUp from '../UI/PopUp';
 import Button from '../UI/Button';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {gameOrderActions} from '../../store/gameOrder';
 
 
-export default function CheckboxListSecondary({ toggleVal, setToggle }) {
-  const [checked, setChecked] = useState([1]);
 
+export default function CheckboxListSecondary({ toggleVal, setToggle }) {
+
+  const userFriendsList = useSelector(state => state.auth.loggedUser.friendsList);
+
+  console.log(userFriendsList)
   const dispatch = useDispatch();
+
+  const [checked, setChecked] = useState([]);
+
+  const [friendsList, setFriendsList] = useState([])
+
+
+  useEffect(() => {
+
+    // fetchFriendsList('62d1400d207bc314b4355c9b');
+     mapFriends();
+   
+   
+  }, [])
+
+  const fetchFriendsList = async(id) =>{
+    try {
+      const respone = await fetch(`http://localhost:5008/api/GetCourt/user/${id}`);
+      if(respone.status === 200){
+        const data = await respone.json();
+        console.log(data)
+        setFriendsList(data.friendsList);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const mapFriends = async() =>{
+    
+    const friends = await Promise.all(userFriendsList.map(async (item)=>{
+      console.log(item)
+      try {
+        const respone = await fetch(`http://localhost:5008/api/GetCourt/user/${item}`);
+        if(respone.status === 200){
+          const data = await respone.json();
+          return data;
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
+    ))
+      console.log(friends)
+      setFriendsList(friends);
+  }
+  
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -34,7 +84,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle }) {
 
 
   const AddToGame = () => {
-
+    console.log(checked)
     dispatch(gameOrderActions.InsertIntoValue({field: 'players', value: checked}));
     setToggle(!toggleVal);
 
@@ -44,8 +94,8 @@ export default function CheckboxListSecondary({ toggleVal, setToggle }) {
   return (
     <PopUp>
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
+      {friendsList.map((value) => {
+        const labelId = `checkbox-list-secondary-label-${value._id}`;
         return (
           <ListItem
             key={value}
@@ -66,7 +116,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle }) {
                   src={`/static/images/avatar/${value + 1}.jpg`}
                 />
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={value.firstName + ' ' + value.lastName} />
             </ListItemButton>
           </ListItem>
         );

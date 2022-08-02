@@ -4,7 +4,6 @@ import Payment from './Forms/Payment';
 import Wrapper from '../Components/UI/Wrapper';
 
 
-
 function Checkout() {
 
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useContext } from 'react';
 import Home from '../Pages/Home';
+import Welcome from '../Pages/Welcome'
 import Login from '../Components/Forms/Login';
 import Register from '../Components/Forms/Register';
 import Shop from '../Pages/Shop';
@@ -23,9 +24,10 @@ function Navigation() {
   return (
 
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Welcome />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/location" element={<Location />} />

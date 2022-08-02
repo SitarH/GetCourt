@@ -1,6 +1,10 @@
 const User = require('../models/user');
 const GameOrder = require('../models/gameOrder');
-// const UserRouter = require('express').Router();
+
+const sid = 'AC8793599c2d2d3795cf7808c4e4b24c37';
+const authToken = '58a4784e8b3432e6539679c1154cc340';
+
+const twilio = require('twilio')(sid, authToken);
 
 //CRUD routes
 
@@ -18,7 +22,21 @@ exports.UserGetById = async (req, res) => {
 
     try {
         let user = await new User().GetUserByID(id);
-        if (user.id === undefined)
+        if (user._id === undefined)
+            res.status(404).json({ message: 'user not found', user });
+        else
+            res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'undefine' });
+    }
+};
+
+exports.UserLogin = async (req, res) => {
+    let { phoneNum, password } = req.body;
+
+    try {
+        let user = await new User().UserLogin(phoneNum, password);
+        if (!user)
             res.status(404).json({ message: 'user not found', user });
         else
             res.status(200).json(user);
@@ -36,9 +54,9 @@ exports.AddUser = async (req, res) => {
      * step 3: connect to DB
      * step 4: insert the record
      */
-    let { email, firstName, lastName, password, dateOfBirth, friendsList,
+    let { phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
         gamesList, ordersList, level } = req.body;
-    let user = new User(email, firstName, lastName, password, dateOfBirth, friendsList,
+    let user = new User(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
          gamesList, ordersList, level);
 
     try {
@@ -49,27 +67,27 @@ exports.AddUser = async (req, res) => {
     }
 };
 
-//add object into array in user object
-exports.AddGameToUser = async (req, res) => {
-    // { $push: { <field1>: <value1>, ... } }
-    let { field, value } = req.body;
+// //add object into array in user object
+// exports.AddGameToUser = async (req, res) => {
+//     // { $push: { <field1>: <value1>, ... } }
+//     let { field, value } = req.body;
     
 
-    try {  
-        let result = await user.InsertNewUser();
-        res.status(201).json(result);
-    } catch (error) {
-        res.status(500).json({ error })
-    }
-};
+//     try {  
+//         let result = await user.InsertNewUser();
+//         res.status(201).json(result);
+//     } catch (error) {
+//         res.status(500).json({ error })
+//     }
+// };
 
 
 exports.UpdateUser = async (req, res) => {
     let { id } = req.params;
-    let { email, firstName, lastName, password, dateOfBirth, friendsList,
+    let { phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
         image, gamesList, ordersList, level } = req.body;
     try {
-        let result = await new User(email, firstName, lastName, password, dateOfBirth, friendsList,
+        let result = await new User(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
             image, gamesList, ordersList, level).UpdateUserById(id);
         res.status(200).json(result);
     } catch (error) {
@@ -88,11 +106,24 @@ exports.AddGameToUser = async (req, res) => {
 
         await u.UpdateUserById(id, user);
         res.status(200).json(user);
+        twilio.messages 
+      .create({ 
+        from: '+13343784350',       
+         to: '+972526103109',
+         body: `YAY YOU GOT IT! ${user.firstName}, this is your order details:
+         date: ${date}, 
+         time: ${time},
+         location: ${location},
+         court: ${court}
+         HAVE FUN!`
+       }) 
+      .then(message => console.log(message.sid)) 
+      .done();
     } catch (error) {
         res.status(500).json({ error });
     }
-};
 
+};
 
 exports.DeleteUser = async (req, res) => {
     let { id } = req.params;
@@ -103,4 +134,3 @@ exports.DeleteUser = async (req, res) => {
         res.status(500).json({ error });
     }
 };
-

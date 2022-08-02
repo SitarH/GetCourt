@@ -29,7 +29,6 @@ function Court() {
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
-    
 
     const SelectionHandler = (fieldVal, value) =>{
         console.log(value)
@@ -65,11 +64,11 @@ function Court() {
           
             <h2>Available hours</h2>
             <Wrapper>
-            {currentCourt.availableHours.map((hour, index) => {
+            {currentCourt.availableHours.map((item, index) => {
                 return <Button
                     key={index}
-                    onClick={()=>SelectionHandler('time',hour)}>
-                    {hour}
+                    onClick={()=>SelectionHandler('time',item.hour)}>
+                    {item.hour}
                 </Button>
             }
             )}

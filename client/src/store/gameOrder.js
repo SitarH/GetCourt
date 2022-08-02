@@ -7,7 +7,7 @@ const initialState = {
         location:'',
         court:'',
         type:'',
-        players:'',
+        players:[],
        
 };
 
@@ -16,6 +16,7 @@ const gameOrderSlice = createSlice({
     initialState,
     reducers: {
         InsertIntoValue(initialState, action){
+            console.log(action.payload.value)
             // insert values to state to create game order
             const value = action.payload.value;
             const field = action.payload.field;
@@ -33,7 +34,7 @@ const gameOrderSlice = createSlice({
                 body: JSON.stringify(initialState)
             };
             try {
-                const response = await fetch(`http://localhost:5008/api/GetCourt/user/addGame/62b1b8d25ac79c104dcfcbae`, game);
+                const response = await fetch(`http://localhost:5008/api/GetCourt/user/addGame/62d9a554b9d76d0cacec7776`, game);
                 const data = await response.json();
                 return data;
             } catch (e) {

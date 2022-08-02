@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
@@ -13,12 +13,14 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { value: enteredEmail,
-        isValid: enteredEmailIsValid,
-        InputChangeHandler: EmailChangeHandler,
-        InputBlurHandler: EmailBlurHandler,
-        Reset: ResetEmail
-    } = useInput(value=> value.includes('@'));
+    // const [users, setUsers] = useState([])
+
+    const { value: enteredPhoneNumber,
+        isValid: enteredPhoneNumbersValid,
+        InputChangeHandler: PhoneNumberChangeHandler,
+        InputBlurHandler: PhoneNumberBlurHandler,
+        Reset: ResetPhoneNumber
+    } = useInput(value=> value.trim() !== '');
 
     const { value: enteredPassword,
         isValid: enteredPasswordIsValid,
@@ -29,21 +31,38 @@ function Login() {
 
     let formIsValid = false;
 
-    if(enteredEmailIsValid && enteredPasswordIsValid){
+    if(enteredPhoneNumbersValid && enteredPasswordIsValid){
         formIsValid = true;
+    }
+
+    const fetchData = async()=>{
+        try {
+            const respone = await fetch('http://localhost:5008/api/GetCourt/user');
+            if(respone.status === 200){
+              const data = await respone.json();
+              console.log(data)
+              return data
+            }
+          } catch (error) {
+            console.log(error)
+          }
     }
 
     const FormSubmitHandler = async (event) =>{
         event.preventDefault();
-
-        const isLoggedIn = dispatch(authActions.LogIn({enteredEmail, enteredPassword}));
-        console.log(isLoggedIn)
-        if(!isLoggedIn)
-            alert('user not found')
-        else
-            navigate('/');
-
-        ResetEmail();
+        
+        const users = await fetchData();
+        const user = users.find(user => user.password === enteredPassword && user.PhoneNumber === enteredPhoneNumber)
+        
+        if (!user) {
+            alert('wrong details try again')
+        }
+        else{
+            dispatch(authActions.LogIn(user));
+            navigate('/home');
+        }
+        
+        ResetPhoneNumber();
         ResetPassword();
         
     }
@@ -54,10 +73,10 @@ function Login() {
         <Card>
         <Form onSubmit={FormSubmitHandler}>
            <Title>Login</Title>
-            <input type="email" placeholder='Email' 
-            value={enteredEmail} 
-            onChange={EmailChangeHandler} 
-            onBlur={EmailBlurHandler}/>
+            <input type="PhoneNumber" placeholder='Phone Number' 
+            value={enteredPhoneNumber} 
+            onChange={PhoneNumberChangeHandler} 
+            onBlur={PhoneNumberBlurHandler}/>
            
             
             <input type="password" placeholder='Password' 

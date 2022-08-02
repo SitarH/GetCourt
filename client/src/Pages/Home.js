@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Location from '../Components/Location'
 import Courts from './CourtList';
 import Wrapper from '../Components/UI/Wrapper';
+import Card from '../Components/UI/Card';
 
 function Home() {
 
@@ -14,15 +15,13 @@ function Home() {
     fetchLocations()
 
   }, [])
-
   
   const fetchLocations = async () => {
-
     try {
       const respone = await fetch('http://localhost:5008/api/GetCourt/location');
       if(respone.status === 200){
         const data = await respone.json();
-        setLocations(data)
+        setLocations(data);
       }
     } catch (error) {
       console.log(error)
@@ -31,15 +30,13 @@ function Home() {
     // const data = await respone.json();
     // console.log(data);
 
-    
-
   }
 
-  
 
   return (
   
     <Wrapper>
+      <Card height={'200px'}>Next available Games</Card>
       {locations.map((location) => {
         return <Location 
         key={location._id} 

@@ -1,65 +1,60 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {fetchUserData} from './authActions';
 
 const initialState = {
-    
-        name: '',
-        email: '',
-        _id: '',
-        registerStatus: '',
-        registerError: '',
-        loginStatus: '',
-        loginError: '',
-        isLoggedIn: false,
-       
+    loggedUser : null,
+    registerStatus: '',
+    registerError: '',
+    loginStatus: '',
+    loginError: '',
+    isLoggedIn: false,
+
 };
 
+
+const fetchData = async (phone, pass) => {
+    console.log(phone, pass);
+        const loginDetails = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({phoneNum: phone, password: pass})
+        };
+        try {
+            const response = await fetch(`http://localhost:5008/api/GetCourt/user/login`, loginDetails);
+            const data = await response.json();
+            return data;
+        } catch (e) {
+            return e;
+        }  
+    
+}
+
 const authSlice = createSlice({
+
     name: 'auth',
     initialState,
     reducers: {
-        AddNewUser(initialState, action){
-
-            fetch('http://localhost:5008/api/GetCourt/user/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: action.payload.enteredEmail,
-                    firstName: action.payload.enteredFirstName,
-                    lastName: action.payload.enteredLastName,
-                    password: action.payload.enteredPassword,
-                    dateOfBirth: action.payload.enteredBirthDate,
-                    friendsList: [],
-                    gamesList: [],
-                    ordersList: [],
-                    level: action.payload.enteredLevel
-                })
-            })
-        },
-        LogIn(initialState, action){
-
-            const logIn = async () =>{
-            try {
-                const response = await fetch('http://localhost:5008/api/GetCourt/user');
-                if (response.status === 200){
-                    const data = await response.json();
-                    const isExist = data.find(user => user.email ===action.payload.enteredEmail && user.password === action.payload.enteredPassword);
-                    return isExist;
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        const isLogged = logIn();
-        console.log(isLogged)
-        return isLogged;
+        AddNewUser(initialState, action) {
 
         },
-        UpdateUser(){
+        LogIn(initialState, action) {
+            // const user =  fetchData(action.payload.enteredEmail, action.payload.enteredPassword);
+            console.log(action.payload)
+             initialState.loggedUser = action.payload;
+            // const user = users.find(user => user.email === action.payload.enteredEmail &&
+            //     user.password === action.payload.enteredPassword);
+            // if(user)
+            //     initialState.loggedUser = user;
+            // else
+            //     alert('User not found please try again');
+        },
+        UpdateUser() {
 
         },
-        DeleteUser(){
+        DeleteUser() {
 
         }
 
