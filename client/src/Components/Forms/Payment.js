@@ -17,9 +17,7 @@ function Payment() {
     const PurchaseHandler = () => {
         dispatch(gameOrderActions.AddNewGame());
         navigate('/confirmation');
-
     }
-
 
     return (
         <Card height={'350px'}>
@@ -35,9 +33,6 @@ function Payment() {
 
             </Form>
             <PurchaseButton onClick={PurchaseHandler}>Confirm</PurchaseButton>
-
-
-
 
         </Card>
     )

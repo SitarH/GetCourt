@@ -12,12 +12,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SidebarData } from './SidebarData';
 
-
-
-function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
+function ResponsiveDrawer(props) {
     
     const navigate = useNavigate();
-    const { window } = props;
+    const { window, togglenavbar, setToggleNav } = props;
     const [open, setOpen] = useState(true);
 
     const handleDrawerToggle = () => {
@@ -33,7 +31,8 @@ function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
                     <ListItem key={index} >
                         {item.icon}
                         <ListItemButton 
-                        onClick={() => {  
+                        onClick={() => { 
+                            setToggleNav(false);
                         navigate(`${item.path}`)}}>
                             <ListItemText primary={item.title} />
                         </ListItemButton>
@@ -49,8 +48,6 @@ function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
 
     return (
         <Box >
-            {/* {open && */}
-                {/* <> */}
                     <Toolbar>
                         {/* <IconButton
                             aria-label="open drawer"
@@ -68,35 +65,7 @@ function ResponsiveDrawer(props, {togglenavbar, setToggleNav}) {
                             {drawer}
                         </Drawer>
                     </Box>
-                {/* </> } */}
                 
-            {/* {open ? 
-            <Toolbar>
-                <IconButton
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={handleDrawerToggle} >
-                    <MenuIcon />
-                </IconButton>
-            </Toolbar> : null}
-            <Box >
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={open}
-                    onClose={handleDrawerToggle} >
-                    {open ?
-                        <Toolbar>
-                            <IconButton
-                                aria-label="close drawer"
-                                edge="start"
-                                onClick={handleDrawerToggle}>
-                                <MenuIcon />
-                            </IconButton>
-                        </Toolbar> : null}
-                    {drawer}
-                </Drawer>
-            </Box> */}
         </Box>
     );
 }

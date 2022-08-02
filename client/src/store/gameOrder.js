@@ -55,7 +55,7 @@ const gameOrderSlice = createSlice({
 
     }
 })
-console.log(gameOrderSlice)
+// console.log(gameOrderSlice)
 export const gameOrderActions = gameOrderSlice.actions;
 
 export default gameOrderSlice.reducer;
