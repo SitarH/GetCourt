@@ -26,8 +26,6 @@ const gameOrderSlice = createSlice({
             initialState[field] = value;
         },
         AddNewGame(initialState){
-            const user = useSelector(state => state.authActions.loggedUser)
-            console.log(user)
             const add = async () =>{
             const game = {
                 method: 'POST',

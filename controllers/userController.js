@@ -47,6 +47,7 @@ exports.UserLogin = async (req, res) => {
 
 
 exports.AddUser = async (req, res) => {
+    console.log('?')
     /*
      * setp 0: make sure to require the model class
      * step 1: get the data from the req.body 
@@ -58,6 +59,7 @@ exports.AddUser = async (req, res) => {
         gamesList, ordersList, level } = req.body;
     let user = new User(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
          gamesList, ordersList, level);
+    console.log(user)
 
     try {
         let result = await user.InsertNewUser();
