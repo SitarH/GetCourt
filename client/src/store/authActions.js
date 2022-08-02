@@ -1,5 +1,5 @@
 
-export const fetchUserData = (email, pass) => {
+export const fetchUserData = (phoneNumber, pass) => {
     // try {
     //     const response = await fetch('http://localhost:5008/api/GetCourt/user');
     //     if (response.ok) {
@@ -27,7 +27,7 @@ export const fetchUserData = (email, pass) => {
     try {
       const usersData = fetchData();
       console.log(usersData);
-      const user = usersData.find(user => user.email === email &&
+      const user = usersData.find(user => user.phoneNumber === phoneNumber &&
           user.password === pass);
       if(user)
           return user;
@@ -57,7 +57,7 @@ export const sendRegisterData = (userDetails) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: userDetails.enteredEmail,
+                    phoneNumber: userDetails.enteredPhoneNumber,
                     firstName: userDetails.enteredFirstName,
                     lastName: userDetails.enteredLastName,
                     password: userDetails.enteredPassword,

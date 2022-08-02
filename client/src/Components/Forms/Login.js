@@ -40,7 +40,7 @@ function Login() {
             const respone = await fetch('http://localhost:5008/api/GetCourt/user');
             if(respone.status === 200){
               const data = await respone.json();
-              console.log(data)
+            
               return data
             }
           } catch (error) {
@@ -52,7 +52,7 @@ function Login() {
         event.preventDefault();
         
         const users = await fetchData();
-        const user = users.find(user => user.password === enteredPassword && user.PhoneNumber === enteredPhoneNumber)
+        const user = users.find(user => user.password === enteredPassword && user.phoneNumber === enteredPhoneNumber)
         
         if (!user) {
             alert('wrong details try again')
@@ -73,7 +73,7 @@ function Login() {
         <Card>
         <Form onSubmit={FormSubmitHandler}>
            <Title>Login</Title>
-            <input type="PhoneNumber" placeholder='Phone Number' 
+            <input type="tel" placeholder='Phone Number' 
             value={enteredPhoneNumber} 
             onChange={PhoneNumberChangeHandler} 
             onBlur={PhoneNumberBlurHandler}/>

@@ -98,10 +98,13 @@ exports.UpdateUser = async (req, res) => {
 exports.AddGameToUser = async (req, res) => {
     let { id } = req.params;
     let { date,time,location,court,type,players } = req.body;
+    console.log(id)
+    console.log(req.body)
     try {
         let u = new User();
         let game = new GameOrder(date,time,location,court,type,players);
         let user = await u.GetUserByID(id);
+        console.log(user)
         user.gamesList.push(game);
 
         await u.UpdateUserById(id, user);

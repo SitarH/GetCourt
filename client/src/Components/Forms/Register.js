@@ -6,7 +6,9 @@ import PurchaseButton from '../UI/PurchaseButton';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
 import { sendRegisterData }  from '../../store/authActions';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 function Register() {
     
@@ -32,7 +34,7 @@ function Register() {
         InputChangeHandler: PhoneNumberChangeHandler,
         InputBlurHandler: PhoneNumberBlurHandler,
         Reset: ResetPhoneNumber
-    } = useInput(value => value.includes('@'));
+    } = useInput(value => value);
 
     const { value: enteredPassword,
         isValid: enteredPasswordIsValid,
@@ -103,10 +105,15 @@ function Register() {
                 onChange={LastNameChangeHandler}
                 onBlur={LastNameBlurHandler} />
 
-            <input type="PhoneNumber" placeholder="Phone Number"
+             <input type="tel" placeholder="Phone Number"
                 value={enteredPhoneNumber}
                 onChange={PhoneNumberChangeHandler}
-                onBlur={PhoneNumberBlurHandler} />
+                onBlur={PhoneNumberBlurHandler} /> 
+                {/* <PhoneInput placeholder="Phone Number"
+                defaultCountry="IL"
+                value={enteredPhoneNumber}
+                onChange={PhoneNumberChangeHandler}
+                onBlur={PhoneNumberBlurHandler}/> */}
 
             <input type="password" placeholder="Password"
                 value={enteredPassword}
