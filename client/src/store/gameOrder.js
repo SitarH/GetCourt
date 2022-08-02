@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {useSelector} from 'react-redux';
+
 
 const initialState = {
     
@@ -11,6 +11,7 @@ const initialState = {
         players:[],
        
 };
+
 
 
 const gameOrderSlice = createSlice({
@@ -25,9 +26,8 @@ const gameOrderSlice = createSlice({
             
             initialState[field] = value;
         },
-        AddNewGame(initialState){
-            const user = useSelector(state => state.authActions.loggedUser)
-            console.log(user)
+        AddNewGame(initialState, action){
+
             const add = async () =>{
             const game = {
                 method: 'POST',
@@ -38,7 +38,7 @@ const gameOrderSlice = createSlice({
                 body: JSON.stringify(initialState)
             };
             try {
-                const response = await fetch(`http://localhost:5008/api/GetCourt/user/addGame/62d9a554b9d76d0cacec7776`, game);
+                const response = await fetch(`http://localhost:5008/api/GetCourt/user/addGame/${action.payload}`, game);
                 const data = await response.json();
                 return data;
             } catch (e) {
