@@ -79,14 +79,14 @@ class User {
         } 
     }
 
-    async UpdateUserById(user, id) {
-        try {
-            return await new DB().UpdateDocById('user', id, user);
-        } catch (error) {
-            console.log(error);
-            return error;
-        } 
-    }
+    // async UpdateUserById(user, id) {
+    //     try {
+    //         return await new DB().UpdateDocById('user', id, user);
+    //     } catch (error) {
+    //         console.log(error);
+    //         return error;
+    //     } 
+    // }
 
     async DeleteUser(id) {
         try {

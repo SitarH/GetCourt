@@ -47,7 +47,7 @@ export const fetchUserData = (phoneNumber, pass) => {
 
 
 export const sendRegisterData = (userDetails) => {
-
+    console.log('?')
     return async (dispatch) => {
 
         const sendRequest = async () => {

@@ -72,7 +72,7 @@ function Register() {
 
     const FormSubmitHandler = (event) => {
         event.preventDefault();
-
+        console.log('?')
         dispatch(sendRegisterData({enteredPhoneNumber,
             enteredFirstName,
             enteredLastName,
