@@ -122,7 +122,6 @@ exports.AddGameToUser = async (req, res) => {
         let u = new User();
         let game = new GameOrder(date,time,location,court,type,players);
         let user = await u.GetUserByID(id);
-        console.log(user)
         user.gamesList.push(game);
 
         await u.UpdateUserById(id, user);
@@ -130,7 +129,7 @@ exports.AddGameToUser = async (req, res) => {
         twilio.messages 
       .create({ 
         from: '+13343784350',       
-         to: '+972526103109',
+         to: user.phoneNumber,
          body: `YAY YOU GOT IT! ${user.firstName}, this is your order details:
          date: ${date}, 
          time: ${time},
