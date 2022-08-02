@@ -1,6 +1,7 @@
 const Court = require('../models/court');
+class CourtController{
 
-exports.CourtsGetAllActive = async (req, res) => {
+async CourtsGetAllActive  (req, res)  {
     try {
         let allCourts = await new Court().GetAllActiveCourts();
         res.status(200).json(allCourts);
@@ -9,7 +10,7 @@ exports.CourtsGetAllActive = async (req, res) => {
     }
 }
 
-exports.CourtsGetByArr = async (req, res) => {
+async CourtsGetByArr  (req, res) {
     let {arr} = req.params;
     console.log(arr.split(','));
     try {
@@ -20,7 +21,7 @@ exports.CourtsGetByArr = async (req, res) => {
     }
 }
 
-exports.CourtsGetById = async (req, res) => {
+async CourtsGetById  (req, res) {
     let { id } = req.params;
     console.log("id=",id);
     try {
@@ -37,7 +38,7 @@ exports.CourtsGetById = async (req, res) => {
      }
  }
 
- exports.AddCourt = async (req, res) => {
+ async AddCourt (req, res) {
     /*
       * setp 0: make sure to require the model class
       * step 1: get the data from the req.body 
@@ -56,7 +57,7 @@ exports.CourtsGetById = async (req, res) => {
      }
  };
 
- exports.UpdateCourt =  async (req, res) => {
+ async UpdateCourt (req, res) {
          let {id} = req.params;
          let { courtId, availableHours} = req.body;
          try {
@@ -67,7 +68,7 @@ exports.CourtsGetById = async (req, res) => {
          }
      };
 
-     exports.DeleteCourt = async (req, res) => {
+async DeleteCourt  (req, res) {
              let {id} = req.params;
              try {
                  let result = await new Court().DeleteCourt(id);
@@ -159,5 +160,5 @@ exports.CourtsGetById = async (req, res) => {
 //     }
 // });
 
-
-// // module.exports = CourtRouter;
+}
+module.exports = CourtController;
