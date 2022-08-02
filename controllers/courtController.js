@@ -1,4 +1,4 @@
-const Court = require('../Models/court');
+const Court = require('../models/court');
 
 exports.CourtsGetAllActive = async (req, res) => {
     try {

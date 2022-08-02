@@ -1,7 +1,7 @@
 const express = require('express');
 const LocationRouter = express.Router();
 
-const LocationController = require('../Controllers/locationController');
+const LocationController = require('../controllers/locationController');
 
 LocationRouter.get("/", LocationController.LocationGetAllActive); 
 
