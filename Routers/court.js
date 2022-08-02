@@ -1,7 +1,7 @@
 const express = require('express');
 const CourtRouter = express.Router();
 
-const CourtController = require('../Controllers/courtController');
+const CourtController = require('../controllers/courtController');
 
 CourtRouter.get("/", CourtController.CourtsGetAllActive); 
 

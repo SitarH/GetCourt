@@ -1,5 +1,6 @@
 import React from 'react';
 import Wrapper from '../Components/UI/Wrapper';
+import PurchseButton from '../Components/UI/PurchaseButton';
 import { useState, useEffect } from 'react';
 import EditProfile from '../Components/Forms/EditProfile';
 
@@ -46,10 +47,10 @@ function Profile() {
         }
       </Wrapper>
       <br />
-      <Wrapper><button onClick={() => {
+      <Wrapper><PurchseButton onClick={() => {
         setToggleEdit(prev=>!prev);
         
-      }}>Edit </button></Wrapper>
+      }}>Edit </PurchseButton></Wrapper>
       
       {toggleEdit ? <EditProfile/> : null }
     </>

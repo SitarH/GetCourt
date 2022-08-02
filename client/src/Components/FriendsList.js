@@ -15,26 +15,26 @@ function FriendsList() {
 
     const fetchFriends = async () => {
 
-        try {
-            const response = await fetch(
-                'http://localhost:5008/api/GetCourt/user',
-                {
-                  method: 'GET',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
-                }
-            );
+        // try {
+        //     const response = await fetch(
+        //         'http://localhost:5008/api/GetCourt/user/',
+        //         // {
+        //         //   method: 'GET',
+        //         //   headers: {
+        //         //     'Content-Type': 'application/json'
+        //         //   }
+        //         // }
+        //     );
 
-            console.log(response)
-            if (response.ok) {
-                const data = await response.json();
-                setFriends(data)
-            }
-        } catch (error) {
-            console.log(error)
+        //     console.log(response)
+        //     if (response.ok) {
+        //         const data = await response.json();
+        //         setFriends(data)
+        //     }
+        // } catch (error) {
+        //     console.log(error)
 
-        }
+        // }
     }
 
     return (
