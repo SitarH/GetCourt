@@ -1,4 +1,4 @@
-const GameOrder = require('../Models/gameOrder');
+const GameOrder = require('../models/gameOrder');
 
 //CRUD routes
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Wrapper from '../Components/UI/Wrapper';
+import PurchseButton from '../Components/UI/PurchaseButton';
 import { useState, useEffect } from 'react';
 import EditProfile from '../Components/Forms/EditProfile';
 import { useSelector } from 'react-redux';
@@ -34,6 +35,7 @@ function Profile() {
         </Wrapper>
 
       {toggleEdit && <EditProfile />}
+
     </>
   )
 }

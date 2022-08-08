@@ -1,4 +1,4 @@
-const Location = require('../Models/location');
+const Location = require('../models/location');
 // const LocationRouter = require('express').Router();
 
 //CRUD routes

@@ -1,11 +1,15 @@
 import React from 'react';
 import Card from '../Components/UI/Card';
 import Form from '../Components/UI/Form';
+import { useState } from 'react';
 import PurchaseButton from '../Components/UI/PurchaseButton';
+import SavedCards from './SavedCards';
+import Wrapper from '../Components/UI/Wrapper';
 import useInput from '../Hooks/useInput';
 
 function UserPayments() {
 
+  const [AllSavedCards, setSavedCards] = useState(false);
 
   const { value: enteredCreditCard,
     InputChangeHandler: CreditCardChangeHandler,
@@ -48,15 +52,6 @@ function UserPayments() {
 
     Fetch();
     Reset();
-    // fetch('http://localhost:5008/api/GetCourt/user/payment/62b1b8d25ac79c104dcfcbae', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     enteredCreditCard, enteredExpirationDate, enteredCVV
-    //   })
-    // })
   }
 
   const Reset = () => {
@@ -67,30 +62,34 @@ function UserPayments() {
 
 
   return (
+    <>
+      <Card height={'350px'}>
+        <Form onSubmit={PurchaseHandler}>
 
-    <Card height={'350px'}>
-      <Form onSubmit={PurchaseHandler}>
+          <input type="text" placeholder='Card number'
+            value={enteredCreditCard}
+            onChange={CreditCardChangeHandler}
+            onBlur={CreditCardBlurHandler} />
 
-        <input type="text" placeholder='Card number'
-          value={enteredCreditCard}
-          onChange={CreditCardChangeHandler}
-          onBlur={CreditCardBlurHandler} />
+          <input type="text" placeholder='Expiration Date'
+            value={enteredExpirationDate}
+            onChange={ExpirationDateChangeHandler}
+            onBlur={ExpirationDateBlurHandler} />
 
-        <input type="text" placeholder='Expiration Date'
-          value={enteredExpirationDate}
-          onChange={ExpirationDateChangeHandler}
-          onBlur={ExpirationDateBlurHandler} />
+          <input type="text" placeholder='CVV'
+            value={enteredCVV}
+            onChange={CVVChangeHandler}
+            onBlur={CVVBlurHandler} />
 
-        <input type="text" placeholder='CVV'
-          value={enteredCVV}
-          onChange={CVVChangeHandler}
-          onBlur={CVVBlurHandler} />
+          <PurchaseButton type='submit'>Add your card</PurchaseButton>
+        </Form>
 
-        <PurchaseButton type='submit'>Add your card</PurchaseButton>
-      </Form>
-
-
-    </Card>
+      </Card>
+      <Wrapper> <PurchaseButton onClick={()=>{
+        setSavedCards(prev=>!prev);
+      }}>Show all saved cards</PurchaseButton></Wrapper>
+      {AllSavedCards ? <SavedCards/> : null }
+    </>
   )
 }
 

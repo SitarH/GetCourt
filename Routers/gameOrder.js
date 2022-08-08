@@ -1,7 +1,7 @@
 const express = require('express');
 const GameOrderRouter = express.Router();
 
-const GameOrderController = require('../Controllers/gameOrderController');
+const GameOrderController = require('../controllers/gameOrderController');
 
 GameOrderRouter.get("/", GameOrderController.GameOrderGetAllActive); 
 
