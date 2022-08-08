@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import FriendsList from '../Components/Popups/FriendsList';
  
 
 function Friends() {
@@ -37,7 +38,7 @@ function Friends() {
   }
 
   return (
-    <div>Friends</div>
+    <FriendsList/>
   )
 }
 

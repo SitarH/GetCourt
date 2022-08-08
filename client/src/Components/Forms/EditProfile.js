@@ -20,12 +20,12 @@ function EditProfile() {
         Reset: ResetLastName
     } = useInput(value => value);
 
-    const { value: enteredEmail,
-        isValid: enteredEmailIsValid,
-        InputChangeHandler: EmailChangeHandler,
-        InputBlurHandler: EmailBlurHandler,
-        Reset: ResetEmail
-    } = useInput(value => value.includes('@'));
+    const { value: enteredPhoneNumber,
+        isValid: enteredPhoneNumberIsValid,
+        InputChangeHandler: PhoneNumberChangeHandler,
+        InputBlurHandler: PhoneNumberBlurHandler,
+        Reset: ResetPhoneNumber
+    } = useInput(value => value);
 
     const { value: enteredPassword,
         isValid: enteredPasswordIsValid,
@@ -52,7 +52,7 @@ function EditProfile() {
 
     if (enteredFirstNameisValid &&
         enteredLastNameIsValid &&
-        enteredEmailIsValid &&
+        enteredPhoneNumberIsValid &&
         enteredPasswordIsValid &&
         enteredBirthDateIsValid &&
         enteredLevelsValid) {
@@ -71,7 +71,7 @@ function EditProfile() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: enteredEmail,
+                phoneNumber: enteredPhoneNumber,
                 firstName: enteredFirstName,
                 lastName: enteredLastName,
                 password: enteredPassword,
@@ -86,7 +86,7 @@ function EditProfile() {
         
         ResetFirstName();
         ResetLastName();
-        ResetEmail();
+        ResetPhoneNumber();
         ResetPassword();
         ResetBirthDate();
         ResetLevel();
@@ -106,10 +106,10 @@ function EditProfile() {
                 onChange={LastNameChangeHandler}
                 onBlur={LastNameBlurHandler} />
 
-            <input type="email" placeholder="Email"
-                value={enteredEmail}
-                onChange={EmailChangeHandler}
-                onBlur={EmailBlurHandler} />
+            <input type="tel" placeholder="Phone Number"
+                value={enteredPhoneNumber}
+                onChange={PhoneNumberChangeHandler}
+                onBlur={PhoneNumberBlurHandler} />
 
             <input type="password" placeholder="Password"
                 value={enteredPassword}

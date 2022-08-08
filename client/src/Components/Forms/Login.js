@@ -70,6 +70,7 @@ function Login() {
 
 
     return (
+       
         <Card>
         <Form onSubmit={FormSubmitHandler}>
            <Title>Login</Title>
@@ -87,6 +88,7 @@ function Login() {
             <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
         </Card>
+    
     )
 }
 

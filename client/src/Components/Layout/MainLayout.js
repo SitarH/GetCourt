@@ -4,12 +4,15 @@ import Navigation from '../Navigation';
 import Footer from '../Footer';
 // import Header from '../UI/Header';
 import Header from '../../Components/Header';
+import Wrapper from '../UI/Wrapper';
 
 function MainLayout() {
     return (
         <div>
             <Header/>
+           
             <Navigation/>
+           
             <Footer/>
         </div>
     )

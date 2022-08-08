@@ -2,56 +2,38 @@ import React from 'react';
 import Wrapper from '../Components/UI/Wrapper';
 import { useState, useEffect } from 'react';
 import EditProfile from '../Components/Forms/EditProfile';
+import { useSelector } from 'react-redux';
+import Button from '../Components/UI/Button';
+import Title from '../Components/UI/Title';
+import Card from '../Components/UI/Card';
 
 function Profile() {
 
-  const [profile, setProfile] = useState(null);
   const [toggleEdit, setToggleEdit] = useState(false);
 
-  useEffect(() => {
-    fetchProfile()
-  }, [])
-
-  const fetchProfile = async () => {
-
-    try {
-      const respone = await fetch('http://localhost:5008/api/GetCourt/user/62b1b8d25ac79c104dcfcbae');
-      if (respone.status === 200) {
-        const data = await respone.json();
-        //onsole.log(data)
-        setProfile(data)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const currentUser = useSelector(state => state.auth.loggedUser)
 
   return (
     <>
-      <Wrapper>
-        <h1>Profile</h1>
-      </Wrapper>
-      <Wrapper>
-        {
-          profile != null ?
-            <div key={profile.id} >
-              First Name: {profile.firstName}<br />
-              Last Name: {profile.lastName} <br />
-              Email: {profile.email} <br />
-              Password: {profile.password} <br />
-              Birth Date: {profile.dateOfBirth} <br />
-              Level: {profile.level} <br />
-            </div>
-            : <p>user not found</p>
-        }
-      </Wrapper>
-      <br />
-      <Wrapper><button onClick={() => {
-        setToggleEdit(prev=>!prev);
+      <Wrapper className="column">
+
         
-      }}>Edit </button></Wrapper>
-      
-      {toggleEdit ? <EditProfile/> : null }
+        <Card>
+        <Title>Profile</Title>
+          <p>First Name: {currentUser.firstName}</p>
+          <p>Last Name: {currentUser.lastName} </p>
+          <p>Phone Number: {currentUser.phoneNumber} </p>
+          <p>Password: {currentUser.password} </p>
+          <p>Birth Date: {currentUser.dateOfBirth}</p>
+          <p>Level: {currentUser.level} </p>
+          </Card>
+        <Button onClick={() => {
+          setToggleEdit(prev => !prev);
+
+        }}>Edit </Button>
+        </Wrapper>
+
+      {toggleEdit && <EditProfile />}
     </>
   )
 }

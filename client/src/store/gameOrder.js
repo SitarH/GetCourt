@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
 const initialState = {
     
         date:'',
@@ -11,8 +10,6 @@ const initialState = {
         players:[],
        
 };
-
-
 
 const gameOrderSlice = createSlice({
     name: 'gameOrder',
@@ -59,7 +56,7 @@ const gameOrderSlice = createSlice({
 
     }
 })
-// console.log(gameOrderSlice)
+
 export const gameOrderActions = gameOrderSlice.actions;
 
 export default gameOrderSlice.reducer;
