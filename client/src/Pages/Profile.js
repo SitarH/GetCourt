@@ -17,7 +17,6 @@ function Profile() {
   return (
     <>
       <Wrapper className="column">
-
         
         <Card>
         <Title>Profile</Title>

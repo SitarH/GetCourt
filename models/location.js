@@ -29,13 +29,30 @@ class Location {
 
     async GetLocationByID(id) {
         try {
-            console.log('hi');
+            
             return await new DB().FindByID('location', id);
             
         } catch (error) {
-            console.log(error);
+
             return error;
         }
+    }
+
+    async GetHoursByLocationAndDate(location, date){
+        try {
+            let options = [{$project: {'_id':0,'gamesList.location':1,'gamesList.time': 1, 'gamesList.date': 1}},{$unwind: '$gamesList'}]
+            let arr = await new DB().Aggregate('user', options);
+            const ArrByDateLoc = arr.filter(game => game.gamesList.location === location && game.gamesList.date == date);
+            const availableHours = ArrByDateLoc.map(game => game.gamesList.time)
+
+            return availableHours;
+        } catch (error) {
+            return error;
+        }
+
+
+
+
     }
 
     async InsertNewLocation() {

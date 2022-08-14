@@ -7,7 +7,9 @@ LocationRouter.get("/", LocationController.LocationGetAllActive);
 
 LocationRouter.get("/:id", LocationController.LocationGetById);
 
-LocationRouter.post("/add", LocationController.AddLocation); 
+LocationRouter.post("/add", LocationController.AddLocation);
+
+LocationRouter.post("/availableHours", LocationController.GetGameByLocationAndDate);
 
 LocationRouter.put("/:id", LocationController.UpdateLocation); 
 

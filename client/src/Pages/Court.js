@@ -22,6 +22,34 @@ function Court() {
         dispatch(gameOrderActions.InsertIntoValue({field: 'court', value: currentCourt.courtId}))
     }, [])
 
+    useEffect(() => {
+        fetchHours()
+
+
+     
+    }, [])
+
+    const fetchHours = async () => {
+        const Details = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({location: 'Yerushalaim', date: '2022-08-04'})
+        };
+        try {
+            const response = await fetch(`http://localhost:5008/api/GetCourt/location/availableHours`, Details);
+            const data = await response.json();
+            console.log(data)
+            return data;
+        } catch (e) {
+            return e;
+        }  
+
+    }
+    
+
     const disablePastDate = () => {
         const today = new Date();
         const dd = String(today.getDate() + 1).padStart(2, "0");

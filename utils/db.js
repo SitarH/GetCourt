@@ -21,6 +21,18 @@ class DB {
         }
     }
 
+    async Aggregate(collection, options = []) {
+
+        try {
+            await this.client.connect();
+            return await this.client.db(this.dbName).collection(collection).aggregate(options).toArray();
+        } catch (error) {
+
+        } finally {
+            await this.client.close();
+        }
+    }
+
     async FindByID(collection, id) {
         try {
             await this.client.connect();
