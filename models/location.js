@@ -60,8 +60,6 @@ class Location {
     async NextAvailableGames(date, time) {
         try {
             let db = new DB();
-            await db.DropCollection('CourtsInLocaion');
-            await db.DropCollection('TakenGames');
 
             let options = [
                 { $unwind: '$court' },
@@ -94,16 +92,26 @@ class Location {
 
             let games = await db.FindAll('CourtsInLocaion');
             let takenGames = await db.FindAll('TakenGames');
-            let availableGames = new Array();
+
+            await db.DropCollection('CourtsInLocaion');
+            await db.DropCollection('TakenGames');
+
+            let temp = new Array();
 
             for (let i = 0; i < takenGames.length; i++) {
                 for (let j = 0; j < games.length; j++) {
                     if (!(games[j].courtInfo.availableHours.hour == takenGames[i].gamesList.time
                         && games[j].beachName == takenGames[i].gamesList.location
                         && games[j].courtInfo.courtId == takenGames[i].gamesList.court))
-                        availableGames.push(games[j]);
+                        temp.push(games[j]);
                 }
             }
+
+            let currentTime = parseInt(time.split(':')[0])
+            let availableGames = temp.filter(game=>{
+                let hour = parseInt(game.courtInfo.availableHours.hour.split(':')[0]);
+                return hour > currentTime
+            })
 
 
             return availableGames;

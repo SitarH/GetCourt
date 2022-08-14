@@ -44,10 +44,10 @@ exports.LocationGetAllActive = async (req, res) => {
 
     exports.NextAvailableGames = async (req, res) => {
 
-        let {date} = req.body;
+        let {date, time} = req.body;
         
         try {
-            let gamesArr = await new Location().NextAvailableGames(date);
+            let gamesArr = await new Location().NextAvailableGames(date, time);
             if (gamesArr === undefined) 
             res.status(404).json({ message: 'location not found', gamesArr });
         else
