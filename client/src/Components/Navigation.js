@@ -16,6 +16,7 @@ import Confirmation from './Confirmation';
 import Cart from '../Pages/Cart';
 import EditProfile from './Forms/EditProfile';
 import UserPayments from '../Pages/UserPayments';
+import Admin from '../Components/Admin/Admin'
 import Contact from '../Pages/Contact';
 import History from '../Pages/History';
 import Friends from '../Pages/Friends';
@@ -40,12 +41,12 @@ function Navigation() {
       <Route path="/Contact" element={<Contact />} />
       <Route path="/History" element={<History />} />
       <Route path="/UserPayments" element={<UserPayments />} />
-      <Route path="/profile/Yaara/edit" element={<EditProfile/>} />
+      <Route path="/profile/Yaara1/edit" element={<EditProfile/>} />
       <Route path="/profile/manageProduct" element={<ManageProduct />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/confirmation" element={<Confirmation />} />
       <Route path="/cart" element={<Cart />} />
-      {/* <Route path="/admin" element={<Admin />} /> */}
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   )
 }
