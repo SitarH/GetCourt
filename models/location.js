@@ -29,18 +29,21 @@ class Location {
 
     async GetLocationByID(id) {
         try {
-            
+
             return await new DB().FindByID('location', id);
-            
+
         } catch (error) {
 
             return error;
         }
     }
 
-    async GetHoursByLocationAndDate(location, date){
+    async GetHoursByLocationAndDate(location, date) {
         try {
-            let options = [{$project: {'_id':0,'gamesList.location':1,'gamesList.time': 1, 'gamesList.date': 1}},{$unwind: '$gamesList'}]
+            let options = [
+                { $project: { '_id': 0, 'gamesList.location': 1, 'gamesList.time': 1, 'gamesList.date': 1 } },
+                { $unwind: '$gamesList' }
+            ]
             let arr = await new DB().Aggregate('user', options);
             const ArrByDateLoc = arr.filter(game => game.gamesList.location === location && game.gamesList.date == date);
             const availableHours = ArrByDateLoc.map(game => game.gamesList.time)
@@ -51,16 +54,72 @@ class Location {
         }
 
 
+    }
+
+
+    async NextAvailableGames(date, time) {
+        try {
+            let db = new DB();
+            await db.DropCollection('CourtsInLocaion');
+            await db.DropCollection('TakenGames');
+
+            let options = [
+                { $unwind: '$court' },
+                {
+                    $lookup: {
+                        from: 'court',
+                        localField: 'court',
+                        foreignField: '_id',
+                        pipeline: [
+                            { $match: { 'isActive': true } },
+                            { $project: { 'gameType': 0 } }
+                        ],
+                        as: 'courtInfo'
+                    }
+                },
+                { $unwind: '$courtInfo' },
+                { $unwind: '$courtInfo.availableHours' },
+                { $project: { '_id': 0, 'court': 0 } },
+                { $out: 'CourtsInLocaion' }
+            ];
+            await db.Aggregate('location', options);
+
+            options = [
+                { $unwind: '$gamesList' },
+                { $project: { '_id': 0, 'gamesList.location': 1, 'gamesList.time': 1, 'gamesList.date': 1, 'gamesList.court': 1 } },
+                { $match: { 'gamesList.date': date } },
+                { $out: 'TakenGames' }
+            ]
+            await db.Aggregate('user', options);
+
+            let games = await db.FindAll('CourtsInLocaion');
+            let takenGames = await db.FindAll('TakenGames');
+            let availableGames = new Array();
+
+            for (let i = 0; i < takenGames.length; i++) {
+                for (let j = 0; j < games.length; j++) {
+                    if (!(games[j].courtInfo.availableHours.hour == takenGames[i].gamesList.time
+                        && games[j].beachName == takenGames[i].gamesList.location
+                        && games[j].courtInfo.courtId == takenGames[i].gamesList.court))
+                        availableGames.push(games[j]);
+                }
+            }
+
+
+            return availableGames;
+        } catch (error) {
+            return error;
+        }
 
 
     }
 
     async InsertNewLocation() {
         try {
-            return await new DB().Insert('location', this); 
+            return await new DB().Insert('location', this);
         } catch (error) {
             return error;
-        } 
+        }
     }
 
     async UpdateLocationById(id) {
@@ -69,12 +128,12 @@ class Location {
         } catch (error) {
             console.log(error);
             return error;
-        } 
+        }
     }
 
     async DeleteLocation(id) {
         try {
-            return await new DB().DeactivateDocById('location',id);
+            return await new DB().DeactivateDocById('location', id);
         } catch (error) {
             return error;
         }

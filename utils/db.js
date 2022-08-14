@@ -119,6 +119,18 @@ class DB {
         }
     }
 
+    async DropCollection(collection) {
+        try {
+            await this.client.connect();
+            return await this.client.db(this.dbName).collection(collection).drop();
+        } catch (error) {
+            console.log(error)
+            return error;
+        } finally {
+            await this.client.close();
+        }
+    }
+
 
 }
 

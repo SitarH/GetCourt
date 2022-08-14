@@ -11,6 +11,8 @@ LocationRouter.post("/add", LocationController.AddLocation);
 
 LocationRouter.post("/availableHours", LocationController.GetGameByLocationAndDate);
 
+LocationRouter.post("/NextAvailableGames", LocationController.NextAvailableGames);
+
 LocationRouter.put("/:id", LocationController.UpdateLocation); 
 
 LocationRouter.delete("/:id", LocationController.DeleteLocation);
