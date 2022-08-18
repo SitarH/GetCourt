@@ -113,8 +113,14 @@ class Location {
                 return hour > currentTime
             })
 
+            let finalGames = new Array();
+            for (let index = 0; index < 4; index++) {
+                const item = availableGames[Math.floor(Math.random()*availableGames.length)];
+                finalGames.push(item);
+                
+            }
 
-            return availableGames;
+            return finalGames;
         } catch (error) {
             return error;
         }

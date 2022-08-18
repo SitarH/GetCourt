@@ -5,6 +5,7 @@ import Location from '../Components/Location'
 import Courts from './CourtList';
 import Wrapper from '../Components/UI/Wrapper';
 import Card from '../Components/UI/Card';
+import GamesList from '../Components/GamesList'
 
 function Home() {
 
@@ -36,7 +37,9 @@ function Home() {
   return (
   
     <Wrapper>
-      <Card height={'200px'}>Next available Games</Card>
+      <Card height={'200px'} width={'950px'} backgroundColor={'#F2C67D'} direction={'column'}>
+        <GamesList/>
+      </Card>
       {locations.map((location) => {
         return <Location 
         key={location._id} 

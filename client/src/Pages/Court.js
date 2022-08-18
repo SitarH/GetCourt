@@ -2,14 +2,14 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AddFriends from '../Components/Popups/AddFriends';
-import {useDispatch} from 'react-redux';
-import {gameOrderActions} from '../store/gameOrder';
+import { useDispatch } from 'react-redux';
+import { gameOrderActions } from '../store/gameOrder';
 import Title from '../Components/UI/Title';
 import Wrapper from '../Components/UI/Wrapper';
 import Button from '../Components/UI/Button';
 import PurchaseButton from '../Components/UI/PurchaseButton';
 
-function Court() {
+function Court({ courtObj }) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,14 +19,14 @@ function Court() {
     const [togglePopUp, setTogglePopUp] = useState(false);
 
     useEffect(() => {
-        dispatch(gameOrderActions.InsertIntoValue({field: 'court', value: currentCourt.courtId}))
+        dispatch(gameOrderActions.InsertIntoValue({ field: 'court', value: currentCourt.courtId }))
     }, [])
 
     useEffect(() => {
         fetchHours()
 
 
-     
+
     }, [])
 
     const fetchHours = async () => {
@@ -36,7 +36,7 @@ function Court() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({location: 'Yerushalaim', date: '2022-08-04'})
+            body: JSON.stringify({ location: 'Yerushalaim', date: '2022-08-04' })
         };
         try {
             const response = await fetch(`http://localhost:5008/api/GetCourt/location/availableHours`, Details);
@@ -45,70 +45,56 @@ function Court() {
             return data;
         } catch (e) {
             return e;
-        }  
+        }
 
     }
-    
 
-    const disablePastDate = () => {
-        const today = new Date();
-        const dd = String(today.getDate() + 1).padStart(2, "0");
-        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-        const yyyy = today.getFullYear();
-        return yyyy + "-" + mm + "-" + dd;
-    };
-
-    const SelectionHandler = (fieldVal, value) =>{
+    const SelectionHandler = (fieldVal, value) => {
         console.log(value)
-        dispatch(gameOrderActions.InsertIntoValue({field: fieldVal, value: value}))
+        dispatch(gameOrderActions.InsertIntoValue({ field: fieldVal, value: value }))
         if (fieldVal === 'time')
             setTogglePopUp(true)
     }
 
-    const PurchaseGameHandler = () =>{
+    const PurchaseGameHandler = () => {
         navigate('/checkout');
     }
 
     return (
-        <Wrapper className={'column'}>
-            <Title>Court {currentCourt.courtId}</Title>
-            <input type="date" 
-            id= "date" 
-            min= {disablePastDate()}
-            onChange={(event)=>SelectionHandler('date',event.target.value)}
-            ></input>
+        <div className="court">
+            <h2>Court {courtObj.courtId}</h2>
 
-            <h2>Playing for?</h2>
-            <Wrapper>
-            {currentCourt.gameType.map((gameType, index) => {
-                return <Button
-                    key={index}
-                    onClick={()=>SelectionHandler('type',gameType)}>
-                    {gameType}
-                </Button>
-            }
-            )}
-            </Wrapper>
-          
-            <h2>Available hours</h2>
-            <Wrapper>
-            {currentCourt.availableHours.map((item, index) => {
-                return <Button
-                    key={index}
-                    onClick={()=>SelectionHandler('time',item.hour)}>
-                    {item.hour}
-                </Button>
-            }
-            )}
-            </Wrapper>
+            <p>Playing for?</p>
+            <div className="rowDirection">
+                {courtObj.gameType.map((gameType, index) => {
+                    return <Button width={'90px'} padding={'3px'}
+                        key={index}
+                        onClick={() => SelectionHandler('type', gameType)}>
+                        {gameType}
+                    </Button>
+                }
+                )}
+            </div>
 
-            {togglePopUp && 
-            <AddFriends 
-            toggleVal={togglePopUp} 
-            setToggle={setTogglePopUp} />}
+            <p>Available hours</p>
+            <div className="rowDirection">
+                {courtObj.availableHours.map((item, index) => {
+                    return <Button width={'90px'} padding={'3px'}
+                        key={index}
+                        onClick={() => SelectionHandler('time', item.hour)}>
+                        {item.hour}
+                    </Button>
+                }
+                )}
+            </div>
 
-            <PurchaseButton onClick={PurchaseGameHandler}>Purchase Game</PurchaseButton>
-        </Wrapper>
+
+            {togglePopUp &&
+                <AddFriends
+                    toggleVal={togglePopUp}
+                    setToggle={setTogglePopUp} />}
+        </div>
+
 
     )
 }

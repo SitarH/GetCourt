@@ -2,17 +2,23 @@
 import styled from 'styled-components';
 
 const Card = styled.div`
-    background-color: #F5D28E;
+
+    background-color: ${props=> props.backgroundColor};
     height: ${props=> props.height};
-    width: 400px;
-    border-radius: 10%;
+    width: ${props=> props.width};
+    border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 30px;
-    flex-direction: column;
+    flex-direction: ${props=> props.direction};
+    padding: ${props=> props.padding};
+    flex-wrap: wrap;
+    
 
-
+   & p{
+      line-height:0 ;
+   }
     & h2{
         font-weight: 100;
         line-height: 0;

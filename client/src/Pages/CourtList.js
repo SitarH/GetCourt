@@ -6,6 +6,7 @@ import Card from '../Components/UI/Card';
 import Title from '../Components/UI/Title';
 import {useDispatch} from 'react-redux';
 import {gameOrderActions} from '../store/gameOrder';
+import Court from '../Pages/Court'
 
 
 function Courts() {
@@ -15,6 +16,7 @@ function Courts() {
   const dispatch = useDispatch();
 
   const [courts, setCourts] = useState(location.state.value.court)
+  console.log(courts)
   // const courts = location.state.value.court;
  
 
@@ -49,17 +51,37 @@ function Courts() {
 
   }
 
+  
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+};
+
   return (
-    <Wrapper>
+    <Wrapper className="column">
+    <input type="date"
+    id= "date" 
+    min= {disablePastDate()}
+    
+    ></input>
+    
+      <div className="wrap">
       {courtsNumbers.map((courtNumber, index) => {
         return <Card height={'200px'}
           key={index}
           onClick={() => navigate('/court', { state: { value: courtNumber } })}
         >
-          <Title>{courtNumber.courtId}</Title>
+          <Court courtObj={courtNumber}/>
         </Card>
       })}
+      </div>
+      
     </Wrapper>
+   
   )
 }
 

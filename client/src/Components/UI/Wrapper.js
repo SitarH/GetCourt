@@ -9,7 +9,23 @@ align-items: center;
  margin-left: 5%;
 
  &.column{
-   flex-direction:column;
+   flex-direction: column;
+ }
+
+ &.column .wrap{
+   display: flex;
+   flex-wrap: wrap;
+ }
+
+ &.column .wrap .court{
+   margin: 10px;
+   padding: 10px;
+   flex: 40%;
+ }
+
+ &.column .wrap .court .rowDirection{
+   display: flex;
+    flex-direction: row;
  }
 
  & input[type="date" i]{
@@ -17,7 +33,9 @@ align-items: center;
     background-color: #F2C67D;
     border: 2px solid #F2C67D;
     border-radius: 15px;
-    width: 150px;
+    width: 350px;
+    font-size: 20px;
+    letter-spacing: 5px;
  }
 
  & h2{

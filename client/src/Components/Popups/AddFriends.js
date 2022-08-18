@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../UI/Button';
 import PopUp from '../UI/PopUp';
 import { useState } from 'react';
-import FriendsList from './FriendsList'
+import FriendsList from './FriendsList';
 
 function AddFriends({ toggleVal, setToggle }) {
 
@@ -27,10 +27,10 @@ function AddFriends({ toggleVal, setToggle }) {
       </FriendsList> :
         <PopUp>
           <h2>would you like to invite friends?</h2>
-          <Button value={"yes"}
+          <Button value={"yes"} width={'150px'}
             onClick={AddFriendHandler}>Yes
           </Button>
-          <Button value={"no"}
+          <Button value={"no"} width={'150px'}
             onClick={AddFriendHandler}>No
           </Button>
         </PopUp>}
