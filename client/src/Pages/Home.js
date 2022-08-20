@@ -9,7 +9,16 @@ import GamesList from '../Components/GamesList'
 
 function Home() {
 
-  const [locations, setLocations] = useState([])
+  const [locations, setLocations] = useState([]);
+
+  const [gameOrder, setGameOrder] = useState({
+    date: '',
+    time: '',
+    location: '',
+    court: '',
+    type: '',
+    players: [],
+  })
 
   useEffect(() => {
 
@@ -43,7 +52,9 @@ function Home() {
       {locations.map((location) => {
         return <Location 
         key={location._id} 
-        location={location} 
+        locationObj={location}
+        game={gameOrder} 
+        setGame={setGameOrder}
       />
       })}
     </Wrapper>

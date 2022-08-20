@@ -22,7 +22,8 @@ function GameDetails({ game }) {
             {togglePopUp &&
                 <AddFriends
                     toggleVal={togglePopUp}
-                    setToggle={setTogglePopUp} />}
+                    setToggle={setTogglePopUp}
+                    gameObj = {game} />}
         </>
     )
   

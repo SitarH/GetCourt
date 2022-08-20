@@ -14,7 +14,7 @@ import {gameOrderActions} from '../../store/gameOrder';
 
 
 
-export default function CheckboxListSecondary({ toggleVal, setToggle }) {
+export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj }) {
 
   const userFriendsList = useSelector(state => state.auth.loggedUser.friendsList);
 
@@ -84,8 +84,9 @@ export default function CheckboxListSecondary({ toggleVal, setToggle }) {
 
 
   const AddToGame = () => {
-    console.log(checked)
-    dispatch(gameOrderActions.InsertIntoValue({field: 'players', value: checked}));
+    console.log(gameObj)
+    gameObj.players.push(checked);
+    dispatch(gameOrderActions.AddNewGame(gameObj));
     setToggle(!toggleVal);
 
   }

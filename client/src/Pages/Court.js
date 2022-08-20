@@ -9,7 +9,7 @@ import Wrapper from '../Components/UI/Wrapper';
 import Button from '../Components/UI/Button';
 import PurchaseButton from '../Components/UI/PurchaseButton';
 
-function Court({ courtObj }) {
+function Court({ courtObj, game, setGame }) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,14 +18,12 @@ function Court({ courtObj }) {
 
     const [togglePopUp, setTogglePopUp] = useState(false);
 
-    useEffect(() => {
-        dispatch(gameOrderActions.InsertIntoValue({ field: 'court', value: currentCourt.courtId }))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(gameOrderActions.InsertIntoValue({ field: 'court', value: currentCourt.courtId }))
+    // }, [])
 
     useEffect(() => {
         fetchHours()
-
-
 
     }, [])
 
@@ -49,16 +47,14 @@ function Court({ courtObj }) {
 
     }
 
-    const SelectionHandler = (fieldVal, value) => {
-        console.log(value)
-        dispatch(gameOrderActions.InsertIntoValue({ field: fieldVal, value: value }))
-        if (fieldVal === 'time')
-            setTogglePopUp(true)
+    const SelectionHandler = (courtNum, hour) => {
+        // setGame({...game, court: courtNum});
+       
+    
     }
-
-    const PurchaseGameHandler = () => {
-        navigate('/checkout');
-    }
+    // const PurchaseGameHandler = () => {
+    //     navigate('/checkout');
+    // }
 
     return (
         <div className="court">
@@ -69,7 +65,7 @@ function Court({ courtObj }) {
                 {courtObj.gameType.map((gameType, index) => {
                     return <Button width={'90px'} padding={'3px'}
                         key={index}
-                        onClick={() => SelectionHandler('type', gameType)}>
+                        onClick={() => setGame({ ...game, type: gameType })}>
                         {gameType}
                     </Button>
                 }
@@ -81,18 +77,18 @@ function Court({ courtObj }) {
                 {courtObj.availableHours.map((item, index) => {
                     return <Button width={'90px'} padding={'3px'}
                         key={index}
-                        onClick={() => SelectionHandler('time', item.hour)}>
+                        onClick={()=> {setGame({...game, time: item.hour, court: courtObj.courtId}); setTogglePopUp(true)}}>
                         {item.hour}
                     </Button>
                 }
                 )}
             </div>
 
-
             {togglePopUp &&
                 <AddFriends
                     toggleVal={togglePopUp}
-                    setToggle={setTogglePopUp} />}
+                    setToggle={setTogglePopUp}
+                    gameObj= {game} />}
         </div>
 
 
