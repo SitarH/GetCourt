@@ -8,16 +8,16 @@ function Location({ locationObj, game, setGame }) {
 
   const navigate = useNavigate();
 
-  const LocationHandler = ()=>{
-  
-    navigate('/courts', { state: {gameOrder: game, location: locationObj}});
+  const LocationHandler = () => {
+
+    navigate('/courts', { state: { gameOrder: game, location: locationObj } });
   }
 
   return (
     <Card height={'200px'}>
-    <Title onClick={LocationHandler}>
-      {locationObj.beachName}
-    </Title>
+      <Title onClick={LocationHandler}>
+        {locationObj.beachName}
+      </Title>
     </Card>
   )
 }

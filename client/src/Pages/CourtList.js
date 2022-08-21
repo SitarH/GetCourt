@@ -13,7 +13,7 @@ import PurchaseButton from '../Components/UI/PurchaseButton';
 function Courts() {
 
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const dispatch = useDispatch();
 
   const { location } = state;
@@ -28,8 +28,8 @@ function Courts() {
   useEffect(() => {
     // dispatch(gameOrderActions.InsertIntoValue({ field: 'location', value: location.state.value.beachName }))
     // if (courts?.length > 0)
-      setGameOrder({...gameOrder, location: location.beachName})
-      fetchCourts()
+    setGameOrder({ ...gameOrder, location: location.beachName })
+    fetchCourts()
 
   }, [])
 
@@ -62,7 +62,7 @@ function Courts() {
   }
 
 
-  const PurchaseHandler = () =>{
+  const PurchaseHandler = () => {
     dispatch(gameOrderActions.AddNewGame(gameOrder));
     navigate('/checkout')
 
@@ -86,7 +86,7 @@ function Courts() {
             </Card>
           })}
         </div>}
-          <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>
+      <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>
 
     </Wrapper>
 

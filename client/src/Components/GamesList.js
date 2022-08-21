@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import GameDetails from '../Components/GameDetails';
 import Wrapper from '../Components/UI/Wrapper'
 
-function GamesList() {
+function GamesList({ gameObj }) {
 
     const [availableGames, setAvailableGames] = useState([])
 
@@ -40,6 +40,7 @@ function GamesList() {
         return <GameDetails
           key={index}
           game={game}
+          gameObj= {gameObj}
         />
       })}
       </>

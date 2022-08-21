@@ -18,10 +18,6 @@ function Court({ courtObj, game, setGame }) {
 
     const [togglePopUp, setTogglePopUp] = useState(false);
 
-    // useEffect(() => {
-    //     dispatch(gameOrderActions.InsertIntoValue({ field: 'court', value: currentCourt.courtId }))
-    // }, [])
-
     useEffect(() => {
         fetchHours()
 
@@ -47,14 +43,6 @@ function Court({ courtObj, game, setGame }) {
 
     }
 
-    const SelectionHandler = (courtNum, hour) => {
-        // setGame({...game, court: courtNum});
-       
-    
-    }
-    // const PurchaseGameHandler = () => {
-    //     navigate('/checkout');
-    // }
 
     return (
         <div className="court">
@@ -77,7 +65,7 @@ function Court({ courtObj, game, setGame }) {
                 {courtObj.availableHours.map((item, index) => {
                     return <Button width={'90px'} padding={'3px'}
                         key={index}
-                        onClick={()=> {setGame({...game, time: item.hour, court: courtObj.courtId}); setTogglePopUp(true)}}>
+                        onClick={() => { setGame({ ...game, time: item.hour, court: courtObj.courtId }); setTogglePopUp(true) }}>
                         {item.hour}
                     </Button>
                 }
@@ -88,7 +76,7 @@ function Court({ courtObj, game, setGame }) {
                 <AddFriends
                     toggleVal={togglePopUp}
                     setToggle={setTogglePopUp}
-                    gameObj= {game} />}
+                    gameObj={game} />}
         </div>
 
 

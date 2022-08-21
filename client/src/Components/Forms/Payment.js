@@ -7,10 +7,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
-function Payment() {
+function Payment({ game }) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,8 +18,8 @@ function Payment() {
     const user = useSelector(state => state.auth.loggedUser)
 
     const PurchaseHandler = () => {
-        console.log(user._id)
-        dispatch(gameOrderActions.AddNewGame(user._id));
+
+        dispatch(gameOrderActions.AddNewGame({ id: user._id, gameOrder: game }));
         navigate('/confirmation');
     }
 

@@ -9,8 +9,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import PopUp from '../UI/PopUp';
 import Button from '../UI/Button';
-import {useDispatch, useSelector} from 'react-redux';
-import {gameOrderActions} from '../../store/gameOrder';
+import { useDispatch, useSelector } from 'react-redux';
+import { gameOrderActions } from '../../store/gameOrder';
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -18,26 +19,28 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   const userFriendsList = useSelector(state => state.auth.loggedUser.friendsList);
 
-  console.log(userFriendsList)
+
   const dispatch = useDispatch();
 
   const [checked, setChecked] = useState([]);
 
-  const [friendsList, setFriendsList] = useState([])
+  const [friendsList, setFriendsList] = useState([]);
+
+  const navigate = useNavigate();
 
 
   useEffect(() => {
 
     // fetchFriendsList('62d1400d207bc314b4355c9b');
-     mapFriends();
-   
-   
+    mapFriends();
+
+
   }, [])
 
-  const fetchFriendsList = async(id) =>{
+  const fetchFriendsList = async (id) => {
     try {
       const respone = await fetch(`http://localhost:5008/api/GetCourt/user/${id}`);
-      if(respone.status === 200){
+      if (respone.status === 200) {
         const data = await respone.json();
         console.log(data)
         setFriendsList(data.friendsList);
@@ -47,13 +50,13 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
     }
   }
 
-  const mapFriends = async() =>{
-    
-    const friends = await Promise.all(userFriendsList.map(async (item)=>{
+  const mapFriends = async () => {
+
+    const friends = await Promise.all(userFriendsList.map(async (item) => {
       console.log(item)
       try {
         const respone = await fetch(`http://localhost:5008/api/GetCourt/user/${item}`);
-        if(respone.status === 200){
+        if (respone.status === 200) {
           const data = await respone.json();
           return data;
         }
@@ -61,12 +64,12 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
         console.log(error)
       }
     }
-    
+
     ))
-      console.log(friends)
-      setFriendsList(friends);
+    console.log(friends)
+    setFriendsList(friends);
   }
-  
+
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -79,51 +82,52 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
     }
 
     setChecked(newChecked);
-   
+
   };
 
 
   const AddToGame = () => {
     console.log(gameObj)
-    gameObj.players.push(checked);
+    gameObj.players=checked;
     dispatch(gameOrderActions.AddNewGame(gameObj));
     setToggle(!toggleVal);
+    navigate('/checkout', { state: {gameOrder: gameObj}});
 
   }
 
 
   return (
     <PopUp>
-    <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {friendsList.map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value._id}`;
-        return (
-          <ListItem
-            key={value}
-            secondaryAction={
-              <Checkbox
-                edge="end"
-                onChange={handleToggle(value)}
-                checked={checked.indexOf(value) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            }
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar
-                  alt={`Avatar n°${value + 1}`}
-                  src={`/static/images/avatar/${value + 1}.jpg`}
+      <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        {friendsList.map((value) => {
+          const labelId = `checkbox-list-secondary-label-${value._id}`;
+          return (
+            <ListItem
+              key={value}
+              secondaryAction={
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggle(value)}
+                  checked={checked.indexOf(value) !== -1}
+                  inputProps={{ 'aria-labelledby': labelId }}
                 />
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={value.firstName + ' ' + value.lastName} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List>
-    <Button onClick={AddToGame}>Add to game</Button>
+              }
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemAvatar>
+                  <Avatar
+                    alt={`Avatar n°${value + 1}`}
+                    src={`/static/images/avatar/${value + 1}.jpg`}
+                  />
+                </ListItemAvatar>
+                <ListItemText id={labelId} primary={value.firstName + ' ' + value.lastName} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+      <Button onClick={AddToGame}>Add to game</Button>
     </PopUp>
   );
 }

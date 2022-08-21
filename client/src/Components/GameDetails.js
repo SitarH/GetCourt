@@ -1,13 +1,23 @@
 import React from 'react';
 import Button from '../Components/UI/Button';
 import GameDetsCard from '../Components/UI/GameDetsCard';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import AddFriends from '../Components/Popups/AddFriends'
 
 
-function GameDetails({ game }) {
+function GameDetails({ game, gameObj }) {
 
-    const [togglePopUp, setTogglePopUp] = useState(false)
+    const [togglePopUp, setTogglePopUp] = useState(false);
+
+    const [gameOrder, setGameOrder] = useState({
+        date: new Date().toLocaleDateString(),
+        time: game.courtInfo.availableHours.hour,
+        location: game.beachName,
+        court: game.courtInfo.courtId,
+        type: '',
+        players: [],
+      })
+    
 
 
     return (
@@ -23,7 +33,7 @@ function GameDetails({ game }) {
                 <AddFriends
                     toggleVal={togglePopUp}
                     setToggle={setTogglePopUp}
-                    gameObj = {game} />}
+                    gameObj = {gameOrder} />}
         </>
     )
   

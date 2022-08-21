@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../UI/Button';
 import PopUp from '../UI/PopUp';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import FriendsList from './FriendsList';
 import { useDispatch } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
@@ -9,18 +10,24 @@ import { gameOrderActions } from '../../store/gameOrder';
 function AddFriends({ toggleVal, setToggle, gameObj }) {
 
   const [toggleList, setToggleList] = useState(false);
-  const dispatch = useDispatch();
+ 
+  const navigate = useNavigate();
 
   const AddFriendHandler = (event) => {
-
+    
     if (event.target.outerText === 'Yes') {
       setToggleList(!toggleList);
+     
 
     }
     else {
-      dispatch(gameOrderActions.AddNewGame(gameObj));
+      
       setToggle(!toggleVal);
+      navigate('/checkout', { state: {gameOrder: gameObj}});
     }
+
+  
+
   }
 
   return (

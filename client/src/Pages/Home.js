@@ -47,7 +47,7 @@ function Home() {
   
     <Wrapper>
       <Card height={'200px'} width={'950px'} backgroundColor={'#F2C67D'} direction={'column'}>
-        <GamesList/>
+        <GamesList gameObj={gameOrder}/>
       </Card>
       {locations.map((location) => {
         return <Location 
