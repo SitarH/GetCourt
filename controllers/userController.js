@@ -46,6 +46,20 @@ exports.UserLogin = async (req, res) => {
     }
 };
 
+exports.FindUsersFriends=async (req, res) =>{
+    let { phoneNum } = req.body;
+
+    try {
+        let friends = await new User().FindUsersFriends(phoneNum);
+        if (!friends)
+            res.status(404).json({ message: 'friends not found', friends });
+        else
+            res.status(200).json(friends);
+    } catch (error) {
+        res.status(500).json({ message: 'undefine' });
+    }
+};
+
 
 exports.AddUser = async (req, res) => {
     console.log('?')

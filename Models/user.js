@@ -1,7 +1,8 @@
+const { options } = require('../Routers/user');
 const DB = require('../utils/db');
 
 class User {
-    phoneNumber; 
+    phoneNumber;
     firstName;
     lastName;
     password;
@@ -13,18 +14,17 @@ class User {
     isActive;
 
     constructor(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
-                gamesList, ordersList, level) 
-                {
-                    this.phoneNumber = phoneNumber;
-                    this.firstName = firstName;
-                    this.lastName = lastName;
-                    this.password = password;
-                    this.dateOfBirth = dateOfBirth;
-                    this.friendsList = friendsList;
-                    this.gamesList = gamesList;
-                    this.ordersList = ordersList;
-                    this.level = level;
-                    this.isActive = true;
+        gamesList, ordersList, level) {
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.friendsList = friendsList;
+        this.gamesList = gamesList;
+        this.ordersList = ordersList;
+        this.level = level;
+        this.isActive = true;
     }
 
     async GetAllActiveUser() {
@@ -52,7 +52,7 @@ class User {
         }
     }
 
-    
+
     async UserLogin(phoneNum, password) {
         try {
             return await new DB().FindForLogin('user', phoneNum, password);
@@ -64,19 +64,44 @@ class User {
 
     async InsertNewUser() {
         try {
-            return await new DB().Insert('user', this); 
+            return await new DB().Insert('user', this);
         } catch (error) {
             return error;
-        } 
+        }
     }
 
-    async UpdateUserById(id, user=null) {
+    async UpdateUserById(id, user = null) {
         try {
             return await new DB().UpdateDocById('user', id, !user ? this : user);
         } catch (error) {
             console.log(error);
             return error;
-        } 
+        }
+    }
+
+    async FindUsersFriends(phoneNumber) {
+        try {
+            let options = [
+               
+                
+                {$unwind:'$friendsList'},
+                {$lookup:{
+                    from:'user',
+                    localField: 'friendsList',
+                    foreignField: '_id',
+                    pipeline:[
+                        {$project: {'firstName':1,'lastName':1}}
+                    ],
+                    as: 'friendsInfo'
+                }}, 
+                {$project:{'phoneNumber':1,'friendsInfo':1}},
+                {$match:{'phoneNumber':phoneNumber}}
+            ];
+            return await new DB().Aggregate('user', options);
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
     }
 
     // async UpdateUserById(user, id) {
@@ -90,7 +115,7 @@ class User {
 
     async DeleteUser(id) {
         try {
-            return await new DB().DeactivateDocById('user',id);
+            return await new DB().DeactivateDocById('user', id);
         } catch (error) {
             return error;
         }

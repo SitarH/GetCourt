@@ -1,49 +1,41 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Wrapper from '../Components/UI/Wrapper';
-import Friends from '../Pages/Friends';
+import { useSelector } from 'react-redux';
 
 function FriendsList() {
 
-    const [friends, setFriends] = useState([])
+    const [friends, SetFriends] = useState([]);
+    const user = useSelector(state => state.auth.loggedUser);
+
+    const GetUserFriends = async () => {
+        let bodyContent = JSON.stringify({
+            "phoneNum": user.phoneNumber
+        });
+
+        let response = await fetch("http://localhost:5008/api/GetCourt/user/friends", {
+            method: "POST",
+            body: bodyContent,
+            headers: { "Content-Type": "application/json" }
+        });
+
+        let data = await response.text();
+        console.log(data);
+        SetFriends(data)
+    }
 
     useEffect(() => {
-        fetchFriends();
-
-    }, [])
-
-
-    const fetchFriends = async () => {
-
-        // try {
-        //     const response = await fetch(
-        //         'http://localhost:5008/api/GetCourt/user/',
-        //         // {
-        //         //   method: 'GET',
-        //         //   headers: {
-        //         //     'Content-Type': 'application/json'
-        //         //   }
-        //         // }
-        //     );
-
-        //     console.log(response)
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         setFriends(data)
-        //     }
-        // } catch (error) {
-        //     console.log(error)
-
-        // }
-    }
+        GetUserFriends()
+      }, []);
 
     return (
         <Wrapper>
-            {friends.map((friends) => {
-                return <Friends
-                    key={friends._id}
-                    friends={friends}
-                />
+            {friends.map((friend) => {
+                return <h2
+                    key={friend.friendsInfo._id}
+                >
+                    {friend.friendsInfo.firstName} {friend.friendsInfo.lastName}
+                </h2>
             })}
         </Wrapper>
     )
