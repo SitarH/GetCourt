@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Wrapper from '../Components/UI/Wrapper';
 import { useSelector } from 'react-redux';
+import { apiAdress } from '../api';
 
 function FriendsList() {
 
@@ -13,7 +14,7 @@ function FriendsList() {
             "phoneNum": user.phoneNumber
         });
 
-        let response = await fetch("http://localhost:5008/api/GetCourt/user/friends", {
+        let response = await fetch(`${apiAdress}/api/GetCourt/user/friends`, {
             method: "POST",
             body: bodyContent,
             headers: { "Content-Type": "application/json" }
@@ -25,14 +26,14 @@ function FriendsList() {
     }
 
     useEffect(() => {
-        GetUserFriends()
-      }, []);
+        GetUserFriends();
+    }, []);
 
     return (
         <Wrapper>
-            {friends.map((friend) => {
+            {friends.map((friend, index) => {
                 return <h2
-                    key={friend.friendsInfo._id}
+                    key={index}
                 >
                     {friend.friendsInfo.firstName} {friend.friendsInfo.lastName}
                 </h2>

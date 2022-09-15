@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../Pages/Home';
-import Welcome from '../Pages/Welcome'
 import Login from '../Components/Forms/Login';
 import Register from '../Components/Forms/Register';
 import Shop from '../Pages/Shop';
@@ -22,12 +21,11 @@ import History from '../Pages/History';
 import Friends from '../Pages/Friends';
 
 function Navigation() {
-  //const { token } = useContext(UserContext);
 
   return (
 
     <Routes>
-      <Route path="/" element={<Welcome />} />
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} />

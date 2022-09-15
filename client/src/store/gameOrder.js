@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {apiAdress} from '../api';
 
 const initialState = {
 
@@ -24,7 +25,7 @@ const gameOrderSlice = createSlice({
                     body: JSON.stringify(initialState)
                 };
                 try {
-                    const response = await fetch(`http://localhost:5008/api/GetCourt/user/addGame/${action.payload.id}`, game);
+                    const response = await fetch(`${apiAdress}/api/GetCourt/user/addGame/${action.payload.id}`, game);
                     const data = await response.json();
                     return data;
                 } catch (e) {

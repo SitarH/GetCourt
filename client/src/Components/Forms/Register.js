@@ -5,13 +5,13 @@ import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
-import { sendRegisterData }  from '../../store/authActions';
-import {useNavigate} from 'react-router-dom';
+import { sendRegisterData } from '../../store/authActions';
+import { useNavigate } from 'react-router-dom';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 
 function Register() {
-    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -72,13 +72,15 @@ function Register() {
 
     const FormSubmitHandler = (event) => {
         event.preventDefault();
-        
-        dispatch(sendRegisterData({enteredPhoneNumber,
+
+        dispatch(sendRegisterData({
+            enteredPhoneNumber,
             enteredFirstName,
             enteredLastName,
             enteredPassword,
             enteredBirthDate,
-            enteredLevel}));
+            enteredLevel
+        }));
 
         ResetFirstName();
         ResetLastName();
@@ -89,51 +91,48 @@ function Register() {
 
         navigate('/login');
     }
-    
+
 
     return (
         <Form onSubmit={FormSubmitHandler}>
             <Title>Register</Title>
+            <div>
+                <input type="text" placeholder="First Name"
+                    value={enteredFirstName}
+                    onChange={FirstNameChangeHandler}
+                    onBlur={FirstNameBlurHandler} />
 
-            <input type="text" placeholder="First Name"
-                value={enteredFirstName}
-                onChange={FirstNameChangeHandler}
-                onBlur={FirstNameBlurHandler} />
+                <input type="text" placeholder="Last Name"
+                    value={enteredLastName}
+                    onChange={LastNameChangeHandler}
+                    onBlur={LastNameBlurHandler} />
+            </div>
+            <div>
+                <input type="tel" placeholder="Phone Number"
+                    value={enteredPhoneNumber}
+                    onChange={PhoneNumberChangeHandler}
+                    onBlur={PhoneNumberBlurHandler} />
 
-            <input type="text" placeholder="Last Name"
-                value={enteredLastName}
-                onChange={LastNameChangeHandler}
-                onBlur={LastNameBlurHandler} />
+                <input type="password" placeholder="Password"
+                    value={enteredPassword}
+                    onChange={PasswordChangeHandler}
+                    onBlur={PasswordBlurHandler} />
+            </div>
+            <div>
+                <input type="date" placeholder="Birth Date"
+                    value={enteredBirthDate}
+                    onChange={BirthDateChangeHandler}
+                    onBlur={BirthDateBlurHandler} />
 
-             <input type="tel" placeholder="Phone Number"
-                value={enteredPhoneNumber}
-                onChange={PhoneNumberChangeHandler}
-                onBlur={PhoneNumberBlurHandler} /> 
-                {/* <PhoneInput placeholder="Phone Number"
-                defaultCountry="IL"
-                value={enteredPhoneNumber}
-                onChange={PhoneNumberChangeHandler}
-                onBlur={PhoneNumberBlurHandler}/> */}
-
-            <input type="password" placeholder="Password"
-                value={enteredPassword}
-                onChange={PasswordChangeHandler}
-                onBlur={PasswordBlurHandler} />
-
-            <input type="date" placeholder="Birth Date"
-                value={enteredBirthDate}
-                onChange={BirthDateChangeHandler}
-                onBlur={BirthDateBlurHandler} />
-
-            <select value={enteredLevel}
-                onChange={LevelChangeHandler}
-                onBlur={LevelBlurHandler}>
-                <option value={"disable"} selected hidden>Choose level</option>
-                <option>Beginner</option>
-                <option>Intermediate</option>
-                <option>Advanced</option>
-            </select>
-
+                <select value={enteredLevel}
+                    onChange={LevelChangeHandler}
+                    onBlur={LevelBlurHandler}>
+                    <option value={"disable"} selected hidden>Choose level</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+            </div>
             <PurchaseButton type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
     )

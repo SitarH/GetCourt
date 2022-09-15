@@ -12,8 +12,7 @@ import Button from '../UI/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom'
-
-
+import {apiAdress} from '../../api';
 
 export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj }) {
 
@@ -39,7 +38,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   const fetchFriendsList = async (id) => {
     try {
-      const respone = await fetch(`http://localhost:5008/api/GetCourt/user/${id}`);
+      const respone = await fetch(`${apiAdress}/api/GetCourt/user/${id}`);
       if (respone.status === 200) {
         const data = await respone.json();
         console.log(data)
@@ -55,7 +54,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
     const friends = await Promise.all(userFriendsList.map(async (item) => {
       console.log(item)
       try {
-        const respone = await fetch(`http://localhost:5008/api/GetCourt/user/${item}`);
+        const respone = await fetch(`${apiAdress}/api/GetCourt/user/${item}`);
         if (respone.status === 200) {
           const data = await respone.json();
           return data;
@@ -66,7 +65,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
     }
 
     ))
-    console.log(friends)
+    
     setFriendsList(friends);
   }
 
@@ -87,9 +86,8 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
 
   const AddToGame = () => {
-    console.log(gameObj)
+
     gameObj.players=checked;
-    dispatch(gameOrderActions.AddNewGame(gameObj));
     setToggle(!toggleVal);
     navigate('/checkout', { state: {gameOrder: gameObj}});
 
