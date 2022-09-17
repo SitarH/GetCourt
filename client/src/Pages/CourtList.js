@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { gameOrderActions } from '../store/gameOrder';
 import Court from '../Pages/Court';
 import PurchaseButton from '../Components/UI/PurchaseButton';
+import {apiAdress} from '../api';
 
 
 function Courts() {
@@ -18,10 +19,8 @@ function Courts() {
 
   const { location } = state;
 
-
   const [gameOrder, setGameOrder] = useState(state.gameOrder)
-  console.log(location.court);
-  console.log(gameOrder);
+
 
   const [courtsNumbers, setCourtsNumbers] = useState([])
 
@@ -35,7 +34,7 @@ function Courts() {
 
   const fetchCourts = async () => {
 
-    const respone = await fetch(`http://localhost:5008/api/GetCourt/court/arr/${location.court.join()}`)
+    const respone = await fetch(`${apiAdress}/api/GetCourt/court/arr/${location.court.join()}`)
     const data = await respone.json();
     console.log(data)
     setCourtsNumbers(data)
@@ -70,6 +69,7 @@ function Courts() {
 
   return (
     <Wrapper className="column">
+      <Title>When do you want to play?</Title>
       <input type="date"
         min={disablePastDate()}
         onChange={(event) => setGameOrder({ ...gameOrder, date: event.target.value })}
@@ -85,8 +85,9 @@ function Courts() {
 
             </Card>
           })}
+          <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>
         </div>}
-      <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>
+      
 
     </Wrapper>
 

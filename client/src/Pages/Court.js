@@ -8,15 +8,17 @@ import Title from '../Components/UI/Title';
 import Wrapper from '../Components/UI/Wrapper';
 import Button from '../Components/UI/Button';
 import PurchaseButton from '../Components/UI/PurchaseButton';
+import {apiAdress} from '../api';
 
 function Court({ courtObj, game, setGame }) {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
     const court = useLocation();
     const currentCourt = court.state.value;
 
     const [togglePopUp, setTogglePopUp] = useState(false);
+    const [takenHours, setTakenHours] = useState([]);
 
     useEffect(() => {
         fetchHours()
@@ -30,13 +32,14 @@ function Court({ courtObj, game, setGame }) {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ location: 'Yerushalaim', date: '2022-08-04' })
+            body: JSON.stringify({ location: game.location, date: game.date })
         };
         try {
-            const response = await fetch(`http://localhost:5008/api/GetCourt/location/availableHours`, Details);
+            const response = await fetch(`${apiAdress}/api/GetCourt/location/availableHours`, Details);
             const data = await response.json();
             console.log(data)
-            return data;
+            setTakenHours(data);
+            // return data;
         } catch (e) {
             return e;
         }
@@ -51,7 +54,7 @@ function Court({ courtObj, game, setGame }) {
             <p>Playing for?</p>
             <div className="rowDirection">
                 {courtObj.gameType.map((gameType, index) => {
-                    return <Button width={'90px'} padding={'3px'}
+                    return <Button className={game.type === gameType && 'clicked'} width={'90px'} padding={'3px'}
                         key={index}
                         onClick={() => setGame({ ...game, type: gameType })}>
                         {gameType}
@@ -63,7 +66,8 @@ function Court({ courtObj, game, setGame }) {
             <p>Available hours</p>
             <div className="rowDirection">
                 {courtObj.availableHours.map((item, index) => {
-                    return <Button width={'90px'} padding={'3px'}
+                    return takenHours.includes(item.hour)? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{item.hour}</Button> :
+                     <Button className={game.time === item.hour && 'clicked'} width={'90px'} padding={'3px'}
                         key={index}
                         onClick={() => { setGame({ ...game, time: item.hour, court: courtObj.courtId }); setTogglePopUp(true) }}>
                         {item.hour}

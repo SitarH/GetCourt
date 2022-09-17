@@ -4,9 +4,11 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
+import Button from '../UI/Button';
 import Card from '../UI/Card';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
+import {apiAdress} from '../../api';
 
 function Login() {
 
@@ -36,7 +38,16 @@ function Login() {
     }
 
     const fetchData = async()=>{
+        const loginDetails = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({phoneNum: enteredPhoneNumber, password: enteredPassword})
+        };
         try {
+<<<<<<< HEAD
             const respone = await fetch('http://localhost:5008/api/GetCourt/user'); //?
             if(respone.status === 200){
               const data = await respone.json();
@@ -46,15 +57,23 @@ function Login() {
           } catch (error) {
             console.log(error)
           }
+=======
+            const response = await fetch(`${apiAdress}/api/GetCourt/user/login`, loginDetails);
+            const data = await response.json();
+            console.log(data);
+            return data;
+        } catch (e) {
+            return e;
+        }  
+>>>>>>> 7d8e80754fa5f1de63744ae480a8248c86f9d220
     }
 
     const FormSubmitHandler = async (event) =>{
         event.preventDefault();
         
-        const users = await fetchData();
-        const user = users.find(user => user.password === enteredPassword && user.phoneNumber === enteredPhoneNumber)
+        const user = await fetchData();
         
-        if (!user) {
+        if (user === null) {
             alert('wrong details try again')
         }
         else{
@@ -73,7 +92,7 @@ function Login() {
        
         <Card>
         <Form onSubmit={FormSubmitHandler}>
-           <Title>Login</Title>
+           <Title>Sign In</Title>
             <input type="tel" placeholder='Phone Number' 
             value={enteredPhoneNumber} 
             onChange={PhoneNumberChangeHandler} 
@@ -86,6 +105,9 @@ function Login() {
             onBlur={PasswordBlurHandler}/>
 
             <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
+            <div>
+            <h2>New user?</h2> <Button width={'90px'} padding={'3px'} onClick={()=>navigate('/register')}>Sign up</Button>
+            </div>
         </Form>
         </Card>
     

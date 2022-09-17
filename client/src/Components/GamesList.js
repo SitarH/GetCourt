@@ -1,7 +1,8 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import GameDetails from '../Components/GameDetails';
-import Wrapper from '../Components/UI/Wrapper'
+import Wrapper from '../Components/UI/Wrapper';
+import {apiAdress} from '../api';
 
 function GamesList({ gameObj }) {
 
@@ -23,7 +24,7 @@ function GamesList({ gameObj }) {
             body: JSON.stringify({date: "2022-08-04", time: "17:00"})
         };
         try {
-            const response = await fetch(`http://localhost:5008/api/GetCourt/location/NextAvailableGames`, gamesDetails);
+            const response = await fetch(`${apiAdress}/api/GetCourt/location/NextAvailableGames`, gamesDetails);
             const data = await response.json();
             console.log(data)
             setAvailableGames(data);

@@ -37,7 +37,7 @@ function Confirmation() {
   const getTimeDays = (time) => (time / daySeconds) | 0;
 
   const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
-  const endTime = stratTime + 243248; // use UNIX timestamp in seconds
+  const endTime = stratTime ; // use UNIX timestamp in seconds
 
   const remainingTime = endTime - stratTime;
   const days = Math.ceil(remainingTime / daySeconds);
@@ -110,4 +110,4 @@ function Confirmation() {
   )
 }
 
-export default Confirmation
+export default Confirmation;

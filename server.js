@@ -5,7 +5,7 @@ const cors = require('cors');
 const path = require('path');
 
 //Server initialize
-const PORT = process.env.PORT || 5008;
+const PORT = process.env.PORT || 5009;
 const server = express();
 server.use(cors()); //allow us to access the server from each endpoint
 server.use(express.json()); //add json support for POST, GET, PUT, DELETE 

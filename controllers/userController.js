@@ -46,7 +46,8 @@ exports.UserLogin = async (req, res) => {
     }
 };
 
-exports.FindUsersFriends=async (req, res) =>{
+
+exports.FindUsersFriends = async (req, res) =>{
     let { phoneNum } = req.body;
 
     try {
