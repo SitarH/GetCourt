@@ -37,7 +37,7 @@ function Login() {
 
     const fetchData = async()=>{
         try {
-            const respone = await fetch('http://localhost:5008/api/GetCourt/user');
+            const respone = await fetch('http://localhost:5008/api/GetCourt/user'); //?
             if(respone.status === 200){
               const data = await respone.json();
             

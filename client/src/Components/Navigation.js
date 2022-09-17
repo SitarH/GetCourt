@@ -7,7 +7,6 @@ import Register from '../Components/Forms/Register';
 import Shop from '../Pages/Shop';
 import Profile from '../Pages/Profile';
 import Location from './Location';
-import Settings from '../Pages/Settings';
 import CourtList from '../Pages/CourtList';
 import ManageProduct from '../Pages/ManageProduct'
 import Court from '../Pages/Court'
@@ -37,7 +36,6 @@ function Navigation() {
       <Route path="/courts" element={<CourtList />} />
       <Route path="/court" element={<Court />} />
       <Route path="/friends" element={<Friends />} />
-      <Route path="/settings" element={<Settings />} />
       <Route path="/Contact" element={<Contact />} />
       <Route path="/History" element={<History />} />
       <Route path="/UserPayments" element={<UserPayments />} />

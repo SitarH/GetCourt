@@ -8,21 +8,21 @@ function FriendsList() {
     const [friends, SetFriends] = useState([]);
     const user = useSelector(state => state.auth.loggedUser);
 
-    const GetUserFriends = async () => {
-        let bodyContent = JSON.stringify({
-            "phoneNum": user.phoneNumber
-        });
+    // const GetUserFriends = async () => {
+    //     // let bodyContent = JSON.stringify({
+    //     //     "phoneNum": user.phoneNumber
+    //     // });
 
-        let response = await fetch("http://localhost:5008/api/GetCourt/user/friends", {
-            method: "POST",
-            body: bodyContent,
-            headers: { "Content-Type": "application/json" }
-        });
+    //     let response = await fetch("http://localhost:5008/api/GetCourt/user/friends", {
+    //         method: "POST",
+    //         body: bodyContent,
+    //         headers: { "Content-Type": "application/json" }
+    //     });
 
-        let data = await response.text();
-        console.log(data);
-        SetFriends(data)
-    }
+    //     let data = await response.text();
+    //     console.log(data);
+    //     SetFriends(data)
+    // }
 
     useEffect(() => {
         GetUserFriends()

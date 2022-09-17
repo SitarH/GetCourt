@@ -7,7 +7,6 @@ function GamesList({ gameObj }) {
 
     const [availableGames, setAvailableGames] = useState([])
 
-
     useEffect(() => {
         fetchAvailableGames();
         console.log(availableGames)

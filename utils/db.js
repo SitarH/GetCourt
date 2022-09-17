@@ -47,7 +47,7 @@ class DB {
     async FindForLogin(collection, phoneNum, password) {
         try {
             await this.client.connect();
-            return await this.client.db(this.dbName).collection(collection).findOne({ email: phoneNum, password: password});
+            return await this.client.db(this.dbName).collection(collection).findOne({ phoneNumber: phoneNum, password: password});
         } catch (error) {
 
         } finally {

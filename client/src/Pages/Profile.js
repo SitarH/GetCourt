@@ -20,11 +20,11 @@ function Profile() {
         
         <Card>
         <Title>Profile</Title>
-          <p>First Name: {currentUser.firstName}</p>
+          <p>First Name: {currentUser.firstName}</p> 
           <p>Last Name: {currentUser.lastName} </p>
-          <p>Phone Number: {currentUser.phoneNumber} </p>
-          <p>Password: {currentUser.password} </p>
-          <p>Birth Date: {currentUser.dateOfBirth}</p>
+          <p>Phone Number: {currentUser.phoneNumber} </p> <br/>
+          <p>Password: {currentUser.password} </p> <br/>
+          <p>Birth Date: {currentUser.dateOfBirth}</p> <br/>
           <p>Level: {currentUser.level} </p>
           </Card>
         <Button onClick={() => {

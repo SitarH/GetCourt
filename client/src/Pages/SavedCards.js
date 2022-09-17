@@ -14,7 +14,7 @@ function SavedCards() {
     <Wrapper className="column">
       <Card>
         <Title>Saved Cards </Title>
-
+        
         <p>Card Number: {currentUser.cardNumber}</p>
       </Card>
     </Wrapper>

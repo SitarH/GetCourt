@@ -55,7 +55,23 @@ class User {
 
     async UserLogin(phoneNum, password) {
         try {
-            return await new DB().FindForLogin('user', phoneNum, password);
+            let user = await new DB().FindForLogin('user', phoneNum, password);
+            for (let index = 0; index < user.gamesList.length; index++) {
+                let players = user.gamesList[index].players
+                let playersName = user.gamesList[index]['playersName']
+                if(players.length > 0){
+                    for (let j = 0; j < players.length; j++) {
+                        let p = await new DB().FindByID('user', players[j].toString()); //all info about user
+                        if(playersName){
+                            user.gamesList[index]['playersName'].push({firstName: p.firstName, lastName: p.lastName})
+                        }
+                        else{
+                            user.gamesList[index]['playersName'] = [{firstName: p.firstName, lastName: p.lastName}]
+                        }
+                    }
+                }
+            }
+            return user
         } catch (error) {
             console.log(error);
             return error;

@@ -18,16 +18,16 @@ function History() {
     GetAllGames()
   }, []);
 
-
   return (
     <>
-      <Wrapper className="column">
+      <Wrapper className="row">
         <Card>
           <Title>All Court Orders</Title>
+          
           {
             games.map((game, index) => (
               Object.entries(game).map(([key, val]) => (
-                <h2>{key}:{val}</h2>
+                <h2>{key}:  {val}</h2>
               ))
             ))
           }
