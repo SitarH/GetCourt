@@ -5,6 +5,8 @@ const UserController = require('../controllers/userController');
 
 UserRouter.get("/", UserController.UserGetAllActive);
 
+UserRouter.get("/gameOrders", UserController.UserGetAllGameOrder);
+
 UserRouter.get("/:id", UserController.UserGetById);
 
 UserRouter.post("/add", UserController.AddUser);

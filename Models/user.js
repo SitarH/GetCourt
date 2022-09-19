@@ -43,6 +43,16 @@ class User {
         }
     }
 
+    async GetAllGameOrders() {
+        try {
+            let options = {gamesList: {$exists: true, $not: {$size: 0}}};
+            let project = {'gamesList.date': 1,'gamesList.time': 1,'gamesList.location': 1,'gamesList.court': 1, 'gamesList.players.firstName': 1, 'gamesList.players.lastName': 1 };
+            return await new DB().FindAllAndProject('user', options, project);
+        } catch (error) {
+            return error;
+        }
+    }
+
     async GetUserByID(id) {
         try {
             return await new DB().FindByID('user', id);

@@ -17,6 +17,15 @@ exports.UserGetAllActive = async (req, res) => {
     }
 };
 
+exports.UserGetAllGameOrder = async (req, res) => {
+    try {
+        let allGames = await new User().GetAllGameOrders();
+        res.status(200).json(allGames);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
 exports.UserGetById = async (req, res) => {
     let { id } = req.params;
 

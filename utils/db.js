@@ -21,6 +21,18 @@ class DB {
         }
     }
 
+    async FindAllAndProject(collection, options = {}, project={}) {
+
+        try {
+            await this.client.connect();
+            return await this.client.db(this.dbName).collection(collection).find(options).project(project).toArray();
+        } catch (error) {
+
+        } finally {
+            await this.client.close();
+        }
+    }
+
     async Aggregate(collection, options = []) {
 
         try {

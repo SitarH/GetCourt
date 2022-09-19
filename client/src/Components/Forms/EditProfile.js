@@ -3,8 +3,11 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
+import {apiAdress} from '../../api';
 
-function EditProfile() {
+function EditProfile({id}) {
+
+
     const { value: enteredFirstName,
         isValid: enteredFirstNameisValid,
         InputChangeHandler: FirstNameChangeHandler,
@@ -62,10 +65,10 @@ function EditProfile() {
 
 
     const FormSubmitHandler = (event) => {
-        console.log('profile edited :)')
+        
         event.preventDefault();
 
-        fetch('http://localhost:5008/api/GetCourt/user/62b1b8d25ac79c104dcfcbae', {
+        fetch(`${apiAdress}/api/GetCourt/user/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

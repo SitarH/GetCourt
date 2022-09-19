@@ -49,7 +49,6 @@ function Court({ courtObj, game, setGame }) {
 
     return (
         <div className="court">
-            <h2>Court {courtObj.courtId}</h2>
 
             <p>Playing for?</p>
             <div className="rowDirection">

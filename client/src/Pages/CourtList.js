@@ -9,6 +9,7 @@ import { gameOrderActions } from '../store/gameOrder';
 import Court from '../Pages/Court';
 import PurchaseButton from '../Components/UI/PurchaseButton';
 import {apiAdress} from '../api';
+import Button from '../Components/UI/Button';
 
 
 function Courts() {
@@ -78,7 +79,7 @@ function Courts() {
         <div className="wrap">
           {courtsNumbers.map((courtNumber, index) => {
             return <Card height={'200px'} key={index}>
-
+              <Button  onClick={() => setGameOrder({ ...gameOrder, court: courtNumber.courtId })} className={courtNumber.courtId === gameOrder.court && 'clicked'}>Court {courtNumber.courtId}</Button>
               <Court courtObj={courtNumber}
                 game={gameOrder}
                 setGame={setGameOrder} />
