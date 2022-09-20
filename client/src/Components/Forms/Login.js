@@ -47,7 +47,6 @@ function Login() {
             body: JSON.stringify({phoneNum: enteredPhoneNumber, password: enteredPassword})
         };
         try {
-<<<<<<< HEAD
             const respone = await fetch('http://localhost:5008/api/GetCourt/user'); //?
             if(respone.status === 200){
               const data = await respone.json();
@@ -57,15 +56,13 @@ function Login() {
           } catch (error) {
             console.log(error)
           }
-=======
             const response = await fetch(`${apiAdress}/api/GetCourt/user/login`, loginDetails);
             const data = await response.json();
             console.log(data);
             return data;
-        } catch (e) {
-            return e;
-        }  
->>>>>>> 7d8e80754fa5f1de63744ae480a8248c86f9d220
+        // } catch (e) {
+        //     return e;
+        // }  
     }
 
     const FormSubmitHandler = async (event) =>{
