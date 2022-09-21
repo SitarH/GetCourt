@@ -36,14 +36,14 @@ function GamesList({ gameObj }) {
 
 
   return (
-    <>
-    {availableGames.map((game, index) => {
+    <>{availableGames.length > 0 ?
+    availableGames.map((game, index) => {
         return <GameDetails
           key={index}
           game={game}
           gameObj= {gameObj}
         />
-      })}
+      }) : <h2>Loading games</h2>}
       </>
       
   )

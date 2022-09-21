@@ -11,7 +11,7 @@ function Checkout() {
   const { gameOrder } = state;
 
   return (
-    <Wrapper>
+    <Wrapper direction={'row'}>
       <Order game={gameOrder} />
       <Payment game={gameOrder} />
     </Wrapper>

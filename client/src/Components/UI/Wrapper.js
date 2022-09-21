@@ -4,6 +4,7 @@ const Wrapper = styled.div`
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
+flex-direction: ${props=> props.direction};
 align-items: center; 
  margin-right: 5%;
  margin-left: 5%;
@@ -28,7 +29,7 @@ align-items: center;
     flex-direction: row;
  }
 
- & input[type="date" i]{
+ & input[type="date" i], [type="time" i]{
     padding: 15px;
     background-color: #F2C67D;
     border: 2px solid #F2C67D;
@@ -36,6 +37,16 @@ align-items: center;
     width: 350px;
     font-size: 20px;
     letter-spacing: 5px;
+ }
+
+ & select {
+  padding: 15px;
+  background-color: #F2C67D;
+  border: 2px solid #F2C67D;
+  border-radius: 15px;
+  width: 350px;
+  font-size: 20px;
+  letter-spacing: 5px;
  }
 
  & h2{

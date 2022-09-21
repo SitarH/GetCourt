@@ -38,17 +38,17 @@ class Location {
         }
     }
 
-    async GetHoursByLocationAndDate(location, date) {
+    async GetHoursByLocationAndDate(location, date, time) {
         try {
             let options = [
-                { $project: { '_id': 0, 'gamesList.location': 1, 'gamesList.time': 1, 'gamesList.date': 1 } },
+                { $project: { '_id': 0, 'gamesList.location': 1, 'gamesList.time': 1, 'gamesList.date': 1, 'gamesList.court': 1 } },
                 { $unwind: '$gamesList' }
             ]
             let arr = await new DB().Aggregate('user', options);
-            const ArrByDateLoc = arr.filter(game => game.gamesList.location === location && game.gamesList.date == date);
-            const availableHours = ArrByDateLoc.map(game => game.gamesList.time)
+            const arrByDateLoc = arr.filter(game => game.gamesList.location === location && game.gamesList.date == date);
+            const takenCourts = arrByDateLoc.map(game => game.gamesList.court)
 
-            return availableHours;
+            return takenCourts;
         } catch (error) {
             return error;
         }

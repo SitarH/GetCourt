@@ -38,8 +38,9 @@ function Admin() {
 
   return (
     <>
-    <Title>Welcome, Admin</Title>
     <Wrapper>
+    <Title>Welcome, Admin</Title>
+    
     <Card height={'400px'} width={'800px'}>
       <h2>Active Users</h2>
       <Table />

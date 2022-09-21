@@ -32,7 +32,7 @@ function Court({ courtObj, game, setGame }) {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ location: game.location, date: game.date })
+            body: JSON.stringify({ location: game.location, date: game.date, time: game.time })
         };
         try {
             const response = await fetch(`${apiAdress}/api/GetCourt/location/availableHours`, Details);
@@ -45,6 +45,8 @@ function Court({ courtObj, game, setGame }) {
         }
 
     }
+
+   
 
 
     return (

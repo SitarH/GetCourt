@@ -137,7 +137,6 @@ export default function CollapsibleTable() {
   }
 
 
-
   return (
     <TableContainer background-color="black" component={Paper}>
       <Table aria-label="collapsible table">
