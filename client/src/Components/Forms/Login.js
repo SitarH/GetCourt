@@ -60,7 +60,7 @@ function Login() {
         event.preventDefault();
         
         const user = await fetchData();
-        
+        console.log(user);
         if (user === null) {
             alert('wrong details try again')
         }

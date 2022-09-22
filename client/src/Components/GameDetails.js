@@ -14,7 +14,6 @@ function GameDetails({ game, gameObj }) {
         time: game.courtInfo.availableHours.hour,
         location: game.beachName,
         court: game.courtInfo.courtId,
-        type: '',
         players: [],
       })
     

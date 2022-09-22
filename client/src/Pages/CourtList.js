@@ -12,7 +12,6 @@ import { apiAdress } from '../api';
 import Button from '../Components/UI/Button';
 import AddFriends from '../Components/Popups/AddFriends'
 
-
 function Courts() {
 
   const navigate = useNavigate();
@@ -33,14 +32,13 @@ function Courts() {
     setGameOrder({ ...gameOrder, location: location.beachName })
     fetchCourts()
 
-
   }, [])
 
   const fetchCourts = async () => {
 
     const respone = await fetch(`${apiAdress}/api/GetCourt/court/arr/${location.court.join()}`)
     const data = await respone.json();
-    console.log(data)
+    console.log(data[0].gameType)
     setCourtObject(data)
 
     // const courtNumsPromise = await courts.map(async (item) => {
@@ -55,13 +53,18 @@ function Courts() {
 
   }
 
-
   const disablePastDate = () => {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
+  }
+
+  const DateHandler = (event) => {
+    const date = event.target.value;
+    const dateFormat = date.replace(/T.*/, '').split('-').reverse().join('-');
+    setGameOrder({ ...gameOrder, date: dateFormat })
   }
 
   const timeHandler = (event) => {
@@ -90,7 +93,6 @@ function Courts() {
 
   }
 
-
   const PurchaseHandler = () => {
     dispatch(gameOrderActions.AddNewGame(gameOrder));
     navigate('/checkout')
@@ -102,48 +104,63 @@ function Courts() {
       <Title>When do you want to play?</Title>
       <input type="date"
         min={disablePastDate()}
-        onChange={(event) => setGameOrder({ ...gameOrder, date: event.target.value })}
+        onChange={(event) => DateHandler(event)}
       ></input>
       {gameOrder.date !== '' &&
         <>
           <Title>What time?</Title>
           <select onChange={(event) => timeHandler(event)}>
-            <option value="8:00">08:00</option>
-            <option value="10:00">10:00</option>
-            <option value="16:00">16:00</option>
-            <option value="18:00">18:00</option>
-            <option value="20:00">20:00</option>
+            {courtObject[0].availableHours.map((item) => {
+              return <option value={item.hour}>{item.hour}</option>
+            })}
           </select>
         </>}
+
       {gameOrder.time !== '' && <>
-        {courtObject.map((court, index) => 
-        { return takenCourtsByHour.includes(court.courtId)? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
-        <Button onClick={() => {setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true)}} width={'90px'} padding={'3px'}>{court.courtId}</Button> })}
+        <Title>Playing for?</Title>
+          {
+            courtObject[0].gameType.map((option, index) => {
+              return <Button
+                onClick={() => { setGameOrder({ ...gameOrder, type: option }) }} width={'90px'} padding={'3px'}>
+                {option}
+              </Button>
+            })
+          }
+       
       </>}
+
+      {gameOrder.type !== '' && <>
+        <Title>Choose court</Title>
+        {courtObject.map((court, index) => {
+          return takenCourtsByHour.includes(court.courtId) ? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
+            <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
+        })}
+      </>}
+
       {togglePopUp &&
-                <AddFriends
-                    toggleVal={togglePopUp}
-                    setToggle={setTogglePopUp}
-                    gameObj={gameOrder} />}
+        <AddFriends
+          toggleVal={togglePopUp}
+          setToggle={setTogglePopUp}
+          gameObj={gameOrder} />}
 
       {gameOrder.court !== '' &&
         <div className="wrap">
-
-          {/* {courtsNumbers.map((courtNumber, index) => {
+{/* 
+          {courtsNumbers.map((courtNumber, index) => {
             return <Card height={'200px'} key={index}>
-              <Button  onClick={() => setGameOrder({ ...gameOrder, court: courtNumber.courtId })} className={courtNumber.courtId === gameOrder.court && 'clicked'}>Court {courtNumber.courtId}</Button>
-             
+              <Button onClick={() => setGameOrder({ ...gameOrder, court: courtNumber.courtId })} className={courtNumber.courtId === gameOrder.court && 'clicked'}>Court {courtNumber.courtId}</Button>
+
               <p>Playing for?</p>
-            <div className="rowDirection">
+              <div className="rowDirection">
                 {courtNumber.gameType.map((gameType, index) => {
-                    return <Button className={gameOrder.type === gameType && 'clicked'} width={'90px'} padding={'3px'}
-                        key={index}
-                        onClick={() => setGameOrder({ ...gameOrder, type: gameType })}>
-                        {gameType}
-                    </Button>
+                  return <Button className={gameOrder.type === gameType && 'clicked'} width={'90px'} padding={'3px'}
+                    key={index}
+                    onClick={() => setGameOrder({ ...gameOrder, type: gameType })}>
+                    {gameType}
+                  </Button>
                 }
                 )}
-            </div>
+              </div>
 
 
               <Court courtObj={courtNumber}

@@ -11,7 +11,6 @@ const initialState = {
 
 };
 
-
 const fetchData = async (phone, pass) => {
     console.log(phone, pass);
         const loginDetails = {

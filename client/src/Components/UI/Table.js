@@ -35,24 +35,24 @@ function Row(props) {
   }  
 }
 
-const EditUser = async(id)=>{
-  const userDetails = {
-    method: 'PUT',
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(id)
-};
-try {
-    const response = await fetch(`${apiAdress}/api/GetCourt/user/delete`, userDetails);
-    const data = await response.json();
-    console.log(data);
-    return data;
-} catch (e) {
-    return e;
-}  
-}
+// const EditUser = async(id)=>{
+//   const userDetails = {
+//     method: 'PUT',
+//     headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(id)
+// };
+// try {
+//     const response = await fetch(`${apiAdress}/api/GetCourt/user/delete`, userDetails);
+//     const data = await response.json();
+//     console.log(data);
+//     return data;
+// } catch (e) {
+//     return e;
+// }  
+// }
 
   
   return (
