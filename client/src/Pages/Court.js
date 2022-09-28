@@ -21,8 +21,7 @@ function Court({ courtObj, game, setGame }) {
     const [takenHours, setTakenHours] = useState([]);
 
     useEffect(() => {
-        fetchHours()
-
+        fetchHours();
     }, [])
 
     const fetchHours = async () => {
@@ -37,9 +36,8 @@ function Court({ courtObj, game, setGame }) {
         try {
             const response = await fetch(`${apiAdress}/api/GetCourt/location/availableHours`, Details);
             const data = await response.json();
-            console.log(data)
             setTakenHours(data);
-            // return data;
+            
         } catch (e) {
             return e;
         }
@@ -88,4 +86,4 @@ function Court({ courtObj, game, setGame }) {
     )
 }
 
-export default Court
+export default Court;

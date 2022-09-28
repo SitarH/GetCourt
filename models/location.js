@@ -95,9 +95,11 @@ class Location {
 
             await db.DropCollection('CourtsInLocaion');
             await db.DropCollection('TakenGames');
-
+           
             let temp = new Array();
+            let finalGames = new Array();
 
+            if (takenGames.length > 0){
             for (let i = 0; i < takenGames.length; i++) {
                 for (let j = 0; j < games.length; j++) {
                     if (!(games[j].courtInfo.availableHours.hour == takenGames[i].gamesList.time
@@ -112,14 +114,31 @@ class Location {
                 let hour = parseInt(game.courtInfo.availableHours.hour.split(':')[0]);
                 return hour > currentTime
             })
+            console.log(availableGames)
 
-            let finalGames = new Array();
+           
             for (let index = 0; index < 4; index++) {
                 const item = availableGames[Math.floor(Math.random()*availableGames.length)];
                 finalGames.push(item);
                 
             }
+        }
+        else{
+         
+            let currentTime = parseInt(time.split(':')[0])
+            let availableGames = games.filter(game=>{
+                let hour = parseInt(game.courtInfo.availableHours.hour.split(':')[0]);
+                return hour > currentTime
+            })
+            for (let index = 0; index < 4; index++) {
+                const item = availableGames[Math.floor(Math.random()*availableGames.length)];
+                finalGames.push(item);
+                
+            }
+            console.log('final',finalGames)
 
+        }
+          
             return finalGames;
         } catch (error) {
             return error;

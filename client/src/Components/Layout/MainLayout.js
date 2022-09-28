@@ -8,7 +8,7 @@ import Wrapper from '../UI/Wrapper';
 
 function MainLayout() {
     return (
-        <div>
+        <div style={{marginLeft:"10px", marginRight:"10px"}}>
             <Header/>
            
             <Navigation/>

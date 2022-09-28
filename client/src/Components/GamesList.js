@@ -51,10 +51,10 @@ console.log(currentDate)
                     game={game}
                     gameObj={gameObj}
                 />
-            }) : <h2>Loading games</h2>}
+            }) : availableGames[0] === null? <h2>No games left today...</h2> : <h2>Loading games</h2>}
         </>
 
     )
 }
 
-export default GamesList
+export default GamesList;

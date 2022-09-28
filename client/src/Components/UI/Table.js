@@ -90,7 +90,7 @@ function Row(props) {
                 Edit User
               </Typography>
              
-                 <EditUser id={'11'}/>
+                 <EditUser id={'11'} user={item}/>
               
             </Box>
           </Collapse>

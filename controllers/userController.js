@@ -131,7 +131,8 @@ exports.UpdateUser = async (req, res) => {
         image, gamesList, ordersList, level } = req.body;
     try {
         let result = await new User(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
-            image, gamesList, ordersList, level).UpdateUserById(id);
+            image, gamesList, ordersList, level).Update
+            UserById(id);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error });

@@ -5,8 +5,8 @@ import Location from '../Components/Location'
 import Courts from './CourtList';
 import Wrapper from '../Components/UI/Wrapper';
 import Card from '../Components/UI/Card';
-import GamesList from '../Components/GamesList'
-import {apiAdress} from '../api'
+import GamesList from '../Components/GamesList';
+import {apiAdress} from '../api';
 
 function Home() {
 

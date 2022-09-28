@@ -1,12 +1,12 @@
 import React from 'react';
 import useInput from '../../Hooks/useInput';
-import Form from '../UI/Form';
+import EditForm from './EditFormUI';
 import Title from '../UI/Title';
 import Button from '../UI/Button';
 import { apiAdress } from '../../api';
 
-function EditUser({ id }) {
-
+function EditUser({ id, user }) {
+console.log(user)
     const { value: enteredFirstName,
         isValid: enteredFirstNameisValid,
         InputChangeHandler: FirstNameChangeHandler,
@@ -67,7 +67,6 @@ function EditUser({ id }) {
     }
 
     const UpdateUser = async () => {
-
         await fetch(`${apiAdress}/api/GetCourt/user/${id}`, {
             method: "PUT",
             headers: {
@@ -114,25 +113,25 @@ function EditUser({ id }) {
 
 
 return (
-    <Form onSubmit={FormSubmitHandler}>
+    <EditForm onSubmit={FormSubmitHandler}>
 
-        <input type="text" placeholder="First Name"
+        <input type="text" placeholder={user.firstName}
             value={enteredFirstName}
             onChange={FirstNameChangeHandler}
             onBlur={FirstNameBlurHandler} />
 
-        <input type="text" placeholder="Last Name"
+        <input type="text" placeholder={user.lastName}
             value={enteredLastName}
             onChange={LastNameChangeHandler}
             onBlur={LastNameBlurHandler} />
 
-        <input type="tel" placeholder="Phone Number"
+        <input type="tel" placeholder={user.phone}
             value={enteredPhoneNumber}
             onChange={PhoneNumberChangeHandler}
             onBlur={PhoneNumberBlurHandler} />
 
 
-        <input type="date" placeholder="Birth Date"
+        <input type="date" placeholder="Birth Date" className="edit"
             value={enteredBirthDate}
             onChange={BirthDateChangeHandler}
             onBlur={BirthDateBlurHandler} />
@@ -147,7 +146,7 @@ return (
         </select>
 
         <Button> Update</Button>
-    </Form>
+    </EditForm>
 )
 }
 

@@ -17,8 +17,6 @@ function GameDetails({ game, gameObj }) {
         players: [],
       })
     
-
-
     return (
         <>
             <GameDetsCard backgroundColor={'#4EB69F'} padding={'10px'}>
