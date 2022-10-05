@@ -11,7 +11,7 @@ import PurchaseButton from '../Components/UI/PurchaseButton';
 import { apiAdress } from '../api';
 import Button from '../Components/UI/Button';
 import AddFriends from '../Components/Popups/AddFriends';
-import court from '../Asset/Images/court.png'
+import courtImg from '../Asset/Images/court.png'
 
 function Courts() {
 
@@ -111,7 +111,7 @@ function Courts() {
         <>
           <Title>What time?</Title>
           <select onChange={(event) => timeHandler(event)}>
-          <option value={"disable"} selected hidden>Choose level</option>
+          <option value={"disable"} selected hidden>Choose time</option>
             {courtObject[0].availableHours.map((item) => {
               return <option value={item.hour}>{item.hour}</option>
             })}
@@ -120,6 +120,7 @@ function Courts() {
 
       {gameOrder.time !== '' && <>
         <Title>Playing for?</Title>
+        <div>
           {
             courtObject[0].gameType.map((option, index) => {
               return <Button
@@ -128,15 +129,16 @@ function Courts() {
               </Button>
             })
           }
-       
+       </div>
       </>}
+
 
       {gameOrder.type !== '' && <>
         <Title>Choose court</Title>
         {courtObject.map((court, index) => {
           return takenCourtsByHour.includes(court.courtId) ? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
             // <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
-            <img src={court} style={{height:'80px'}}></img>
+            <img src={courtImg} style={{height:'80px'}}></img>
         })}
       </>}
 

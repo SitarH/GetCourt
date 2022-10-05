@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import FooterImg from '../../Asset/Images/footer.png';
 
 
 const Footer = styled.footer`
-    display: flex;
-    align-items: center;
+   
     font-size: 40px;
-    color: #4EB69F;
-    justify-content: space-between;
+    
+   
     
 
 `;

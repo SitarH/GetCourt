@@ -7,7 +7,7 @@ import Wrapper from '../src/Components/UI/Wrapper'
 
 function App() {
   return (
-    <div style={{ backgroundImage: `url(${sand})` ,height: '100vh'}}>
+    <div style={{ backgroundColor: `#FDEEB7` ,height: '100vh'}}>
     <BrowserRouter>
       <MainLayout/>
     </BrowserRouter>

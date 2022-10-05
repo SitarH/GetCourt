@@ -8,7 +8,6 @@ import Profile from '../Pages/Profile';
 import Location from './Location';
 import Settings from '../Pages/Settings';
 import CourtList from '../Pages/CourtList';
-import ManageProduct from '../Pages/ManageProduct'
 import Court from '../Pages/Court'
 import Checkout from './Checkout';
 import Confirmation from './Confirmation';
@@ -40,7 +39,6 @@ function Navigation() {
       <Route path="/History" element={<History />} />
       <Route path="/UserPayments" element={<UserPayments />} />
       <Route path="/profile/Yaara1/edit" element={<EditProfile/>} />
-      <Route path="/profile/manageProduct" element={<ManageProduct />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/confirmation" element={<Confirmation />} />
       <Route path="/cart" element={<Cart />} />

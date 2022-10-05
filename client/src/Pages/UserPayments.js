@@ -1,15 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import useInput from '../Hooks/useInput';
+import PurchaseButton from '../Components/UI/PurchaseButton';
 import Card from '../Components/UI/Card';
 import Form from '../Components/UI/Form';
-import { useState } from 'react';
-import PurchaseButton from '../Components/UI/PurchaseButton';
-import SavedCards from './SavedCards';
 import Wrapper from '../Components/UI/Wrapper';
-import useInput from '../Hooks/useInput';
+import SavedCards from './SavedCards';
+import { apiAdress } from '../api'
+
 
 function UserPayments() {
 
-  const [AllSavedCards, setSavedCards] = useState(false);
+  const currentUserId = useSelector(state => state.auth.loggedUser._id)
 
   const { value: enteredCreditCard,
     InputChangeHandler: CreditCardChangeHandler,
@@ -29,12 +32,9 @@ function UserPayments() {
     Reset: ResetCVV
   } = useInput(value => value);
 
-  // let formIsValid = false;
 
-  // if (enteredCreditCard) { formIsValid = true; }
-
-  const Fetch = async () => {
-    let res = await fetch('http://localhost:5008/api/GetCourt/user/payment/62b1b8d25ac79c104dcfcbae', {
+  const AddCard = async () => {
+    let res = await fetch(`${apiAdress}/api/GetCourt/user/payment/${currentUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -44,13 +44,12 @@ function UserPayments() {
       })
     });
     let data = await res.json();
-    console.log(data);
   }
+
   const PurchaseHandler = (event) => {
     event.preventDefault();
-    console.log('credit card saved :) ')
 
-    Fetch();
+    AddCard();
     Reset();
   }
 
@@ -60,10 +59,12 @@ function UserPayments() {
     ResetCVV();
   }
 
-
   return (
-    <>
-      <Card height={'350px'}>
+    <Wrapper>
+      <Card height={'350px'}
+        width={'300px'}
+        backgroundColor={'#F2C67D'}
+      >
         <Form onSubmit={PurchaseHandler}>
 
           <input type="text" placeholder='Card number'
@@ -81,15 +82,12 @@ function UserPayments() {
             onChange={CVVChangeHandler}
             onBlur={CVVBlurHandler} />
 
-          <PurchaseButton type='submit'>Add your card</PurchaseButton>
+          <PurchaseButton type='submit'>Save card</PurchaseButton>
         </Form>
 
       </Card>
-      <Wrapper> <PurchaseButton onClick={()=>{
-        setSavedCards(prev=>!prev);
-      }}>Show all saved cards</PurchaseButton></Wrapper>
-      {AllSavedCards ? <SavedCards/> : null }
-    </>
+      <SavedCards />
+    </Wrapper>
   )
 }
 

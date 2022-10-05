@@ -18,7 +18,6 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   const userFriendsList = useSelector(state => state.auth.loggedUser.friendsList);
 
-
   const dispatch = useDispatch();
 
   const [checked, setChecked] = useState([]);
@@ -32,7 +31,6 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
     // fetchFriendsList('62d1400d207bc314b4355c9b');
     mapFriends();
-
 
   }, [])
 
@@ -52,7 +50,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
   const mapFriends = async () => {
 
     const friends = await Promise.all(userFriendsList.map(async (item) => {
-      console.log(item)
+  
       try {
         const respone = await fetch(`${apiAdress}/api/GetCourt/user/${item}`);
         if (respone.status === 200) {
@@ -84,7 +82,6 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   };
 
-
   const AddToGame = () => {
 
     gameObj.players=checked;
@@ -92,7 +89,6 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
     navigate('/checkout', { state: {gameOrder: gameObj}});
 
   }
-
 
   return (
     <PopUp>

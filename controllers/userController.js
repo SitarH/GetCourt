@@ -72,7 +72,6 @@ exports.FindUsersFriends = async (req, res) =>{
 
 
 exports.AddUser = async (req, res) => {
-    console.log('?')
     /*
      * setp 0: make sure to require the model class
      * step 1: get the data from the req.body 
@@ -109,16 +108,16 @@ exports.AddUser = async (req, res) => {
 // };
 
 exports.AddPaymentToUser = async (req, res) => {
-    // { $push: { <field1>: <value1>, ... } }
+   
     let {  enteredCreditCard, enteredExpirationDate, enteredCVV } = req.body;
     let {id} = req.params;
-    console.log('hi from server')
+  
     try {  
         let user = await new User().GetUserByID(id);
-        let payments = user.payments || [] 
-        payments.push({enteredCreditCard, enteredExpirationDate, enteredCVV });
-        user.payments = payments;
-        await new User().UpdateUserById(user, id);
+        let paymentsArr = user.payments || [] 
+        paymentsArr.push({enteredCreditCard, enteredExpirationDate, enteredCVV });
+        user.payments = paymentsArr;
+        await new User().UpdateUserById(id, user);
         res.status(201).json(user);
     } catch (error) {
         res.status(500).json({ error })

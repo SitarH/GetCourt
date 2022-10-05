@@ -1,10 +1,10 @@
 import React from 'react'
 import Navigation from '../Navigation';
 // import Header from '../Header';
-import Footer from '../UI/Footer';
 // import Header from '../UI/Header';
 import Header from '../../Components/Header';
 import Wrapper from '../UI/Wrapper';
+import Footer from '../Footer'
 
 function MainLayout() {
     return (
@@ -12,8 +12,8 @@ function MainLayout() {
             <Header/>
            
             <Navigation/>
-           
-            <Footer/>
+          
+            <Footer /> 
         </div>
     )
 }

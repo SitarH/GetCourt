@@ -16,22 +16,19 @@ function Profile() {
 
   return (
     <>
-      <Wrapper className="column">
-        
-        <Card>
+        <Card backgroundColor={'#F2C67D'} width={'350px'} height={'350px'} direction={'column'}>
         <Title>Profile</Title>
-          <p>First Name: {currentUser.firstName}</p>
-          <p>Last Name: {currentUser.lastName} </p>
-          <p>Phone Number: {currentUser.phoneNumber} </p>
-          <p>Password: {currentUser.password} </p>
-          <p>Birth Date: {currentUser.dateOfBirth}</p>
-          <p>Level: {currentUser.level} </p>
-          </Card>
-        <Button onClick={() => {
+          <h2>First Name: {currentUser.firstName}</h2>
+          <h2>Last Name: {currentUser.lastName} </h2>
+          <h2>Phone Number: {currentUser.phoneNumber} </h2>
+          <h2>Birth Date: {currentUser.dateOfBirth}</h2>
+          <h2>Level: {currentUser.level} </h2>
+          <Button width={'90px'} padding={'3px'} onClick={() => {
           setToggleEdit(prev => !prev);
 
         }}>Edit </Button>
-        </Wrapper>
+          </Card>
+
 
       {toggleEdit && <EditProfile />}
 
