@@ -4,7 +4,7 @@ const Wrapper = styled.div`
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
-flex-direction: ${props=> props.direction};
+flex-direction: ${props => props.direction};
 align-items: center; 
  margin-right: 5%;
  margin-left: 5%;
@@ -26,7 +26,7 @@ align-items: center;
 
  &.column .wrap .court .rowDirection{
    display: flex;
-    flex-direction: row;
+  flex-direction: row;
  }
 
  & input[type="date" i], [type="time" i]{
@@ -34,7 +34,7 @@ align-items: center;
     background-color: #F2C67D;
     border: 2px solid #F2C67D;
     border-radius: 15px;
-    width: 350px;
+    width: ${props => props.width};
     font-size: 20px;
     letter-spacing: 5px;
  }
@@ -44,7 +44,7 @@ align-items: center;
   background-color: #F2C67D;
   border: 2px solid #F2C67D;
   border-radius: 15px;
-  width: 350px;
+  width: ${props => props.width};
   font-size: 20px;
   letter-spacing: 5px;
  }

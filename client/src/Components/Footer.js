@@ -5,6 +5,7 @@ import lottie from 'lottie-web';
 function Footer() {
 
   const container = useRef(null);
+  const containertwo = useRef(null);
 
   useEffect(() => {
     lottie.loadAnimation({
@@ -12,25 +13,25 @@ function Footer() {
       render: 'svg',
       loop: true,
       autoplay: true,
-      animationData: require('../Asset/Lottie/walking.json')
+      animationData: require('../Asset/Lottie/walking2.json')
     })
 
     lottie.loadAnimation({
-      container: container.current,
+      container: containertwo.current,
       render: 'svg',
       loop: true,
       autoplay: true,
-      animationData: require('../Asset/Lottie/skate.json')
+      animationData: require('../Asset/Lottie/skate4.json')
     })
   }, [])
 
 
   return (
-    <>
-      <div className=" container" style={{ height: 80, position: 'absolute', left: '10' }} ref={container}></div>
-      <div className=" container" style={{ height: 80, position: 'absolute' }} ref={container}></div>
+    <footer style={{position: 'absolute', bottom: '0', width: '100%'}}>
+      <div className=" container" style={{ height: 80, position: 'absolute', transform: 'translate(85vw, 5vh)'}} ref={container}></div>
+      <div className=" container" style={{ height: 80, position: 'absolute', transform: 'translate(10vw, 11vh)' }} ref={containertwo}></div>
       <img src={FooterImg} width={'100%'}></img>
-    </>
+    </footer>
   )
 }
 

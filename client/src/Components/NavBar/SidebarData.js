@@ -34,12 +34,6 @@ export const SidebarData = [
 
   },
   {
-    title: 'Shop',
-    path: '/Shop',
-    icon: <AiIcons.AiFillShop />,
-    
-  },
-  {
     title: 'Settings',
     path: '/Settings',
     icon: <AiIcons.AiFillSetting />,

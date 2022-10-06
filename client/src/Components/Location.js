@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import Courts from '../Pages/CourtList';
 import { useNavigate } from "react-router-dom";
-import Card from '../Components/UI/Card'
-import Title from '../Components/UI/Title'
+import Card from '../Components/UI/Card';
+import Title from '../Components/UI/Title';
+import lottie from 'lottie-web';
 
 function Location({ locationObj, game, setGame }) {
 
   const navigate = useNavigate();
+  const container = useRef(null);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      render: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../Asset/Lottie/location.json')
+    })
+   
+  }, [])
+  
 
   const LocationHandler = () => {
 
@@ -14,8 +28,9 @@ function Location({ locationObj, game, setGame }) {
   }
 
   return (
-    <Card height={'200px'}>
-      <Title onClick={LocationHandler}>
+    <Card height={'100px'}>
+      <div style={{height: '50px'}} ref={container}></div>
+      <Title style={{cursor: 'pointer'}} onClick={LocationHandler}>
         {locationObj.beachName}
       </Title>
     </Card>

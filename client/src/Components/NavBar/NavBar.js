@@ -24,11 +24,11 @@ function ResponsiveDrawer(props) {
     };
 
     const drawer = (
-        <>
-            <Divider/>
+        <div style={{backgroundColor: '#F2C67D', height: '100vh', width:'200px'}}>
+           
             <List>
                 {SidebarData.map((item, index) => (
-                    <ListItem key={index} >
+                    <ListItem style={{marginBottom: '20px'}} key={index} >
                         {item.icon}
                         <ListItemButton 
                         onClick={() => { 
@@ -39,9 +39,9 @@ function ResponsiveDrawer(props) {
                     </ListItem>
                 ))}
             </List>
-            <Divider/>
+        
 
-        </>
+        </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;

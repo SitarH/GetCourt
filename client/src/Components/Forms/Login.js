@@ -58,6 +58,7 @@ function Login() {
 
     const FormSubmitHandler = async (event) =>{
         event.preventDefault();
+        console.log('??')
         
         const user = await fetchData();
         console.log(user);
@@ -78,10 +79,10 @@ function Login() {
 
     return (
        
-        <Card>
+        <Card style={{marginTop: '-30px', height: '60vh'}}>
         <Form onSubmit={FormSubmitHandler}>
            <Title>Sign In</Title>
-            <input type="tel" placeholder='Phone Number' 
+            <input type="tel" placeholder='Phone number' 
             value={enteredPhoneNumber} 
             onChange={PhoneNumberChangeHandler} 
             onBlur={PhoneNumberBlurHandler}/>
@@ -93,8 +94,8 @@ function Login() {
             onBlur={PasswordBlurHandler}/>
 
             <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
-            <div>
-            <h2>New user?</h2> <Button width={'90px'} padding={'3px'} onClick={()=>navigate('/register')}>Sign up</Button>
+            <div style={{display: 'flex', marginTop: '10px', flexDirection: 'column'}}>
+            <h2>New user?</h2> <Button width="100px" onClick={()=>navigate('/register')}>Sign up</Button>
             </div>
         </Form>
         </Card>

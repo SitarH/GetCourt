@@ -8,13 +8,14 @@ import Footer from '../Footer'
 
 function MainLayout() {
     return (
+        <>
         <div style={{marginLeft:"10px", marginRight:"10px"}}>
             <Header/>
            
             <Navigation/>
-          
+            </div>
             <Footer /> 
-        </div>
+            </> 
     )
 }
 

@@ -13,7 +13,7 @@ align-items: center;
     background-color: transparent;
     border: 0;
     border-bottom: 3px solid #4EB69F;
-    margin-bottom: 60px;
+    margin-bottom: 35px;
     width: 200px;
     outline: 0;
 

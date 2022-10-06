@@ -11,7 +11,10 @@ import PurchaseButton from '../Components/UI/PurchaseButton';
 import { apiAdress } from '../api';
 import Button from '../Components/UI/Button';
 import AddFriends from '../Components/Popups/AddFriends';
-import courtImg from '../Asset/Images/court.png'
+import courtImg1 from '../Asset/Images/court1.png';
+import courtImg2 from '../Asset/Images/court2.png';
+import courtImg3 from '../Asset/Images/court3.png';
+import courtImg4 from '../Asset/Images/court4.png';
 
 function Courts() {
 
@@ -26,6 +29,8 @@ function Courts() {
   const [courtObject, setCourtObject] = useState([])
 
   const [togglePopUp, setTogglePopUp] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isActiveTwo, setIsActiveTwo] = useState(false);
 
   useEffect(() => {
     // dispatch(gameOrderActions.InsertIntoValue({ field: 'location', value: location.state.value.beachName }))
@@ -70,6 +75,7 @@ function Courts() {
 
   const timeHandler = (event) => {
     setGameOrder({ ...gameOrder, time: event.target.value });
+    setIsActive(true);
     FetchCourts();
   }
 
@@ -101,46 +107,52 @@ function Courts() {
   }
 
   return (
-    <Wrapper className="column">
-      <Title>When do you want to play?</Title>
-      <input type="date"
-        min={disablePastDate()}
-        onChange={(event) => DateHandler(event)}
-      ></input>
-      {gameOrder.date !== '' &&
-        <>
-          <Title>What time?</Title>
-          <select onChange={(event) => timeHandler(event)}>
-          <option value={"disable"} selected hidden>Choose time</option>
-            {courtObject[0].availableHours.map((item) => {
-              return <option value={item.hour}>{item.hour}</option>
-            })}
-          </select>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <Wrapper direction={isActive ? 'row' : 'column'}>
+        <Title size={isActive ? '25px' : '35px'}>When do you want to play?</Title>
+        <input type="date" width={isActive ? '150px' : '350px'}
+          min={disablePastDate()}
+          onChange={(event) => DateHandler(event)}
+        ></input>
+        {gameOrder.date !== '' &&
+          <>
+            <Title size={isActive ? '25px' : '35px'} >What time?</Title>
+            <select onChange={(event) => timeHandler(event)} width={isActive ? '150px' : '350px'}>
+              <option value={"disable"} selected hidden>Choose time</option>
+              {courtObject[0].availableHours.map((item) => {
+                return <option value={item.hour}>{item.hour}</option>
+              })}
+            </select>
+          </>}
+      </Wrapper>
+      <Wrapper direction={isActiveTwo ? 'row' : 'column'} style={{justifyContent: 'unset'}}>
+        {gameOrder.time !== '' && <>
+          <Title size={isActiveTwo ? '25px' : '35px'} style={{marginRight: '10px'}}>Playing for?</Title>
+          <div>
+            {
+              courtObject[0].gameType.map((option, index) => {
+                return <Button
+                  onClick={() => { setGameOrder({ ...gameOrder, type: option }); setIsActiveTwo(true) }} width={'100px'} padding={'10px'}>
+                  {option}
+                </Button>
+              })
+            }
+          </div>
         </>}
 
-      {gameOrder.time !== '' && <>
-        <Title>Playing for?</Title>
-        <div>
-          {
-            courtObject[0].gameType.map((option, index) => {
-              return <Button
-                onClick={() => { setGameOrder({ ...gameOrder, type: option }) }} width={'90px'} padding={'3px'}>
-                {option}
-              </Button>
-            })
-          }
-       </div>
-      </>}
-
-
+      </Wrapper>
+      <Wrapper direction={'column'}>
       {gameOrder.type !== '' && <>
         <Title>Choose court</Title>
+        <div>
         {courtObject.map((court, index) => {
           return takenCourtsByHour.includes(court.courtId) ? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
             // <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
-            <img src={courtImg} style={{height:'80px'}}></img>
-        })}
+            <img src={courtImg+ index} style={{ height: '80px' }}></img>
+        })} 
+        </div>
       </>}
+      </Wrapper>
 
       {togglePopUp &&
         <AddFriends
@@ -150,7 +162,7 @@ function Courts() {
 
       {gameOrder.court !== '' &&
         <div className="wrap">
-{/* 
+          {/* 
           {courtsNumbers.map((courtNumber, index) => {
             return <Card height={'200px'} key={index}>
               <Button onClick={() => setGameOrder({ ...gameOrder, court: courtNumber.courtId })} className={courtNumber.courtId === gameOrder.court && 'clicked'}>Court {courtNumber.courtId}</Button>
@@ -176,8 +188,8 @@ function Courts() {
           {/* <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>  */}
         </div>}
 
+    </div>
 
-    </Wrapper>
 
   )
 }

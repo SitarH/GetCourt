@@ -19,11 +19,11 @@ function GameDetails({ game, gameObj }) {
     
     return (
         <>
-            <GameDetsCard backgroundColor={'#4EB69F'} padding={'10px'}>
+            <GameDetsCard backgroundColor={'#4EB69F'} padding={'4px'}>
                 <p>{game.beachName}</p>
                 <p>Court {game.courtInfo.courtId}</p>
                 <p>{game.courtInfo.availableHours.hour}</p>
-                <Button width={'70px'} padding={'5px'} onClick={() => setTogglePopUp(true)}>Book Now</Button>
+                <Button width={'80px'} padding={'3px'} onClick={() => setTogglePopUp(true)}>Book Now</Button>
             </GameDetsCard>
 
             {togglePopUp &&
