@@ -20,7 +20,14 @@ exports.UserGetAllActive = async (req, res) => {
 exports.UserGetAllGameOrder = async (req, res) => {
     try {
         let allGames = await new User().GetAllGameOrders();
-        res.status(200).json(allGames);
+        let games = [];
+        allGames.map((game) => {
+            for (let i = 0; i < game.gamesList.length; i++) {
+                games.push(game.gamesList[i]);
+            }
+        });
+
+        res.status(200).json(games);
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -56,7 +63,7 @@ exports.UserLogin = async (req, res) => {
 };
 
 
-exports.FindUsersFriends = async (req, res) =>{
+exports.FindUsersFriends = async (req, res) => {
     let { phoneNum } = req.body;
 
     try {
@@ -82,7 +89,7 @@ exports.AddUser = async (req, res) => {
     let { phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
         gamesList, ordersList, level } = req.body;
     let user = new User(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
-         gamesList, ordersList, level);
+        gamesList, ordersList, level);
     console.log(user)
 
     try {
@@ -97,7 +104,7 @@ exports.AddUser = async (req, res) => {
 // exports.AddGameToUser = async (req, res) => {
 //     // { $push: { <field1>: <value1>, ... } }
 //     let { field, value } = req.body;
-    
+
 
 //     try {  
 //         let result = await user.InsertNewUser();
@@ -108,14 +115,14 @@ exports.AddUser = async (req, res) => {
 // };
 
 exports.AddPaymentToUser = async (req, res) => {
-   
-    let {  enteredCreditCard, enteredExpirationDate, enteredCVV } = req.body;
-    let {id} = req.params;
-  
-    try {  
+
+    let { enteredCreditCard, enteredExpirationDate, enteredCVV } = req.body;
+    let { id } = req.params;
+
+    try {
         let user = await new User().GetUserByID(id);
-        let paymentsArr = user.payments || [] 
-        paymentsArr.push({enteredCreditCard, enteredExpirationDate, enteredCVV });
+        let paymentsArr = user.payments || []
+        paymentsArr.push({ enteredCreditCard, enteredExpirationDate, enteredCVV });
         user.payments = paymentsArr;
         await new User().UpdateUserById(id, user);
         res.status(201).json(user);
@@ -126,12 +133,9 @@ exports.AddPaymentToUser = async (req, res) => {
 
 exports.UpdateUser = async (req, res) => {
     let { id } = req.params;
-    let { phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
-        image, gamesList, ordersList, level } = req.body;
     try {
-        let result = await new User(phoneNumber, firstName, lastName, password, dateOfBirth, friendsList,
-            image, gamesList, ordersList, level).Update
-            UserById(id);
+        let a = { ...req.body }
+        let result = await new User().UpdateUserById(id, a);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error });
@@ -140,30 +144,30 @@ exports.UpdateUser = async (req, res) => {
 
 exports.AddGameToUser = async (req, res) => {
     let { id } = req.params;
-    let { date,time,location,court,type,players } = req.body;
+    let { date, time, location, court, type, players } = req.body;
     console.log(id)
     console.log(req.body)
     try {
         let u = new User();
-        let game = new GameOrder(date,time,location,court,type,players);
+        let game = new GameOrder(date, time, location, court, type, players);
         let user = await u.GetUserByID(id);
         user.gamesList.push(game);
 
         await u.UpdateUserById(id, user);
         res.status(200).json(user);
-        twilio.messages 
-      .create({ 
-        from: '+13343784350',       
-         to: user.phoneNumber,
-         body: `YAY YOU GOT IT! ${user.firstName}, this is your order details:
+        twilio.messages
+            .create({
+                from: '+13343784350',
+                to: user.phoneNumber,
+                body: `YAY YOU GOT IT! ${user.firstName}, this is your order details:
          date: ${date}, 
          time: ${time},
          location: ${location},
          court: ${court}
          HAVE FUN!`
-       }) 
-      .then(message => console.log(message.sid)) 
-      .done();
+            })
+            .then(message => console.log(message.sid))
+            .done();
     } catch (error) {
         res.status(500).json({ error });
     }

@@ -9,9 +9,11 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 function Confirmation() {
 
-  const gameDate = useSelector(state => state.gameOrder.date);
-  const gameTime = useSelector(state => state.gameOrder.time);
-  
+  // const gameDate = useSelector(state => state.gameOrder.date);
+  // const gameTime = useSelector(state => state.gameOrder.time);
+  const gameDate = '8-10-2022'
+  const gameTime = '16:00';
+  console.log(gameDate, gameTime);
   const minuteSeconds = 60;
   const hourSeconds = 3600;
   const daySeconds = 86400;
@@ -36,18 +38,21 @@ function Confirmation() {
   const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
   const getTimeDays = (time) => (time / daySeconds) | 0;
 
-  const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
-  const endTime = stratTime ; // use UNIX timestamp in seconds
-
+  let stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
+  let endTime = new Date(`${gameDate.split('-')[2]}-${gameDate.split('-')[1]}-${gameDate.split('-')[0]}`) ; // use UNIX timestamp in seconds
+  endTime.setHours(gameTime.split(':')[0])
+  endTime.setMinutes(gameTime.split(':')[1])
+  endTime/=1000;
   const remainingTime = endTime - stratTime;
   const days = Math.ceil(remainingTime / daySeconds);
   const daysDuration = days * daySeconds;
 
 
   return (
-    <Wrapper>
+    <Wrapper direction={'column'}>
 
       <Title>YAY! Your game is about to start in...</Title>
+      <div style={{ display: 'flex', flexDirection: 'row'}}>
       <CountdownCircleTimer
         {...timerProps}
         colors="#7E2E84"
@@ -105,7 +110,7 @@ function Confirmation() {
           </span>
         )}
       </CountdownCircleTimer>
-
+      </div>
     </Wrapper>
   )
 }

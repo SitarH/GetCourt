@@ -10,7 +10,7 @@ function GameDetails({ game, gameObj }) {
     const [togglePopUp, setTogglePopUp] = useState(false);
 
     const [gameOrder, setGameOrder] = useState({
-        date: new Date().toLocaleDateString(),
+        date: [new Date().getDate(), new Date().getMonth()+1, new Date().getFullYear()].join('-'),
         time: game.courtInfo.availableHours.hour,
         location: game.beachName,
         court: game.courtInfo.courtId,

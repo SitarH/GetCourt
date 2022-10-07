@@ -11,7 +11,7 @@ function Checkout() {
   const { gameOrder } = state;
 
   return (
-    <Wrapper direction={'row'}>
+    <Wrapper style={{justifyContent: 'space-evenly'}} direction={'row'}>
       <Order game={gameOrder} />
       <Payment game={gameOrder} />
     </Wrapper>

@@ -7,8 +7,8 @@ function Order({ game }) {
     const players = game.players;
 
     return (
-        <Card height={'350px'} direction={'column'}>
-            <h2>Game details:</h2>
+        <Card height={'350px'} width={'350px'} direction={'column'} backgroundColor={'#F2C67D'}>
+            <h2 style={{fontWeight: 'bold'}}>Game details:</h2>
             {Object.entries(game).map(([key, val], i) => (
                 key === 'players' && val.length > 0 ? players.map((player, index) => {
 

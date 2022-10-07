@@ -144,11 +144,11 @@ function Courts() {
       <Wrapper direction={'column'}>
       {gameOrder.type !== '' && <>
         <Title>Choose court</Title>
-        <div>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
         {courtObject.map((court, index) => {
           return takenCourtsByHour.includes(court.courtId) ? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
             // <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
-            <img src={courtImg+ index} style={{ height: '80px' }}></img>
+            <img src={courtImg1} style={{ height: '80px', cursor: 'pointer' }} onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}></img>
         })} 
         </div>
       </>}

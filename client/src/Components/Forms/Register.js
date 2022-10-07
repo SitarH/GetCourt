@@ -98,6 +98,7 @@ function Register() {
             <Title>Register</Title>
             <div>
                 <input type="text" placeholder="First Name"
+                    style={{ marginRight: '50px' }}
                     value={enteredFirstName}
                     onChange={FirstNameChangeHandler}
                     onBlur={FirstNameBlurHandler} />
@@ -109,6 +110,7 @@ function Register() {
             </div>
             <div>
                 <input type="tel" placeholder="Phone Number"
+                    style={{ marginRight: '50px' }}
                     value={enteredPhoneNumber}
                     onChange={PhoneNumberChangeHandler}
                     onBlur={PhoneNumberBlurHandler} />
@@ -120,6 +122,7 @@ function Register() {
             </div>
             <div>
                 <input type="date" placeholder="Birth Date"
+                    style={{ marginRight: '50px' }}
                     value={enteredBirthDate}
                     onChange={BirthDateChangeHandler}
                     onBlur={BirthDateBlurHandler} />

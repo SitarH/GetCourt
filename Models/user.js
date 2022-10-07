@@ -45,8 +45,8 @@ class User {
 
     async GetAllGameOrders() {
         try {
-            let options = {gamesList: {$exists: true, $not: {$size: 0}}};
-            let project = {'gamesList.date': 1,'gamesList.time': 1,'gamesList.location': 1,'gamesList.court': 1, 'gamesList.players.firstName': 1, 'gamesList.players.lastName': 1 };
+            let options = { gamesList: { $exists: true, $not: { $size: 0 } } };
+            let project = { _id: 0, 'gamesList.date': 1, 'gamesList.time': 1, 'gamesList.location': 1, 'gamesList.court': 1, 'gamesList.players.firstName': 1, 'gamesList.players.lastName': 1 };
             return await new DB().FindAllAndProject('user', options, project);
         } catch (error) {
             return error;
@@ -82,7 +82,16 @@ class User {
 
     async UpdateUserById(id, user = null) {
         try {
-            return await new DB().UpdateDocById('user', id, !user ? this : user);
+            let doc = {};
+            let isUpdate = false;
+            for (let key in user) {
+                if (user[key] != null || user[key] != undefined) {
+                    doc[key] = user[key];
+                    isUpdate = true;
+                }
+            }
+            console.log(doc);
+            return await new DB().UpdateDocById('user', id, isUpdate ? doc : null);
         } catch (error) {
             console.log(error);
             return error;
@@ -92,20 +101,22 @@ class User {
     async FindUsersFriends(phoneNumber) {
         try {
             let options = [
-               
-                
-                {$unwind:'$friendsList'},
-                {$lookup:{
-                    from:'user',
-                    localField: 'friendsList',
-                    foreignField: '_id',
-                    pipeline:[
-                        {$project: {'firstName':1,'lastName':1}}
-                    ],
-                    as: 'friendsInfo'
-                }}, 
-                {$project:{'phoneNumber':1,'friendsInfo':1}},
-                {$match:{'phoneNumber':phoneNumber}}
+
+
+                { $unwind: '$friendsList' },
+                {
+                    $lookup: {
+                        from: 'user',
+                        localField: 'friendsList',
+                        foreignField: '_id',
+                        pipeline: [
+                            { $project: { 'firstName': 1, 'lastName': 1 } }
+                        ],
+                        as: 'friendsInfo'
+                    }
+                },
+                { $project: { 'phoneNumber': 1, 'friendsInfo': 1 } },
+                { $match: { 'phoneNumber': phoneNumber } }
             ];
             return await new DB().Aggregate('user', options);
         } catch (error) {

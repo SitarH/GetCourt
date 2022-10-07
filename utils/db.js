@@ -89,12 +89,15 @@ class DB {
         }
     }
 
-    async UpdateDocById(collection, id, doc) {
+    async UpdateDocById(collection, id, doc = null) {
+        
         try {
+            if (doc != null){
             await this.client.connect();
             return await this.client.db(this.dbName).collection(collection).updateOne(
                 { _id: ObjectId(id) },
                 { $set: doc });
+            }
         } catch (error) {
             console.log(error)
             return error;

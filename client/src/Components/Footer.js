@@ -27,7 +27,7 @@ function Footer() {
 
 
   return (
-    <footer style={{position: 'absolute', bottom: '0', width: '100%'}}>
+    <footer style={{position: 'fixed', bottom: '0', width: '100%'}}>
       <div className=" container" style={{ height: 80, position: 'absolute', transform: 'translate(85vw, 5vh)'}} ref={container}></div>
       <div className=" container" style={{ height: 80, position: 'absolute', transform: 'translate(10vw, 11vh)' }} ref={containertwo}></div>
       <img src={FooterImg} width={'100%'}></img>

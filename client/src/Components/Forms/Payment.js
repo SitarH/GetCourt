@@ -3,6 +3,7 @@ import Card from '../UI/Card';
 import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import PurchaseButton from '../UI/PurchaseButton';
+import Button from '../UI/Button';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
@@ -24,7 +25,7 @@ function Payment({ game }) {
     }
 
     return (
-        <Card height={'350px'}>
+        <Card height={'350px'} width={'350px'} backgroundColor={'#F2C67D'} direction={'column'}>
             <Form>
                 <input type="email" placeholder='Card name'
                 />
@@ -36,6 +37,7 @@ function Payment({ game }) {
                 />
 
             </Form>
+            <Button width={'200px'} padding={'10px'}>Use saved card</Button>
             <PurchaseButton onClick={PurchaseHandler}>Confirm</PurchaseButton>
 
         </Card>
