@@ -102,7 +102,7 @@ function Login() {
             onChange={PasswordChangeHandler} 
             onBlur={PasswordBlurHandler}/>
 
-            <PurchaseButton disabled={!formIsValid}>Submit</PurchaseButton>
+            <PurchaseButton disabled={!formIsValid} valid={formIsValid? 'pointer' : 'unset'}>Submit</PurchaseButton>
             <div style={{display: 'flex', marginTop: '10px', flexDirection: 'column'}}>
             <h2>New user?</h2> <Button width="100px" onClick={()=>navigate('/register')}>Sign up</Button>
             </div>

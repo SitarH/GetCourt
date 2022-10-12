@@ -10,29 +10,6 @@ import {apiAdress} from '../../api'
 
 
 function Admin() {
-
-//   const [users, setUsers] = useState([]);
-//   const [orders, setOrders] = useState([]);
-
-
-//   useEffect(() => {
-//     fetchUsers()
-
-// }, [])
-
-// const fetchUsers = async () => {
-
-//     try {
-//         const response = await fetch(`${apiAdress}/api/GetCourt/user/`);
-//         const data = await response.json();
-//         console.log(data)
-//         setUsers(data);
-//         // return data;
-//     } catch (e) {
-//         return e;
-//     }
-
-// }
   
 
 
@@ -41,7 +18,7 @@ function Admin() {
     <Wrapper>
     <Title>Welcome, Admin</Title>
     
-    <Card height={'400px'} width={'800px'}>
+    <Card height={'400px'} width={'800px'} >
       <h2>Active Users</h2>
       <Table />
     </Card>

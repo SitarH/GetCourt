@@ -62,9 +62,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {item.firstName + " " + item.lastName}
         </TableCell>
-        <TableCell align="right">{item.phone}</TableCell>
-        <TableCell align="right">{item.dob}</TableCell>
-        <TableCell align="right">{item.level}</TableCell>
+        <TableCell align="left">{item.phone}</TableCell>
+        <TableCell align="left">{item.dob}</TableCell>
+        <TableCell align="left">{item.level}</TableCell>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -139,14 +139,14 @@ export default function CollapsibleTable() {
 
   return (
     <TableContainer background-color="black" component={Paper}>
-      <Table aria-label="collapsible table">
+      <Table aria-label="collapsible table"  pageSize={5}>
         <TableHead>
           <TableRow>
           <TableCell></TableCell>
             <TableCell>Full Name</TableCell>
-            <TableCell align="right">Phone number</TableCell>
-            <TableCell align="right">Date of birth</TableCell>
-            <TableCell align="right">Level</TableCell>
+            <TableCell align="left">Phone number</TableCell>
+            <TableCell align="left">Date of birth</TableCell>
+            <TableCell align="left">Level</TableCell>
             <TableCell />
           </TableRow>
         </TableHead>

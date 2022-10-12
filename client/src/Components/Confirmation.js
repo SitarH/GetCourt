@@ -55,7 +55,7 @@ function Confirmation() {
       <div style={{ display: 'flex', flexDirection: 'row'}}>
       <CountdownCircleTimer
         {...timerProps}
-        colors="#7E2E84"
+        colors="#F2C67D"
         duration={daysDuration}
         initialRemainingTime={remainingTime}
       >
@@ -97,7 +97,7 @@ function Confirmation() {
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors="#218380"
+        colors="#4EB69F"
         duration={minuteSeconds}
         initialRemainingTime={remainingTime % minuteSeconds}
         onComplete={(totalElapsedTime) => ({

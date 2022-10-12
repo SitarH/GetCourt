@@ -8,20 +8,19 @@ function GamesList({ gameObj }) {
 
     const [availableGames, setAvailableGames] = useState([])
 
-    const currentDate = new Date().toISOString().replace(/T.*/,'').split('-').reverse().join('-')
-console.log(currentDate)
+    const currentDate = new Date().toISOString().replace(/T.*/, '').split('-').reverse().join('-')
+   
     const currentTime = new Date().toLocaleTimeString('en-US', {
         hour12: false,
         hour: "numeric",
         minute: "numeric"
     });
-   
+
 
     useEffect(() => {
         fetchAvailableGames();
-        console.log(availableGames)
+        
     }, [])
-
 
     const fetchAvailableGames = async () => {
         const gamesDetails = {
@@ -35,13 +34,12 @@ console.log(currentDate)
         try {
             const response = await fetch(`${apiAdress}/api/GetCourt/location/NextAvailableGames`, gamesDetails);
             const data = await response.json();
-            console.log(data)
+            
             setAvailableGames(data);
         } catch (e) {
             return e;
         }
     }
-
 
     return (
         <>{availableGames.length > 0 ?
@@ -51,7 +49,7 @@ console.log(currentDate)
                     game={game}
                     gameObj={gameObj}
                 />
-            }) : availableGames[0] === null? <h2>No games left today...</h2> : <h2>Loading games</h2>}
+            }) : availableGames[0] === null ? <h2>No games left today...</h2> : <h2>Loading games</h2>}
         </>
 
     )

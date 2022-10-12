@@ -17,20 +17,23 @@ function Register() {
 
     const { value: enteredFirstName,
         isValid: enteredFirstNameisValid,
+        hasError: firstNameHasError,
         InputChangeHandler: FirstNameChangeHandler,
         InputBlurHandler: FirstNameBlurHandler,
         Reset: ResetFirstName
-    } = useInput(value => value);
+    } = useInput(value => value.trim() !== '');
 
     const { value: enteredLastName,
         isValid: enteredLastNameIsValid,
+        hasError: lastNameHasError,
         InputChangeHandler: LastNameChangeHandler,
         InputBlurHandler: LastNameBlurHandler,
         Reset: ResetLastName
-    } = useInput(value => value);
+    } = useInput(value => value.trim() !== '');
 
     const { value: enteredPhoneNumber,
         isValid: enteredPhoneNumberIsValid,
+        hasError: phoneNumberHasError,
         InputChangeHandler: PhoneNumberChangeHandler,
         InputBlurHandler: PhoneNumberBlurHandler,
         Reset: ResetPhoneNumber
@@ -38,6 +41,7 @@ function Register() {
 
     const { value: enteredPassword,
         isValid: enteredPasswordIsValid,
+        hasError: passwordHasError,
         InputChangeHandler: PasswordChangeHandler,
         InputBlurHandler: PasswordBlurHandler,
         Reset: ResetPassword
@@ -45,6 +49,7 @@ function Register() {
 
     const { value: enteredBirthDate,
         isValid: enteredBirthDateIsValid,
+        hasError: dateOfBirthHasError,
         InputChangeHandler: BirthDateChangeHandler,
         InputBlurHandler: BirthDateBlurHandler,
         Reset: ResetBirthDate
@@ -52,10 +57,11 @@ function Register() {
 
     const { value: enteredLevel,
         isValid: enteredLevelsValid,
+        hasError: levelHasError,
         InputChangeHandler: LevelChangeHandler,
         InputBlurHandler: LevelBlurHandler,
         Reset: ResetLevel
-    } = useInput(value => value);
+    } = useInput(value => value.trim() !== '');
 
     let formIsValid = false;
 
@@ -102,30 +108,36 @@ function Register() {
                     value={enteredFirstName}
                     onChange={FirstNameChangeHandler}
                     onBlur={FirstNameBlurHandler} />
+                {firstNameHasError && <p>Please enter a first name</p>}
 
                 <input type="text" placeholder="Last Name"
                     value={enteredLastName}
                     onChange={LastNameChangeHandler}
                     onBlur={LastNameBlurHandler} />
+                {lastNameHasError && <p>Please enter a last name</p>}
             </div>
             <div>
                 <input type="tel" placeholder="Phone Number"
+                    pattern={'/^05\d([-]{0,1})\d{7}$/'}
                     style={{ marginRight: '50px' }}
                     value={enteredPhoneNumber}
                     onChange={PhoneNumberChangeHandler}
                     onBlur={PhoneNumberBlurHandler} />
+                {phoneNumberHasError && <p>Please enter a valid phone number</p>}
 
                 <input type="password" placeholder="Password"
                     value={enteredPassword}
                     onChange={PasswordChangeHandler}
                     onBlur={PasswordBlurHandler} />
+                {passwordHasError && <p>Please enter a valid password</p>}
             </div>
             <div>
                 <input type="date" placeholder="Birth Date"
-                    style={{ marginRight: '50px' }}
+                    style={{ marginRight: '50px', fontSize: '17px' }}
                     value={enteredBirthDate}
                     onChange={BirthDateChangeHandler}
                     onBlur={BirthDateBlurHandler} />
+                {dateOfBirthHasError && <p>Please enter your date of birth.</p>}
 
                 <select value={enteredLevel}
                     onChange={LevelChangeHandler}
@@ -135,6 +147,7 @@ function Register() {
                     <option>Intermediate</option>
                     <option>Advanced</option>
                 </select>
+                {levelHasError && <p>Please select a level</p>}
             </div>
             <PurchaseButton type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>

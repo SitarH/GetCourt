@@ -44,8 +44,6 @@ function Court({ courtObj, game, setGame }) {
 
     }
 
-   
-
 
     return (
         <div className="court">

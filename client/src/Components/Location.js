@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 import Courts from '../Pages/CourtList';
 import { useNavigate } from "react-router-dom";
 import Card from '../Components/UI/Card';
@@ -18,9 +18,9 @@ function Location({ locationObj, game, setGame }) {
       autoplay: true,
       animationData: require('../Asset/Lottie/location.json')
     })
-   
+
   }, [])
-  
+
 
   const LocationHandler = () => {
 
@@ -28,9 +28,9 @@ function Location({ locationObj, game, setGame }) {
   }
 
   return (
-    <Card height={'100px'}>
-      <div style={{height: '50px'}} ref={container}></div>
-      <Title style={{cursor: 'pointer'}} onClick={LocationHandler}>
+    <Card height={'100px'} backgroundColor={'#F2C67D'} padding={'5px'} >
+      <div style={{ height: '50px' }} ref={container}></div>
+      <Title style={{ cursor: 'pointer' }} onClick={LocationHandler}>
         {locationObj.beachName}
       </Title>
     </Card>

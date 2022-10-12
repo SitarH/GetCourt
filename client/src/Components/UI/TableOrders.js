@@ -13,18 +13,19 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 function Row(props) {
-  const { item } = props;
+  const { item, key } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableCell align="right">{1}</TableCell>
         <TableCell component="th" scope="row">
-          {item.firstName + " " + item.lastName}
+          {item.date}
         </TableCell>
-        <TableCell align="right">{item.phone}</TableCell>
-        <TableCell align="right">{item.dob}</TableCell>
-        <TableCell align="right">{item.level}</TableCell>
+        <TableCell align="left">{item.time}</TableCell>
+        <TableCell align="left">{item.location}</TableCell>
+        <TableCell align="left">{item.court}</TableCell>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -61,26 +62,27 @@ export default function CollapsibleTable() {
     try {
       const response = await fetch(`${apiAdress}/api/GetCourt/user/gameOrders`);
       const data = await response.json();
-      console.log(data)
-      const games = data.map((item, index) => {
-        return item.gamesList;
-      })
-      const games2 = games.map((item, index) => {
-        return item[index];
-      })
-      console.log(games2)
-      const gamesArr = games.map((game, index) => {
-        return {
-          id: index + 1,
-          date: game.gamesList.date,
-          time: game.time,
-          location: game.location,
-          court: game.court,
+      setGames(data)
+      // console.log('?',data)
+      // const games = data.map((item, index) => {
+      //   return item.gamesList;
+      // })
+      // const games2 = games.map((item, index) => {
+      //   return item[index];
+      // })
+      // console.log(games2)
+      // const gamesArr = games.map((game, index) => {
+      //   return {
+      //     id: index + 1,
+      //     date: game.gamesList.date,
+      //     time: game.time,
+      //     location: game.location,
+      //     court: game.court,
 
-        }
-      })
-      console.log(games)
-      setGames(gamesArr);
+      //   }
+      // })
+      // console.log(games)
+      // setGames(gamesArr);
       // return data;
     } catch (e) {
       return e;
@@ -93,10 +95,11 @@ export default function CollapsibleTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
+          <TableCell align="left"></TableCell>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Time</TableCell>
-            <TableCell align="right">Location</TableCell>
-            <TableCell align="right">Court</TableCell>
+            <TableCell align="left">Time</TableCell>
+            <TableCell align="left">Location</TableCell>
+            <TableCell align="left">Court</TableCell>
             <TableCell />
           </TableRow>
         </TableHead>

@@ -11,7 +11,7 @@ const PurchseButton = styled.button`
     letter-spacing: 3px;
     width: 200px;
     text-align: center;
-    cursor: pointer;
+    cursor: ${props=> props.valid};
    
 `;
 

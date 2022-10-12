@@ -27,6 +27,7 @@ function Courts() {
   const [gameOrder, setGameOrder] = useState(state.gameOrder)
   const [takenCourtsByHour, setTakenCourtsByHour] = useState([])
   const [courtObject, setCourtObject] = useState([])
+  const imgArr = [courtImg1, courtImg2, courtImg3, courtImg4]
 
   const [togglePopUp, setTogglePopUp] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -125,6 +126,7 @@ function Courts() {
             </select>
           </>}
       </Wrapper>
+
       <Wrapper direction={isActiveTwo ? 'row' : 'column'} style={{justifyContent: 'unset'}}>
         {gameOrder.time !== '' && <>
           <Title size={isActiveTwo ? '25px' : '35px'} style={{marginRight: '10px'}}>Playing for?</Title>
@@ -139,8 +141,8 @@ function Courts() {
             }
           </div>
         </>}
-
       </Wrapper>
+
       <Wrapper direction={'column'}>
       {gameOrder.type !== '' && <>
         <Title>Choose court</Title>
@@ -149,7 +151,7 @@ function Courts() {
           return takenCourtsByHour.includes(court.courtId) ? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
             // <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
             <img src={courtImg1} style={{ height: '80px', cursor: 'pointer' }} onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}></img>
-        })} 
+        })}
         </div>
       </>}
       </Wrapper>
@@ -179,7 +181,6 @@ function Courts() {
                 )}
               </div>
 
-
               <Court courtObj={courtNumber}
                 game={gameOrder}
                 setGame={setGameOrder} />
@@ -187,7 +188,6 @@ function Courts() {
           })} */}
           {/* <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>  */}
         </div>}
-
     </div>
 
 

@@ -6,7 +6,7 @@ import Courts from './CourtList';
 import Wrapper from '../Components/UI/Wrapper';
 import Card from '../Components/UI/Card';
 import GamesList from '../Components/GamesList';
-import {apiAdress} from '../api';
+import { apiAdress } from '../api';
 
 function Home() {
 
@@ -26,11 +26,11 @@ function Home() {
     fetchLocations()
 
   }, [])
-  
+
   const fetchLocations = async () => {
     try {
       const respone = await fetch(`${apiAdress}/api/GetCourt/location`);
-      if(respone.status === 200){
+      if (respone.status === 200) {
         const data = await respone.json();
         setLocations(data);
       }
@@ -45,18 +45,21 @@ function Home() {
 
 
   return (
-  
-    <Wrapper style={{marginTop: '-30px'}}>
+
+    <Wrapper style={{ marginTop: '-30px' }}>
+      
       <Card height={'150px'} width={'950px'} backgroundColor={'#F2C67D'} direction={'column'}>
-        <GamesList gameObj={gameOrder}/>
+
+        <GamesList gameObj={gameOrder} />
+        
       </Card>
       {locations.map((location) => {
-        return <Location 
-        key={location._id} 
-        locationObj={location}
-        game={gameOrder} 
-        setGame={setGameOrder}
-      />
+        return <Location
+          key={location._id}
+          locationObj={location}
+          game={gameOrder}
+          setGame={setGameOrder}
+        />
       })}
     </Wrapper>
 

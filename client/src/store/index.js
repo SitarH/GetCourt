@@ -9,10 +9,6 @@ const store = configureStore({
     reducer: {
         gameOrder: gameOrderReducer,
         auth: authReducer,
-        // middleware: (getDefaultMiddleware) =>
-        // getDefaultMiddleware({
-        //   serializableCheck: false,
-        // }),
     }
 })
 
