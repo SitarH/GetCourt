@@ -58,7 +58,7 @@ export default function DataTable() {
 
 
   return (
-    <div style={{ height: 400, width: '80%' }}>
+    <div style={{ height: 300, width: '80%', backgroundColor:'#F2C67D', borderRadius: '10px' }}>
       <DataGrid
         rows={games}
         columns={columns}

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import FooterImg from '../Asset/Images/footer444.png';
+import FooterImg from '../Asset/Images/footer101.png';
 import lottie from 'lottie-web';
 
 function Footer() {

@@ -28,9 +28,9 @@ function Location({ locationObj, game, setGame }) {
   }
 
   return (
-    <Card height={'100px'} backgroundColor={'#F2C67D'} padding={'5px'} >
+    <Card height={'100px'} backgroundColor={'#F2C67D'} padding={'5px'} style={{ cursor: 'pointer' }} onClick={LocationHandler} >
       <div style={{ height: '50px' }} ref={container}></div>
-      <Title style={{ cursor: 'pointer' }} onClick={LocationHandler}>
+      <Title>
         {locationObj.beachName}
       </Title>
     </Card>

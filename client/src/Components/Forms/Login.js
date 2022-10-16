@@ -88,7 +88,7 @@ function Login() {
 
     return (
        
-        <Card style={{marginTop: '-30px', height: '60vh'}}>
+        <Card style={{ height: '60vh'}}>
         <Form onSubmit={FormSubmitHandler}>
            <Title>Sign In</Title>
             <input type="tel" placeholder='Phone number' 

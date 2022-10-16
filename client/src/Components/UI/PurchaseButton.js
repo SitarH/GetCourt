@@ -6,10 +6,10 @@ const PurchseButton = styled.button`
     border: 5px solid #4EB69F;
     padding: 10px;
     border-radius: 15px;
-    font-size: 20px;
+    font-size: ${props=> props.size};
     font-weight: bold;
     letter-spacing: 3px;
-    width: 200px;
+    width: ${props=> props.width};
     text-align: center;
     cursor: ${props=> props.valid};
    

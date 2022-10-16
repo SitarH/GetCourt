@@ -3,9 +3,9 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
-import {apiAdress} from '../../api';
+import { apiAdress } from '../../api';
 
-function EditProfile({id}) {
+function EditProfile({ id }) {
 
 
     const { value: enteredFirstName,
@@ -14,7 +14,7 @@ function EditProfile({id}) {
         InputBlurHandler: FirstNameBlurHandler,
         Reset: ResetFirstName
     } = useInput(value => value);
-    
+
 
     const { value: enteredLastName,
         isValid: enteredLastNameIsValid,
@@ -63,9 +63,8 @@ function EditProfile({id}) {
         formIsValid = true;
     }
 
-
     const FormSubmitHandler = (event) => {
-        
+
         event.preventDefault();
 
         fetch(`${apiAdress}/api/GetCourt/user/${id}`, {
@@ -86,7 +85,6 @@ function EditProfile({id}) {
             })
         })
 
-        
         ResetFirstName();
         ResetLastName();
         ResetPhoneNumber();
@@ -98,42 +96,47 @@ function EditProfile({id}) {
     return (
         <Form onSubmit={FormSubmitHandler}>
             <Title>Edit Your Profile </Title>
+            <div>
+                <input type="text" placeholder="First Name"
+                    style={{ marginRight: '50px' }}
+                    value={enteredFirstName}
+                    onChange={FirstNameChangeHandler}
+                    onBlur={FirstNameBlurHandler} />
 
-            <input type="text" placeholder="First Name"
-                value={enteredFirstName}
-                onChange={FirstNameChangeHandler}
-                onBlur={FirstNameBlurHandler} />
+                <input type="text" placeholder="Last Name"
+                    value={enteredLastName}
+                    onChange={LastNameChangeHandler}
+                    onBlur={LastNameBlurHandler} />
+            </div>
+            <div>
+                <input type="tel" placeholder="Phone Number"
+                    style={{ marginRight: '50px' }}
+                    value={enteredPhoneNumber}
+                    onChange={PhoneNumberChangeHandler}
+                    onBlur={PhoneNumberBlurHandler} />
 
-            <input type="text" placeholder="Last Name"
-                value={enteredLastName}
-                onChange={LastNameChangeHandler}
-                onBlur={LastNameBlurHandler} />
+                <input type="password" placeholder="Password"
+                    value={enteredPassword}
+                    onChange={PasswordChangeHandler}
+                    onBlur={PasswordBlurHandler} />
+            </div>
+            <div>
+                <input type="date" placeholder="Birth Date"
+                    style={{ marginRight: '50px' }}
+                    value={enteredBirthDate}
+                    onChange={BirthDateChangeHandler}
+                    onBlur={BirthDateBlurHandler} />
 
-            <input type="tel" placeholder="Phone Number"
-                value={enteredPhoneNumber}
-                onChange={PhoneNumberChangeHandler}
-                onBlur={PhoneNumberBlurHandler} />
-
-            <input type="password" placeholder="Password"
-                value={enteredPassword}
-                onChange={PasswordChangeHandler}
-                onBlur={PasswordBlurHandler} />
-
-            <input type="date" placeholder="Birth Date"
-                value={enteredBirthDate}
-                onChange={BirthDateChangeHandler}
-                onBlur={BirthDateBlurHandler} />
-
-            <select value={enteredLevel}
-                onChange={LevelChangeHandler}
-                onBlur={LevelBlurHandler}>
-                <option value={"disable"} selected hidden>Choose level</option>
-                <option>Beginner</option>
-                <option>Intermediate</option>
-                <option>Advanced</option>
-            </select>
-            
-            <PurchaseButton> Update</PurchaseButton>
+                <select value={enteredLevel}
+                    onChange={LevelChangeHandler}
+                    onBlur={LevelBlurHandler}>
+                    <option value={"disable"} selected hidden>Choose level</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+            </div>
+            <PurchaseButton width="200px"> Update</PurchaseButton>
         </Form>
     )
 }

@@ -15,7 +15,7 @@ function Profile() {
   const currentUser = useSelector(state => state.auth.loggedUser)
 
   return (
-    <>
+    <Wrapper>
         <Card backgroundColor={'#F2C67D'} width={'350px'} height={'350px'} direction={'column'}>
         <Title>Profile</Title>
           <h2>First Name: {currentUser.firstName}</h2>
@@ -23,16 +23,16 @@ function Profile() {
           <h2>Phone Number: {currentUser.phoneNumber} </h2>
           <h2>Birth Date: {currentUser.dateOfBirth}</h2>
           <h2>Level: {currentUser.level} </h2>
-          <Button width={'90px'} padding={'3px'} onClick={() => {
+          <PurchseButton width={'100px'} valid={'pointer'} size={'15px'} onClick={() => {
           setToggleEdit(prev => !prev);
 
-        }}>Edit </Button>
+        }}>Edit </PurchseButton>
           </Card>
 
 
       {toggleEdit && <EditProfile />}
 
-    </>
+    </Wrapper>
   )
 }
 

@@ -11,8 +11,9 @@ function MainLayout() {
         <>
         <div style={{marginLeft:"10px", marginRight:"10px"}}>
             <Header/>
-           
-            <Navigation/>
+           <div style={{marginTop:"-30px"}}>
+            <Navigation />
+            </div>
             </div>
             <Footer /> 
             </> 

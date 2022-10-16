@@ -6,8 +6,9 @@ import PurchaseButton from '../Components/UI/PurchaseButton';
 import Card from '../Components/UI/Card';
 import Form from '../Components/UI/Form';
 import Wrapper from '../Components/UI/Wrapper';
-import SavedCards from './SavedCards';
-import { apiAdress } from '../api'
+import Title from '../Components/UI/Title';
+import { apiAdress } from '../api';
+import CardsTable from '../Components/UI/TableCards';
 
 
 function UserPayments() {
@@ -62,7 +63,7 @@ function UserPayments() {
   return (
     <Wrapper>
       <Card height={'350px'}
-        width={'300px'}
+        width={'400px'}
         backgroundColor={'#F2C67D'}
       >
         <Form onSubmit={PurchaseHandler}>
@@ -86,7 +87,13 @@ function UserPayments() {
         </Form>
 
       </Card>
-      <SavedCards />
+      <Card height={'350px'}
+        width={'400px'}
+        backgroundColor={'#F2C67D'}
+        direction= {'column'}>
+      <Title>Saved cards</Title>
+      <CardsTable />
+      </Card>
     </Wrapper>
   )
 }
