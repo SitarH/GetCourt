@@ -5,21 +5,18 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import Toolbar from '@mui/material/Toolbar';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { SidebarData } from './SidebarData';
 
 function ResponsiveDrawer(props) {
 
     const navigate = useNavigate();
+
     const { window, togglenavbar, setToggleNav } = props;
-    const [open, setOpen] = useState(true);
 
     const handleDrawerToggle = () => {
-        setOpen((prev) => !prev);
-        // setToggleNav((prev) => !prev)
+        setToggleNav((prev) => !prev)
     };
 
     const drawer = (
@@ -40,7 +37,6 @@ function ResponsiveDrawer(props) {
                 ))}
             </List>
 
-
         </div>
     );
 
@@ -48,19 +44,12 @@ function ResponsiveDrawer(props) {
 
     return (
         <Box >
-            <Toolbar>
-                {/* <IconButton
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={handleDrawerToggle} >
-                            <MenuIcon />
-                        </IconButton> */}
-            </Toolbar>
+
             <Box>
                 <Drawer
                     container={container}
                     variant="temporary"
-                    open={open}
+                    open={togglenavbar}
                     onClose={handleDrawerToggle} >
                     {drawer}
                 </Drawer>

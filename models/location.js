@@ -135,7 +135,7 @@ class Location {
                 finalGames.push(item);
                 
             }
-            console.log('final',finalGames)
+          
 
         }
           

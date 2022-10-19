@@ -34,8 +34,7 @@ function Courts() {
   const [isActiveTwo, setIsActiveTwo] = useState(false);
 
   useEffect(() => {
-    // dispatch(gameOrderActions.InsertIntoValue({ field: 'location', value: location.state.value.beachName }))
-    // if (courts?.length > 0)
+    
     setGameOrder({ ...gameOrder, location: location.beachName })
     fetchCourts()
 
@@ -45,18 +44,8 @@ function Courts() {
 
     const respone = await fetch(`${apiAdress}/api/GetCourt/court/arr/${location.court.join()}`)
     const data = await respone.json();
-    console.log(data[0].gameType)
+    
     setCourtObject(data)
-
-    // const courtNumsPromise = await courts.map(async (item) => {
-    //   console.log(item)
-    //   const respone = await fetch(`http://localhost:5008/api/GetCourt/court/${item}`);
-    //   console.log(respone)
-    //   const data = await respone.json();
-    //   return data
-    // });
-
-    // Promise.all(courtNumsPromise).then(court => setCourtsNumbers(court));
 
   }
 
@@ -93,7 +82,8 @@ function Courts() {
       const response = await fetch(`${apiAdress}/api/GetCourt/location/availableHours`, Details);
       const data = await response.json();
       console.log(data)
-      setTakenCourtsByHour(data);
+      
+      (data);
       // return data;
     } catch (e) {
       return e;
@@ -110,11 +100,14 @@ function Courts() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Wrapper direction={isActive ? 'row' : 'column'}>
+        {courtObject.length > 0 ?
+          <>
         <Title size={isActive ? '25px' : '35px'}>When do you want to play?</Title>
         <input type="date" width={isActive ? '150px' : '350px'}
           min={disablePastDate()}
           onChange={(event) => DateHandler(event)}
         ></input>
+        </>: null}
         {gameOrder.date !== '' &&
           <>
             <Title size={isActive ? '25px' : '35px'} >What time?</Title>
@@ -148,9 +141,12 @@ function Courts() {
         <Title>Choose court</Title>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
         {courtObject.map((court, index) => {
-          return takenCourtsByHour.includes(court.courtId) ? <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
+          return takenCourtsByHour.includes(court.courtId) ? 
+          <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
             // <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
-            <img src={courtImg1} style={{ height: '80px', cursor: 'pointer' }} onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}></img>
+            <img src={courtImg1} 
+            style={{ height: '80px', cursor: 'pointer' }} 
+            onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}></img>
         })}
         </div>
       </>}
@@ -162,32 +158,7 @@ function Courts() {
           setToggle={setTogglePopUp}
           gameObj={gameOrder} />}
 
-      {gameOrder.court !== '' &&
-        <div className="wrap">
-          {/* 
-          {courtsNumbers.map((courtNumber, index) => {
-            return <Card height={'200px'} key={index}>
-              <Button onClick={() => setGameOrder({ ...gameOrder, court: courtNumber.courtId })} className={courtNumber.courtId === gameOrder.court && 'clicked'}>Court {courtNumber.courtId}</Button>
-
-              <p>Playing for?</p>
-              <div className="rowDirection">
-                {courtNumber.gameType.map((gameType, index) => {
-                  return <Button className={gameOrder.type === gameType && 'clicked'} width={'90px'} padding={'3px'}
-                    key={index}
-                    onClick={() => setGameOrder({ ...gameOrder, type: gameType })}>
-                    {gameType}
-                  </Button>
-                }
-                )}
-              </div>
-
-              <Court courtObj={courtNumber}
-                game={gameOrder}
-                setGame={setGameOrder} />
-            </Card>
-          })} */}
-          {/* <PurchaseButton onClick={PurchaseHandler}>Book a Game</PurchaseButton>  */}
-        </div>}
+     
     </div>
 
 

@@ -21,7 +21,6 @@ function Location({ locationObj, game, setGame }) {
 
   }, [])
 
-
   const LocationHandler = () => {
 
     navigate('/courts', { state: { gameOrder: game, location: locationObj } });

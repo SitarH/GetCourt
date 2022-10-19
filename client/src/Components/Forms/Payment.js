@@ -37,8 +37,8 @@ function Payment({ game }) {
                 />
 
             </Form>
-            <Button width={'200px'} padding={'10px'}>Use saved card</Button>
-            <PurchaseButton onClick={PurchaseHandler}>Confirm</PurchaseButton>
+            <Button width={'130px'} padding={'10px'}>Use saved card</Button>
+            <PurchaseButton width={'200px'} onClick={PurchaseHandler}>Confirm</PurchaseButton>
 
         </Card>
     )

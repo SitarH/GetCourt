@@ -7,7 +7,6 @@ import { apiAdress } from '../../api';
 
 function EditProfile({ id }) {
 
-
     const { value: enteredFirstName,
         isValid: enteredFirstNameisValid,
         InputChangeHandler: FirstNameChangeHandler,
@@ -53,11 +52,11 @@ function EditProfile({ id }) {
 
     let formIsValid = false;
 
-    if (enteredFirstNameisValid &&
-        enteredLastNameIsValid &&
-        enteredPhoneNumberIsValid &&
-        enteredPasswordIsValid &&
-        enteredBirthDateIsValid &&
+    if (enteredFirstNameisValid ||
+        enteredLastNameIsValid ||
+        enteredPhoneNumberIsValid ||
+        enteredPasswordIsValid ||
+        enteredBirthDateIsValid ||
         enteredLevelsValid) {
 
         formIsValid = true;
@@ -78,9 +77,6 @@ function EditProfile({ id }) {
                 lastName: enteredLastName,
                 password: enteredPassword,
                 dateOfBirth: enteredBirthDate,
-                friendsList: [],
-                gamesList: [],
-                ordersList: [],
                 level: enteredLevel
             })
         })
@@ -136,7 +132,7 @@ function EditProfile({ id }) {
                     <option>Advanced</option>
                 </select>
             </div>
-            <PurchaseButton width="200px"> Update</PurchaseButton>
+            <PurchaseButton width="200px" disabled={!formIsValid} valid={formIsValid? 'pointer' : 'unset'}> Update</PurchaseButton>
         </Form>
     )
 }

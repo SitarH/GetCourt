@@ -9,18 +9,19 @@ function useInput(ValidateValue) {
     const valueIsValid = ValidateValue(enteredValue);
 
     const InputChangeHandler = (event) => {
+        console.log('value->', event.target.value)
         setEnteredValue(event.target.value);
 
-        if (event.target.value.trim() !== '')
-            setEnteredValueIsValid(true)
+        // if (event.target.value.trim() !== '')
+        //     setEnteredValueIsValid(true)
     };
 
     const InputBlurHandler = () => {
         setIsTouched(true);
-        if (enteredValue.trim() ===''){
-            setEnteredValueIsValid(true);
-            return
-        }
+        // if (enteredValue.trim() ===''){
+        //     setEnteredValueIsValid(true);
+        //     return
+        // }
     }
 
     const Reset = () => {

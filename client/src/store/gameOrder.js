@@ -13,7 +13,7 @@ const gameOrderSlice = createSlice({
     reducers: {
         AddNewGame(initialState, action) {
 
-            initialState = action.payload.gameOrder;
+            initialState.game = action.payload.gameOrder;
 
             const add = async () => {
                 const game = {

@@ -43,16 +43,16 @@ function Home() {
 
   }
 
-
   return (
 
-    <Wrapper style={{ marginTop: '-30px' }}>
-      
+    <Wrapper style={{justifyContent: 'center'}}>
+
       <Card height={'150px'} width={'950px'} backgroundColor={'#F2C67D'} direction={'column'}>
 
         <GamesList gameObj={gameOrder} />
-        
+
       </Card>
+      <div style={{display: 'flex', flexDirection: 'row'}}>
       {locations.map((location) => {
         return <Location
           key={location._id}
@@ -61,6 +61,7 @@ function Home() {
           setGame={setGameOrder}
         />
       })}
+      </div>
     </Wrapper>
 
   )
