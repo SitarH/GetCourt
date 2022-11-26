@@ -49,8 +49,9 @@ exports.UserGetById = async (req, res) => {
 
 
 exports.UserLogin = async (req, res) => {
+    
     let { phoneNum, password } = req.body;
-
+    console.log('?',phoneNum, password);
     try {
         let user = await new User().UserLogin(phoneNum, password);
         if (!user)
@@ -134,8 +135,9 @@ exports.AddPaymentToUser = async (req, res) => {
 exports.UpdateUser = async (req, res) => {
     let { id } = req.params;
     try {
-        let a = { ...req.body }
-        let result = await new User().UpdateUserById(id, a);
+        let value = { ...req.body }
+       
+        let result = await new User().UpdateUserById(id, value);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error });

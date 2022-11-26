@@ -25,21 +25,19 @@ function Payment({ game }) {
     }
 
     return (
-        <Card height={'350px'} width={'350px'} backgroundColor={'#F2C67D'} direction={'column'}>
+        <Card height={'350px'}
+            width={'350px'}
+            backgroundColor={'#F2C67D'}
+            direction={'column'}>
             <Form>
-                <input type="email" placeholder='Card name'
-                />
-
-                <input type="email" placeholder='Card number'
-                />
-
-                <input type="email" placeholder='CVV'
-                />
-
+                <input placeholder='Card name' />
+                <input placeholder='Card number' />
+                <input placeholder='CVV' />
             </Form>
-            <Button width={'130px'} padding={'10px'}>Use saved card</Button>
-            <PurchaseButton width={'200px'} onClick={PurchaseHandler}>Confirm</PurchaseButton>
-
+            <Button width={'130px'}
+                padding={'10px'}>Use saved card</Button>
+            <PurchaseButton width={'200px'}
+                onClick={PurchaseHandler}>Confirm</PurchaseButton>
         </Card>
     )
 }

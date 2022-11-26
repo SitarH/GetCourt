@@ -149,7 +149,7 @@ function Register() {
                 </select>
                 {levelHasError && <p>Please select a level</p>}
             </div>
-            <PurchaseButton type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
+            <PurchaseButton size={'20px'} width={'200px'} type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
     )
 }

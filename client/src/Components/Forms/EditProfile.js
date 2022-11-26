@@ -90,7 +90,10 @@ function EditProfile({ id }) {
     }
 
     return (
-        <Form onSubmit={FormSubmitHandler}>
+        <Form onSubmit={FormSubmitHandler} 
+        backgroundColor={'#F2C67D'}
+        formHeight={'350px'}
+        style={{padding: "15px"}}>
             <Title>Edit Your Profile </Title>
             <div>
                 <input type="text" placeholder="First Name"
@@ -123,7 +126,9 @@ function EditProfile({ id }) {
                     onChange={BirthDateChangeHandler}
                     onBlur={BirthDateBlurHandler} />
 
-                <select value={enteredLevel}
+                <select
+                
+                 value={enteredLevel}
                     onChange={LevelChangeHandler}
                     onBlur={LevelBlurHandler}>
                     <option value={"disable"} selected hidden>Choose level</option>
@@ -132,7 +137,10 @@ function EditProfile({ id }) {
                     <option>Advanced</option>
                 </select>
             </div>
-            <PurchaseButton width="200px" disabled={!formIsValid} valid={formIsValid? 'pointer' : 'unset'}> Update</PurchaseButton>
+            <PurchaseButton width={"200px"}
+                disabled={!formIsValid}
+                valid={formIsValid ? 'pointer' : 'unset'}>
+                Save</PurchaseButton>
         </Form>
     )
 }

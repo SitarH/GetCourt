@@ -64,12 +64,16 @@ class User {
 
 
     async UserLogin(phoneNum, password) {
+
         try {
             let user = await new DB().FindForLogin('user', phoneNum, password);
+          
             for (let index = 0; index < user.gamesList.length; index++) {
                 let players = user.gamesList[index].players
                 let playersName = user.gamesList[index]['playersName']
+               
                 if(players.length > 0){
+                   
                     for (let j = 0; j < players.length; j++) {
                         let p = await new DB().FindByID('user', players[j].toString()); //all info about user
                         if(playersName){
@@ -81,6 +85,7 @@ class User {
                     }
                 }
             }
+           
             return user
         } catch (error) {
             console.log(error);
@@ -97,16 +102,17 @@ class User {
     }
 
     async UpdateUserById(id, user = null) {
+       
         try {
             let doc = {};
             let isUpdate = false;
             for (let key in user) {
-                if (user[key] != null || user[key] != undefined) {
+                if (user[key] != '') {
                     doc[key] = user[key];
                     isUpdate = true;
                 }
             }
-            console.log(doc);
+           
             return await new DB().UpdateDocById('user', id, isUpdate ? doc : null);
         } catch (error) {
             console.log(error);

@@ -1,4 +1,29 @@
 
+
+// export const Login = createAsyncThunk('auth/Login', async ()=>{
+//     const loginDetails = {
+//         method: 'POST',
+//         headers: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({phoneNum: phone, password: pass})
+//     };
+//     try {
+//         const response = await fetch(`${apiAdress}/api/GetCourt/user/login`, loginDetails);
+//         const data = await response.json();
+//         return data;
+//     } catch (e) {
+//         return e;
+//     }  
+// })
+
+
+
+
+
+
+
 export const fetchUserData = (phoneNumber, pass) => {
     // try {
     //     const response = await fetch('http://localhost:5008/api/GetCourt/user');

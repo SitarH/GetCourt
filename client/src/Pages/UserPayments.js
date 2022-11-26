@@ -73,7 +73,7 @@ function UserPayments() {
             onChange={CreditCardChangeHandler}
             onBlur={CreditCardBlurHandler} />
 
-          <input type="text" placeholder='Expiration Date'
+          <input type="text" placeholder='Expiration date'
             value={enteredExpirationDate}
             onChange={ExpirationDateChangeHandler}
             onBlur={ExpirationDateBlurHandler} />
@@ -83,16 +83,18 @@ function UserPayments() {
             onChange={CVVChangeHandler}
             onBlur={CVVBlurHandler} />
 
-          <PurchaseButton type='submit'>Save card</PurchaseButton>
+          <PurchaseButton type='submit'
+            width={"200px"}
+          >Save card</PurchaseButton>
         </Form>
 
       </Card>
       <Card height={'350px'}
         width={'400px'}
         backgroundColor={'#F2C67D'}
-        direction= {'column'}>
-      <Title>Saved cards</Title>
-      <CardsTable />
+        direction={'column'}>
+        <Title>Saved cards</Title>
+        <CardsTable />
       </Card>
     </Wrapper>
   )

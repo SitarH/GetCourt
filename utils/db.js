@@ -56,12 +56,13 @@ class DB {
         }
     }
 
-    async FindForLogin(collection, phoneNum, password) {
+    async FindForLogin(collection, phoneNum, pass) {
+        
         try {
             await this.client.connect();
-            return await this.client.db(this.dbName).collection(collection).findOne({ phoneNumber: phoneNum, password: password});
+            return await this.client.db(this.dbName).collection(collection).findOne({ phoneNumber: phoneNum, password: pass});
         } catch (error) {
-
+            return error
         } finally {
             await this.client.close();
         }
@@ -90,7 +91,7 @@ class DB {
     }
 
     async UpdateDocById(collection, id, doc = null) {
-        
+       
         try {
             if (doc != null){
             await this.client.connect();

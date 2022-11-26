@@ -29,25 +29,12 @@ align-items: center;
   flex-direction: row;
  }
 
- & input[type="date" i], [type="time" i]{
-    padding: 15px;
+ & input[type="date" i], [type="time" i], select{
     background-color: #F2C67D;
     border: 2px solid #F2C67D;
-    border-radius: 15px;
     width: ${props => props.width};
-    font-size: 20px;
-    letter-spacing: 5px;
  }
 
- & select {
-  padding: 15px;
-  background-color: #F2C67D;
-  border: 2px solid #F2C67D;
-  border-radius: 15px;
-  width: ${props => props.width};
-  font-size: 20px;
-  letter-spacing: 5px;
- }
 
  & h2{
     font-weight: 100;

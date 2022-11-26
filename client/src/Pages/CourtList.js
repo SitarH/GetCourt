@@ -33,6 +33,12 @@ function Courts() {
   const [isActive, setIsActive] = useState(false);
   const [isActiveTwo, setIsActiveTwo] = useState(false);
 
+  const currentTime = parseInt(new Date().toLocaleTimeString('en-US', {
+    hour12: false,
+    hour: "numeric",
+    minute: "numeric"
+}).split(':')[0])
+
   useEffect(() => {
     
     setGameOrder({ ...gameOrder, location: location.beachName })
@@ -100,6 +106,7 @@ function Courts() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Wrapper direction={isActive ? 'row' : 'column'}>
+
         {courtObject.length > 0 ?
           <>
         <Title size={isActive ? '25px' : '35px'}>When do you want to play?</Title>
@@ -108,13 +115,18 @@ function Courts() {
           onChange={(event) => DateHandler(event)}
         ></input>
         </>: null}
+
         {gameOrder.date !== '' &&
           <>
             <Title size={isActive ? '25px' : '35px'} >What time?</Title>
             <select onChange={(event) => timeHandler(event)} width={isActive ? '150px' : '350px'}>
               <option value={"disable"} selected hidden>Choose time</option>
-              {courtObject[0].availableHours.map((item) => {
-                return <option value={item.hour}>{item.hour}</option>
+              {courtObject[0].availableHours.map((item) => {{
+                return parseInt(item.hour.split(':')[0]) < currentTime?
+                  <option disabled>{item.hour}</option>: 
+                  <option value={item.hour}>{item.hour}</option>
+              }
+                
               })}
             </select>
           </>}
@@ -126,7 +138,7 @@ function Courts() {
           <div>
             {
               courtObject[0].gameType.map((option, index) => {
-                return <Button
+                return <Button className={gameOrder.type === option && 'clicked'}
                   onClick={() => { setGameOrder({ ...gameOrder, type: option }); setIsActiveTwo(true) }} width={'100px'} padding={'10px'}>
                   {option}
                 </Button>
@@ -143,7 +155,6 @@ function Courts() {
         {courtObject.map((court, index) => {
           return takenCourtsByHour.includes(court.courtId) ? 
           <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
-            // <Button onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }} width={'90px'} padding={'3px'}>{court.courtId}</Button>
             <img src={courtImg1} 
             style={{ height: '80px', cursor: 'pointer' }} 
             onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}></img>
@@ -158,7 +169,6 @@ function Courts() {
           setToggle={setTogglePopUp}
           gameObj={gameOrder} />}
 
-     
     </div>
 
 

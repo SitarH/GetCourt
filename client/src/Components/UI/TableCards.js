@@ -12,9 +12,8 @@ const columns = [
   },
   {
     field: 'expirationDate',
-    headerName: 'expiration',
-    width: 100,
-   
+    headerName: 'Expiration date',
+    width: 120,
   }
 
 ];
@@ -22,23 +21,28 @@ const columns = [
 
 export default function DataTable() {
 
-    const currentUserPayments = useSelector(state => state.auth.loggedUser.payments);
-    
-    const cards = currentUserPayments.map((card, index) => {
-        return {
-          id: index + 1,
-          number: card.enteredCreditCard,
-          expirationDate: card.enteredExpirationDate,
-     } })
+  const currentUserPayments = useSelector(state => state.auth.loggedUser.payments);
+
+  const cards = currentUserPayments.map((card, index) => {
+    return {
+      id: index + 1,
+      number: card.enteredCreditCard,
+      expirationDate: card.enteredExpirationDate,
+    }
+  })
 
 
   return (
-    <div style={{ height: 250, width: '350px', backgroundColor:'#F2C67D', borderRadius: '10px' }}>
+    <div style={{
+      height: 250,
+      width: '350px',
+      backgroundColor: '#F2C67D',
+      borderRadius: '10px'
+    }}>
       <DataGrid
         rows={cards}
         columns={columns}
         pageSize={5}
-       
       />
     </div>
   );

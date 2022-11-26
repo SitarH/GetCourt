@@ -7,7 +7,7 @@ import PurchaseButton from '../UI/PurchaseButton';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/auth';
+import { LogIn } from '../../store/auth';
 import {apiAdress} from '../../api';
 
 function Login() {
@@ -36,6 +36,7 @@ function Login() {
     }
 
     const fetchData = async()=>{
+        console.log(enteredPassword, enteredPhoneNumber)
         const loginDetails = {
             method: 'POST',
             headers: {
@@ -45,22 +46,15 @@ function Login() {
             body: JSON.stringify({phoneNum: enteredPhoneNumber, password: enteredPassword})
         };
         try {
-            const respone = await fetch('http://localhost:5008/api/GetCourt/user'); //?
-            if(respone.status === 200){
-              const data = await respone.json();
-            
-              return data
-            }
-          } catch (error) {
-            console.log(error)
-          }
             const response = await fetch(`${apiAdress}/api/GetCourt/user/login`, loginDetails);
             const data = await response.json();
             console.log(data);
             return data;
-        // } catch (e) {
-        //     return e;
-        // }  
+          } catch (error) {
+            console.log(error)
+          }
+         
+      
     }
 
     const FormSubmitHandler = async (event) =>{
@@ -73,7 +67,7 @@ function Login() {
             alert('wrong details try again')
         }
         else{
-            dispatch(authActions.LogIn(user));
+            dispatch(LogIn(user));
             navigate('/home');
         }
         
