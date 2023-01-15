@@ -43,10 +43,11 @@ function AddFriends({ toggleVal, setToggle, gameObj }) {
           <PopUp>
             <Title size={'20px'}>would you like to invite friends?</Title>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Button value={"yes"} width={'150px'}
+              <Button value={"yes"} width={'150px'} padding={'3px'}
                 onClick={AddFriendHandler}>Yes
               </Button>
-              <Button value={"no"} width={'150px'}
+              <br></br>
+              <Button value={"no"} width={'150px'} padding={'3px'}
                 onClick={AddFriendHandler}>No
               </Button>
             </div>

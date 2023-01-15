@@ -37,12 +37,12 @@ function Confirmation() {
   const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
   const getTimeDays = (time) => (time / daySeconds) | 0;
 
-  let stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
+  let startTime = Date.now() / 1000; // use UNIX timestamp in seconds
   let endTime = new Date(`${gameDate.split('-')[2]}-${gameDate.split('-')[1]}-${gameDate.split('-')[0]}`) ; // use UNIX timestamp in seconds
   endTime.setHours(gameTime.split(':')[0])
   endTime.setMinutes(gameTime.split(':')[1])
   endTime/=1000;
-  const remainingTime = endTime - stratTime;
+  const remainingTime = endTime - startTime;
   const days = Math.ceil(remainingTime / daySeconds);
   const daysDuration = days * daySeconds;
 

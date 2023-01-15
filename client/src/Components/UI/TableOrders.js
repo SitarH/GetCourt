@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { apiAdress } from '../../api';
+import { apiAddress } from '../../api';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@mui/material/IconButton';
@@ -60,7 +60,7 @@ export default function CollapsibleTable() {
   const fetchUsers = async () => {
 
     try {
-      const response = await fetch(`${apiAdress}/api/GetCourt/user/gameOrders`);
+      const response = await fetch(`${apiAddress}/api/GetCourt/user/gameOrders`);
       const data = await response.json();
       setGames(data)
       // console.log('?',data)

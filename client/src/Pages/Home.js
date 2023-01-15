@@ -6,7 +6,7 @@ import Courts from './CourtList';
 import Wrapper from '../Components/UI/Wrapper';
 import Card from '../Components/UI/Card';
 import GamesList from '../Components/GamesList';
-import { apiAdress } from '../api';
+import { apiAddress } from '../api';
 
 function Home() {
 
@@ -29,7 +29,7 @@ function Home() {
 
   const fetchLocations = async () => {
     try {
-      const respone = await fetch(`${apiAdress}/api/GetCourt/location`);
+      const respone = await fetch(`${apiAddress}/api/GetCourt/location`);
       if (respone.status === 200) {
         const data = await respone.json();
         setLocations(data);

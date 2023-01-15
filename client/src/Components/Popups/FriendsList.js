@@ -12,7 +12,7 @@ import Button from '../UI/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom'
-import {apiAdress} from '../../api';
+import {apiAddress} from '../../api';
 
 export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj }) {
 
@@ -36,7 +36,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   const fetchFriendsList = async (id) => {
     try {
-      const respone = await fetch(`${apiAdress}/api/GetCourt/user/${id}`);
+      const respone = await fetch(`${apiAddress}/api/GetCourt/user/${id}`);
       if (respone.status === 200) {
         const data = await respone.json();
         console.log(data)
@@ -52,7 +52,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
     const friends = await Promise.all(userFriendsList.map(async (item) => {
   
       try {
-        const respone = await fetch(`${apiAdress}/api/GetCourt/user/${item}`);
+        const respone = await fetch(`${apiAddress}/api/GetCourt/user/${item}`);
         if (respone.status === 200) {
           const data = await respone.json();
           return data;
@@ -92,6 +92,12 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   return (
     <PopUp>
+      {friendsList.length === 0? 
+      <>
+      <h2 style={{fontWeight: 'lighter'}}>No friends in your list..</h2>
+      <Button onClick={AddToGame} width={'150px'} padding={'3px'}>Continue</Button>
+      </>:
+      <>
       <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         {friendsList.map((value) => {
           const labelId = `checkbox-list-secondary-label-${value._id}`;
@@ -122,6 +128,7 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
         })}
       </List>
       <Button onClick={AddToGame}>Add to game</Button>
+      </>}
     </PopUp>
   );
 }

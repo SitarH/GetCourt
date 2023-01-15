@@ -7,8 +7,10 @@ import PurchaseButton from '../UI/PurchaseButton';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import { useDispatch } from 'react-redux';
-import { LogIn } from '../../store/auth';
-import {apiAdress} from '../../api';
+import {LogIn} from '../../store/auth'
+import {apiAddress} from '../../api';
+import {fetchUserData} from '../../store/authActions';
+
 
 function Login() {
 
@@ -35,34 +37,11 @@ function Login() {
         formIsValid = true;
     }
 
-    const fetchData = async()=>{
-        console.log(enteredPassword, enteredPhoneNumber)
-        const loginDetails = {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({phoneNum: enteredPhoneNumber, password: enteredPassword})
-        };
-        try {
-            const response = await fetch(`${apiAdress}/api/GetCourt/user/login`, loginDetails);
-            const data = await response.json();
-            console.log(data);
-            return data;
-          } catch (error) {
-            console.log(error)
-          }
-         
-      
-    }
-
     const FormSubmitHandler = async (event) =>{
         event.preventDefault();
-        console.log('??')
         
-        const user = await fetchData();
-        console.log(user);
+        const user = await fetchUserData(enteredPhoneNumber, enteredPassword);
+        
         if (user === null) {
             alert('wrong details try again')
         }

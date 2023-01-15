@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../Pages/Home';
 import Login from '../Components/Forms/Login';
 import Register from '../Components/Forms/Register';
-import Shop from '../Pages/Shop';
 import Profile from '../Pages/Profile';
 import Location from './Location';
 import CourtList from '../Pages/CourtList';
@@ -26,7 +25,6 @@ function Navigation() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/shop" element={<Shop />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/location" element={<Location />} />
       <Route path="/courts" element={<CourtList />} />
@@ -35,7 +33,6 @@ function Navigation() {
       <Route path="/Contact" element={<Contact />} />
       <Route path="/History" element={<History />} />
       <Route path="/UserPayments" element={<UserPayments />} />
-      <Route path="/profile/Yaara1/edit" element={<EditProfile/>} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/confirmation" element={<Confirmation />} />
       <Route path="/admin" element={<Admin />} />

@@ -3,8 +3,6 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/auth';
 import { sendRegisterData } from '../../store/authActions';
 import { useNavigate } from 'react-router-dom';
 import 'react-phone-number-input/style.css';
@@ -12,11 +10,11 @@ import PhoneInput from 'react-phone-number-input';
 
 function Register() {
 
-    const dispatch = useDispatch();
+ 
     const navigate = useNavigate();
 
     const { value: enteredFirstName,
-        isValid: enteredFirstNameisValid,
+        isValid: enteredFirstNameIsValid,
         hasError: firstNameHasError,
         InputChangeHandler: FirstNameChangeHandler,
         InputBlurHandler: FirstNameBlurHandler,
@@ -65,7 +63,7 @@ function Register() {
 
     let formIsValid = false;
 
-    if (enteredFirstNameisValid &&
+    if (enteredFirstNameIsValid &&
         enteredLastNameIsValid &&
         enteredPhoneNumberIsValid &&
         enteredPasswordIsValid &&
@@ -76,17 +74,26 @@ function Register() {
     }
 
 
-    const FormSubmitHandler = (event) => {
+    const FormSubmitHandler = async (event) => {
         event.preventDefault();
 
-        dispatch(sendRegisterData({
+        const userDetails = {
             enteredPhoneNumber,
             enteredFirstName,
             enteredLastName,
             enteredPassword,
             enteredBirthDate,
             enteredLevel
-        }));
+        }
+
+        const response = await sendRegisterData(userDetails);
+
+        if (response.acknowledged) {
+            navigate('/login');
+        }
+        else {
+            alert('something went wrong, please try again')
+        }
 
         ResetFirstName();
         ResetLastName();
@@ -95,7 +102,6 @@ function Register() {
         ResetBirthDate();
         ResetLevel();
 
-        navigate('/login');
     }
 
 
@@ -118,7 +124,7 @@ function Register() {
             </div>
             <div>
                 <input type="tel" placeholder="Phone Number"
-                    pattern={'/^05\d([-]{0,1})\d{7}$/'}
+                    // pattern={'/^05([-]{0,1})\d{7}$/'}
                     style={{ marginRight: '50px' }}
                     value={enteredPhoneNumber}
                     onChange={PhoneNumberChangeHandler}

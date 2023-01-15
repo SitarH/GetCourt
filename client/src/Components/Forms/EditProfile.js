@@ -3,12 +3,12 @@ import useInput from '../../Hooks/useInput';
 import Form from '../UI/Form';
 import Title from '../UI/Title';
 import PurchaseButton from '../UI/PurchaseButton';
-import { apiAdress } from '../../api';
+import { apiAddress } from '../../api';
 
 function EditProfile({ id }) {
 
     const { value: enteredFirstName,
-        isValid: enteredFirstNameisValid,
+        isValid: enteredFirstNameIsValid,
         InputChangeHandler: FirstNameChangeHandler,
         InputBlurHandler: FirstNameBlurHandler,
         Reset: ResetFirstName
@@ -52,7 +52,7 @@ function EditProfile({ id }) {
 
     let formIsValid = false;
 
-    if (enteredFirstNameisValid ||
+    if (enteredFirstNameIsValid ||
         enteredLastNameIsValid ||
         enteredPhoneNumberIsValid ||
         enteredPasswordIsValid ||
@@ -66,7 +66,7 @@ function EditProfile({ id }) {
 
         event.preventDefault();
 
-        fetch(`${apiAdress}/api/GetCourt/user/${id}`, {
+        fetch(`${apiAddress}/api/GetCourt/user/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

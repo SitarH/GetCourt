@@ -7,7 +7,7 @@ import Card from '../Components/UI/Card';
 import Form from '../Components/UI/Form';
 import Wrapper from '../Components/UI/Wrapper';
 import Title from '../Components/UI/Title';
-import { apiAdress } from '../api';
+import { apiAddress } from '../api';
 import CardsTable from '../Components/UI/TableCards';
 
 
@@ -35,7 +35,7 @@ function UserPayments() {
 
 
   const AddCard = async () => {
-    let res = await fetch(`${apiAdress}/api/GetCourt/user/payment/${currentUserId}`, {
+    let res = await fetch(`${apiAddress}/api/GetCourt/user/payment/${currentUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

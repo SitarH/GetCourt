@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { useState, useEffect } from 'react';
-import { apiAdress } from '../api';
+import { apiAddress } from '../api';
 import PurchaseButton from '../Components/UI/PurchaseButton'
 
 export default function Tags() {
@@ -18,7 +18,7 @@ export default function Tags() {
 
   const fetchUsers = async () => {
     try {
-      const respone = await fetch(`${apiAdress}/api/GetCourt/user`);
+      const respone = await fetch(`${apiAddress}/api/GetCourt/user`);
       if (respone.status === 200) {
         const data = await respone.json();
         setUsers(data);

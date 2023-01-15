@@ -19,9 +19,10 @@ align-items: center;
  }
 
  & .edit{
-    padding: 15px;
-    font-size: 20px;
-    letter-spacing: 5px;
+   
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-right: 50px
  }
 
  & select{

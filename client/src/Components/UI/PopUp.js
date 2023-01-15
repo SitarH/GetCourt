@@ -11,6 +11,9 @@ flex-direction: column;
 align-items: center;
 padding-top: 20px;
 position: fixed;
+z-index: 1;
+margin-left: 25%;
+border: 10px solid;
 `;
 
 

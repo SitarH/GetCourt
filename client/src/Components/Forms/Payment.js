@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PopUp from '../UI/PopUp';
+import TableCards from '../UI/TableCards'
 
 
 function Payment({ game }) {
@@ -17,6 +19,7 @@ function Payment({ game }) {
     const navigate = useNavigate();
 
     const user = useSelector(state => state.auth.loggedUser)
+    const [openCards, setOpenCards] = useState(false)
 
     const PurchaseHandler = () => {
 
@@ -25,20 +28,30 @@ function Payment({ game }) {
     }
 
     return (
-        <Card height={'350px'}
-            width={'350px'}
-            backgroundColor={'#F2C67D'}
-            direction={'column'}>
-            <Form>
-                <input placeholder='Card name' />
-                <input placeholder='Card number' />
-                <input placeholder='CVV' />
-            </Form>
-            <Button width={'130px'}
-                padding={'10px'}>Use saved card</Button>
-            <PurchaseButton width={'200px'}
-                onClick={PurchaseHandler}>Confirm</PurchaseButton>
-        </Card>
+        <>
+            <Card height={'350px'}
+                width={'350px'}
+                backgroundColor={'#F2C67D'}
+                direction={'column'}>
+                <Form>
+                    <input placeholder='Card name' />
+                    <input placeholder='Card number' />
+                    <input placeholder='CVV' />
+                </Form>
+                <Button width={'130px'}
+                    padding={'10px'} onClick={() => { setOpenCards(true) }}>Use saved card</Button>
+                <PurchaseButton width={'200px'}
+                    onClick={PurchaseHandler}>Confirm</PurchaseButton>
+            </Card>
+            {openCards && user.cardNumber ?
+                <PopUp>
+                    <TableCards />
+                </PopUp> : 
+                <PopUp>
+                    <h2>No saved cards</h2>
+                </PopUp>}
+
+        </>
     )
 }
 

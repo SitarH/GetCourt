@@ -11,19 +11,19 @@ function Header() {
 
   const navigate = useNavigate();
 
-  const isLogged = useSelector(state => state.auth.isLoggedIn);
+   const isLogged = useSelector(state => state.auth.isLoggedIn);
 
   const [toggleNav, setToggleNav] = useState(false);
 
   return (
     <>
       <HeaderUI>
-        {
+         {
           isLogged &&
           <GoThreeBars
           style={{cursor: 'pointer'}}
             onClick={() => setToggleNav(!toggleNav)} />
-        }
+        } 
 
         {toggleNav &&
           <NavBar togglenavbar={toggleNav}

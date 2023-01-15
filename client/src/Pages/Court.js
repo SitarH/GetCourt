@@ -8,7 +8,7 @@ import Title from '../Components/UI/Title';
 import Wrapper from '../Components/UI/Wrapper';
 import Button from '../Components/UI/Button';
 import PurchaseButton from '../Components/UI/PurchaseButton';
-import {apiAdress} from '../api';
+import {apiAddress} from '../api';
 
 function Court({ courtObj, game, setGame }) {
 
@@ -34,7 +34,7 @@ function Court({ courtObj, game, setGame }) {
             body: JSON.stringify({ location: game.location, date: game.date, time: game.time })
         };
         try {
-            const response = await fetch(`${apiAdress}/api/GetCourt/location/availableHours`, Details);
+            const response = await fetch(`${apiAddress}/api/GetCourt/location/availableHours`, Details);
             const data = await response.json();
             setTakenHours(data);
             

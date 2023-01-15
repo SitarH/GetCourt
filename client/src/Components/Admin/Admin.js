@@ -5,12 +5,11 @@ import Wrapper from '../UI/Wrapper';
 import Table from '../UI/Table';
 import TableOrders from '../UI/TableOrders';
 import {useEffect, useState} from 'react';
-import {apiAdress} from '../../api'
+import {apiAddress} from '../../api'
 
 
 
 function Admin() {
-  
 
 
   return (

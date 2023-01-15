@@ -1,6 +1,6 @@
  import * as React from 'react';
  import { useEffect, useState } from 'react';
- import { apiAdress } from '../../api';
+ import { apiAddress } from '../../api';
  import DeleteIcon from '@material-ui/icons/Delete';
  import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@mui/material/IconButton';
@@ -26,7 +26,7 @@ function Row(props) {
       method: 'DELETE',
   };
   try {
-      const response = await fetch(`${apiAdress}/api/GetCourt/user/${id}`, userDetails);
+      const response = await fetch(`${apiAddress}/api/GetCourt/user/${id}`, userDetails);
       const data = await response.json();
       console.log(data);
       return data;
@@ -45,7 +45,7 @@ function Row(props) {
 //     body: JSON.stringify(id)
 // };
 // try {
-//     const response = await fetch(`${apiAdress}/api/GetCourt/user/delete`, userDetails);
+//     const response = await fetch(`${apiAddress}/api/GetCourt/user/delete`, userDetails);
 //     const data = await response.json();
 //     console.log(data);
 //     return data;
@@ -113,7 +113,7 @@ export default function CollapsibleTable() {
   const fetchUsers = async () => {
 
     try {
-      const response = await fetch(`${apiAdress}/api/GetCourt/user/`);
+      const response = await fetch(`${apiAddress}/api/GetCourt/user/`);
       const data = await response.json();
       console.log(data)
       const users = data.map((user, index) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import GameDetails from '../Components/GameDetails';
 import Wrapper from '../Components/UI/Wrapper';
-import { apiAdress } from '../api';
+import { apiAddress } from '../api';
 
 function GamesList({ gameObj }) {
 
@@ -32,9 +32,9 @@ function GamesList({ gameObj }) {
             body: JSON.stringify({ date: currentDate, time: currentTime })
         };
         try {
-            const response = await fetch(`${apiAdress}/api/GetCourt/location/NextAvailableGames`, gamesDetails);
+            const response = await fetch(`${apiAddress}/api/GetCourt/location/NextAvailableGames`, gamesDetails);
             const data = await response.json();
-            
+            console.log(data)
             setAvailableGames(data);
         } catch (e) {
             return e;
@@ -42,7 +42,7 @@ function GamesList({ gameObj }) {
     }
 
     return (
-        <>{availableGames.length > 0 ?
+        <>{availableGames.length > 0 && availableGames[0] != null?
             availableGames.map((game, index) => {
                 return <GameDetails
                     key={index}

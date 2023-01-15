@@ -3,12 +3,12 @@ import useInput from '../../Hooks/useInput';
 import EditForm from './EditFormUI';
 import Title from '../UI/Title';
 import Button from '../UI/Button';
-import { apiAdress } from '../../api';
+import { apiAddress } from '../../api';
 
 function EditUser({ id, user }) {
-console.log(user)
+
     const { value: enteredFirstName,
-        isValid: enteredFirstNameisValid,
+        isValid: enteredFirstNameIsValid,
         InputChangeHandler: FirstNameChangeHandler,
         InputBlurHandler: FirstNameBlurHandler,
         Reset: ResetFirstName
@@ -45,7 +45,7 @@ console.log(user)
 
     let formIsValid = false;
 
-    if (enteredFirstNameisValid &&
+    if (enteredFirstNameIsValid &&
         enteredLastNameIsValid &&
         enteredPhoneNumberIsValid &&
         enteredBirthDateIsValid &&
@@ -67,7 +67,7 @@ console.log(user)
     }
 
     const UpdateUser = async () => {
-        await fetch(`${apiAdress}/api/GetCourt/user/${id}`, {
+        await fetch(`${apiAddress}/api/GetCourt/user/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -103,7 +103,7 @@ console.log(user)
     //     })
     // };
     // try {
-    //     const response = await fetch(`${apiAdress}/api/GetCourt/user/${id}`, userDetails);
+    //     const response = await fetch(`${apiAddress}/api/GetCourt/user/${id}`, userDetails);
     //     const data = await response.json();
     //     console.log(data);
     //     // return data;
@@ -112,42 +112,46 @@ console.log(user)
     // }
 
 
-return (
-    <EditForm onSubmit={FormSubmitHandler}>
+    return (
+        <EditForm onSubmit={FormSubmitHandler}>
 
-        <input type="text" placeholder={user.firstName}
-            value={enteredFirstName}
-            onChange={FirstNameChangeHandler}
-            onBlur={FirstNameBlurHandler} />
+            <input type="text" placeholder={user.firstName}
+                value={enteredFirstName}
+                onChange={FirstNameChangeHandler}
+                onBlur={FirstNameBlurHandler} />
 
-        <input type="text" placeholder={user.lastName}
-            value={enteredLastName}
-            onChange={LastNameChangeHandler}
-            onBlur={LastNameBlurHandler} />
+            <input type="text" placeholder={user.lastName}
+                value={enteredLastName}
+                onChange={LastNameChangeHandler}
+                onBlur={LastNameBlurHandler} />
 
-        <input type="tel" placeholder={user.phone}
-            value={enteredPhoneNumber}
-            onChange={PhoneNumberChangeHandler}
-            onBlur={PhoneNumberBlurHandler} />
+            <input type="tel" placeholder={user.phone}
+                value={enteredPhoneNumber}
+                onChange={PhoneNumberChangeHandler}
+                onBlur={PhoneNumberBlurHandler} />
 
+            <div>
+                <input style={{ backgroundColor: 'transparent', border: '1px solid transparent' }}
+                    type="date"
+                    placeholder="Birth Date"
+                    className="edit"
+                    value={enteredBirthDate}
+                    onChange={BirthDateChangeHandler}
+                    onBlur={BirthDateBlurHandler} />
 
-        <input type="date" placeholder="Birth Date" className="edit"
-            value={enteredBirthDate}
-            onChange={BirthDateChangeHandler}
-            onBlur={BirthDateBlurHandler} />
+                <select style={{marginRight: '50px'}} value={enteredLevel}
+                    onChange={LevelChangeHandler}
+                    onBlur={LevelBlurHandler}>
+                    <option value={"disable"} selected hidden>Choose level</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
 
-        <select value={enteredLevel}
-            onChange={LevelChangeHandler}
-            onBlur={LevelBlurHandler}>
-            <option value={"disable"} selected hidden>Choose level</option>
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
-        </select>
-
-        <Button> Update</Button>
-    </EditForm>
-)
+                <Button width='90px' padding='3px'> Update</Button>
+            </div>
+        </EditForm>
+    )
 }
 
 export default EditUser; 
