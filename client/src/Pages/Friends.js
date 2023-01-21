@@ -8,7 +8,6 @@ import SearchBar from '../Components/SearchBar';
 function Friends() {
 
 
-
   return (
     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
       <Card height={'350px'} width={'350px'} direction={'column'} backgroundColor={'#F2C67D'}>

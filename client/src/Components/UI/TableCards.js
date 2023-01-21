@@ -18,7 +18,6 @@ const columns = [
 
 ];
 
-
 export default function DataTable() {
 
   const currentUserPayments = useSelector(state => state.auth.loggedUser.payments);
@@ -39,10 +38,12 @@ export default function DataTable() {
       backgroundColor: '#F2C67D',
       borderRadius: '10px'
     }}>
-      <DataGrid
+      <DataGrid 
         rows={cards}
         columns={columns}
         pageSize={5}
+        checkboxSelection
+        
       />
     </div>
   );

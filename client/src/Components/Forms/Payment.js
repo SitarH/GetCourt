@@ -10,7 +10,9 @@ import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PopUp from '../UI/PopUp';
-import TableCards from '../UI/TableCards'
+import TableCards from '../UI/TableCards';
+import { AddGame } from '../../store/gameActions';
+import { AddNewGame } from '../../store/gameOrder';
 
 
 function Payment({ game }) {
@@ -21,9 +23,9 @@ function Payment({ game }) {
     const user = useSelector(state => state.auth.loggedUser)
     const [openCards, setOpenCards] = useState(false)
 
-    const PurchaseHandler = () => {
-
-        dispatch(gameOrderActions.AddNewGame({ id: user._id, gameOrder: game }));
+    const PurchaseHandler = async () => {
+        const response= await AddGame(user._id, game)
+        dispatch(AddNewGame(game));
         navigate('/confirmation');
     }
 
@@ -40,16 +42,17 @@ function Payment({ game }) {
                 </Form>
                 <Button width={'130px'}
                     padding={'10px'} onClick={() => { setOpenCards(true) }}>Use saved card</Button>
-                <PurchaseButton width={'200px'}
+                <PurchaseButton width={'200px'} valid={'pointer'}
                     onClick={PurchaseHandler}>Confirm</PurchaseButton>
             </Card>
-            {openCards && user.cardNumber ?
+            {openCards && user.payments ?
                 <PopUp>
                     <TableCards />
-                </PopUp> : 
-                <PopUp>
-                    <h2>No saved cards</h2>
-                </PopUp>}
+                    <Button width={'100px'}>save</Button>
+                </PopUp> : openCards ?
+                    <PopUp>
+                        <h2>No saved cards</h2>
+                    </PopUp> : null}
 
         </>
     )

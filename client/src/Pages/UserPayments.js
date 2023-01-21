@@ -10,7 +10,6 @@ import Title from '../Components/UI/Title';
 import { apiAddress } from '../api';
 import CardsTable from '../Components/UI/TableCards';
 
-
 function UserPayments() {
 
   const currentUserId = useSelector(state => state.auth.loggedUser._id)
@@ -32,7 +31,6 @@ function UserPayments() {
     InputBlurHandler: CVVBlurHandler,
     Reset: ResetCVV
   } = useInput(value => value);
-
 
   const AddCard = async () => {
     let res = await fetch(`${apiAddress}/api/GetCourt/user/payment/${currentUserId}`, {

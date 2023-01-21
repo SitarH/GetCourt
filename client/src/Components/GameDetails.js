@@ -4,7 +4,6 @@ import GameDetsCard from '../Components/UI/GameDetsCard';
 import { useState , useEffect } from 'react';
 import AddFriends from '../Components/Popups/AddFriends'
 
-
 function GameDetails({ game, gameObj }) {
 
     const [togglePopUp, setTogglePopUp] = useState(false);

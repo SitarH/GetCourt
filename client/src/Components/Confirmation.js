@@ -9,10 +9,10 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 function Confirmation() {
 
-   const gameDate = useSelector(state => state.gameOrder.initialState.date);
-   const gameTime = useSelector(state => state.gameOrder.initialState.time);
+    const gameDate = useSelector(state => state.gameOrder.game.date);
+    const gameTime = useSelector(state => state.gameOrder.game.time);
 
-  console.log(gameDate, gameTime);
+  
   const minuteSeconds = 60;
   const hourSeconds = 3600;
   const daySeconds = 86400;

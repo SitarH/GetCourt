@@ -5,7 +5,7 @@ import Wrapper from '../Components/UI/Wrapper';
 import Card from '../Components/UI/Card';
 import Title from '../Components/UI/Title';
 import { useDispatch } from 'react-redux';
-import { gameOrderActions } from '../store/gameOrder';
+
 import Court from '../Pages/Court';
 import PurchaseButton from '../Components/UI/PurchaseButton';
 import { apiAddress } from '../api';
@@ -15,6 +15,7 @@ import courtImg1 from '../Asset/Images/court1.png';
 import courtImg2 from '../Asset/Images/court2.png';
 import courtImg3 from '../Asset/Images/court3.png';
 import courtImg4 from '../Asset/Images/court4.png';
+import { AddGame } from '../store/gameActions';
 
 function Courts() {
 
@@ -97,11 +98,13 @@ function Courts() {
 
   }
 
-  const PurchaseHandler = () => {
-    dispatch(gameOrderActions.AddNewGame(gameOrder));
-    navigate('/checkout')
+  // const PurchaseHandler = () => {
 
-  }
+  //   const response = await AddGame(gameOrder)
+  //   dispatch(AddNewGame(response));
+  //   navigate('/checkout')
+
+  // }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -173,7 +176,6 @@ function Courts() {
           gameObj={gameOrder} />}
 
     </div>
-
 
   )
 }

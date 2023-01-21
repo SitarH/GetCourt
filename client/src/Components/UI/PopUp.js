@@ -12,7 +12,7 @@ align-items: center;
 padding-top: 20px;
 position: fixed;
 z-index: 1;
-margin-left: 25%;
+margin-top: 20%;
 border: 10px solid;
 `;
 

@@ -73,6 +73,8 @@ function Register() {
         formIsValid = true;
     }
 
+  
+
 
     const FormSubmitHandler = async (event) => {
         event.preventDefault();
@@ -92,7 +94,7 @@ function Register() {
             navigate('/login');
         }
         else {
-            alert('something went wrong, please try again')
+            alert('OOPS something went wrong, please try again')
         }
 
         ResetFirstName();
@@ -110,6 +112,7 @@ function Register() {
             <Title>Register</Title>
             <div>
                 <input type="text" placeholder="First Name"
+                
                     style={{ marginRight: '50px' }}
                     value={enteredFirstName}
                     onChange={FirstNameChangeHandler}
@@ -117,6 +120,7 @@ function Register() {
                 {firstNameHasError && <p>Please enter a first name</p>}
 
                 <input type="text" placeholder="Last Name"
+                
                     value={enteredLastName}
                     onChange={LastNameChangeHandler}
                     onBlur={LastNameBlurHandler} />
@@ -124,7 +128,7 @@ function Register() {
             </div>
             <div>
                 <input type="tel" placeholder="Phone Number"
-                    // pattern={'/^05([-]{0,1})\d{7}$/'}
+                    pattern={'^[0][5][0|2|3|4|5|9]{1}[-]{0,1}[0-9]{7}$'}
                     style={{ marginRight: '50px' }}
                     value={enteredPhoneNumber}
                     onChange={PhoneNumberChangeHandler}
@@ -132,6 +136,7 @@ function Register() {
                 {phoneNumberHasError && <p>Please enter a valid phone number</p>}
 
                 <input type="password" placeholder="Password"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                     value={enteredPassword}
                     onChange={PasswordChangeHandler}
                     onBlur={PasswordBlurHandler} />

@@ -11,24 +11,24 @@ const initialState = {
 
 
 
-export const LoginAction = createAsyncThunk('auth/Login', async (phone, pass) => {
-    const loginDetails = {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({phoneNum: phone, password: pass})
-    };
-    try {
-        const response = await fetch(`${apiAddress}/api/GetCourt/user/login`, loginDetails);
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (e) {
-        return e;
-    }  
-})
+// export const LoginAction = createAsyncThunk('auth/Login', async (phone, pass) => {
+//     const loginDetails = {
+//         method: 'POST',
+//         headers: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({phoneNum: phone, password: pass})
+//     };
+//     try {
+//         const response = await fetch(`${apiAddress}/api/GetCourt/user/login`, loginDetails);
+//         const data = await response.json();
+//         console.log(data);
+//         return data;
+//     } catch (e) {
+//         return e;
+//     }  
+// })
 
 
 const authSlice = createSlice({
@@ -54,24 +54,7 @@ const authSlice = createSlice({
         }
 
     },
-    extraReducers(builder){ 
-        builder.addCase(LoginAction.pending, (state, action) => {
-            state.loginStatus = 'loading';
-        })
-        .addCase(LoginAction.fulfilled, (state, action) => {
-            state.loggedUser = action.payload;
-             state.loginStatus = 'succeeded'
-             state.isLoggedIn = true;
 
-        })
-        .addCase(LoginAction.rejected, (state, action) => {
-            state.error = action.error.message;
-             state.loginStatus = 'failed';
-             state.isLoggedIn = false;
-
-        })
-
-    }
 })
 
  export const { AddNewUser, LogIn } = authSlice.actions;

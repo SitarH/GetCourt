@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {apiAddress} from '../api';
+import { apiAddress } from '../api';
 
 const initialState = {
-
     game: null
-
 };
 
 const gameOrderSlice = createSlice({
@@ -12,29 +10,8 @@ const gameOrderSlice = createSlice({
     initialState,
     reducers: {
         AddNewGame(initialState, action) {
-
-            initialState.game = action.payload.gameOrder;
-
-            const add = async () => {
-                const game = {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(initialState)
-                };
-                try {
-                    const response = await fetch(`${apiAddress}/api/GetCourt/user/addGame/${action.payload.id}`, game);
-                    const data = await response.json();
-                    return data;
-                } catch (e) {
-                    return e;
-                }
-            }
-
-            add()
-
+            console.log(action.payload)
+            initialState.game = action.payload;
         },
         UpdateGameOrder() {
 
@@ -46,6 +23,7 @@ const gameOrderSlice = createSlice({
     }
 })
 
-export const gameOrderActions = gameOrderSlice.actions;
+export const { AddNewGame } = gameOrderSlice.actions;
+
 
 export default gameOrderSlice.reducer;
