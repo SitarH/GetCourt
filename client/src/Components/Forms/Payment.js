@@ -40,8 +40,8 @@ function Payment({ game }) {
                     <input placeholder='Card number' />
                     <input placeholder='CVV' />
                 </Form>
-                <Button width={'130px'}
-                    padding={'10px'} onClick={() => { setOpenCards(true) }}>Use saved card</Button>
+                {/* <Button width={'130px'}
+                    padding={'10px'} onClick={() => { setOpenCards(true) }}>Use saved card</Button> */}
                 <PurchaseButton width={'200px'} valid={'pointer'}
                     onClick={PurchaseHandler}>Confirm</PurchaseButton>
             </Card>

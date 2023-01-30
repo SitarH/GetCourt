@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
+import Title from './Title';
 
 const columns = [
   { field: 'id', headerName: '', width: 90 },
@@ -21,14 +22,16 @@ const columns = [
 export default function DataTable() {
 
   const currentUserPayments = useSelector(state => state.auth.loggedUser.payments);
-
-  const cards = currentUserPayments.map((card, index) => {
-    return {
-      id: index + 1,
-      number: card.enteredCreditCard,
-      expirationDate: card.enteredExpirationDate,
-    }
-  })
+  let cards;
+  if (currentUserPayments != undefined) {
+     cards = currentUserPayments.map((card, index) => {
+      return {
+        id: index + 1,
+        number: card.enteredCreditCard,
+        expirationDate: card.enteredExpirationDate,
+      }
+    })
+  }
 
 
   return (
@@ -38,13 +41,14 @@ export default function DataTable() {
       backgroundColor: '#F2C67D',
       borderRadius: '10px'
     }}>
-      <DataGrid 
+      {currentUserPayments != undefined ?
+      <DataGrid
         rows={cards}
         columns={columns}
         pageSize={5}
         checkboxSelection
-        
-      />
+
+      />: <h2>No saved cards yet..</h2>}
     </div>
   );
 }

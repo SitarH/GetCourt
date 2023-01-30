@@ -28,8 +28,8 @@ export default function Tags() {
     }
   }
 
-  const AddFriendHandler = () => {
-
+  const AddFriendHandler = (friend) => {
+    console.log(friend)
 
 
   }
@@ -54,7 +54,7 @@ export default function Tags() {
         />
 
       </Stack>
-      <PurchaseButton valid={'pointer'} width='70px' onClick={AddFriendHandler}>Add</PurchaseButton>
+      <PurchaseButton valid={'pointer'} width='70px' onClick={()=>AddFriendHandler(params)}>Add</PurchaseButton>
     </>
   );
 }

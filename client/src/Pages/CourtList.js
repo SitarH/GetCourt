@@ -113,7 +113,8 @@ function Courts() {
         {courtObject.length > 0 ?
           <>
             <Title size={isActive ? '25px' : '35px'}>When do you want to play?</Title>
-            <input type="date" width={isActive ? '150px' : '350px'}
+            <input type="date"
+            style={{width: isActive ? '150px' : '250px', padding: '10px', borderRadius: '15px'}}
               min={disablePastDate()}
               onChange={(event) => DateHandler(event)}
             ></input>
@@ -122,7 +123,8 @@ function Courts() {
         {gameOrder.date !== '' &&
           <>
             <Title size={isActive ? '25px' : '35px'} >What time?</Title>
-            <select onChange={(event) => timeHandler(event)} width={isActive ? '150px' : '350px'}>
+            <select onChange={(event) => timeHandler(event)}
+            style={{width: isActive ? '150px' : '250px', padding: '10px', borderRadius: '15px'}}>
               <option value={"disable"} selected hidden>Choose time</option>
               {courtObject[0].availableHours.map((item) => {
                 {

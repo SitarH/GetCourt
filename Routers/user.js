@@ -19,6 +19,8 @@ UserRouter.put("/:id", UserController.UpdateUser);
 
 UserRouter.post("/payment/:id", UserController.AddPaymentToUser);
 
+UserRouter.post("/AddFriend/:id", UserController.AddFriendToUser);
+
 UserRouter.post("/friends/", UserController.FindUsersFriends);
 
 UserRouter.delete("/:id", UserController.DeleteUser);

@@ -2,7 +2,7 @@ const User = require('../models/user');
 const GameOrder = require('../models/gameOrder');
 
 const sid = 'AC8793599c2d2d3795cf7808c4e4b24c37';
-const authToken = '58a4784e8b3432e6539679c1154cc340';
+const authToken = 'f4263ee900d890a72c5da650c234e62f';
 
 const twilio = require('twilio')(sid, authToken);
 
@@ -132,6 +132,23 @@ exports.AddPaymentToUser = async (req, res) => {
     }
 };
 
+exports.AddFriendToUser = async (req, res) => {
+
+    let { friend } = req.body;
+    let { id } = req.params;
+
+    try {
+        let user = await new User().GetUserByID(id);
+        let friendsArr = user.friendsList || []
+        friendsArr.push(friend);
+        user.friendsList = friendsArr;
+        await new User().UpdateUserById(id, user);
+        res.status(201).json(user);
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+};
+
 exports.UpdateUser = async (req, res) => {
     let { id } = req.params;
     try {
@@ -145,10 +162,10 @@ exports.UpdateUser = async (req, res) => {
 };
 
 exports.AddGameToUser = async (req, res) => {
+   
     let { id } = req.params;
     let { date, time, location, court, type, players } = req.body;
-    console.log(id)
-    console.log(req.body)
+ 
     try {
         let u = new User();
         let game = new GameOrder(date, time, location, court, type, players);
@@ -157,10 +174,11 @@ exports.AddGameToUser = async (req, res) => {
 
         await u.UpdateUserById(id, user);
         res.status(200).json(user);
+        
         twilio.messages
             .create({
                 from: '+13343784350',
-                to: user.phoneNumber,
+                to: '+972526103109',
                 body: `YAY YOU GOT IT! ${user.firstName}, this is your order details:
          date: ${date}, 
          time: ${time},
@@ -170,6 +188,7 @@ exports.AddGameToUser = async (req, res) => {
             })
             .then(message => console.log(message.sid))
             .done();
+
     } catch (error) {
         res.status(500).json({ error });
     }

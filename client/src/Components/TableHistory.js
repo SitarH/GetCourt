@@ -14,13 +14,13 @@ const columns = [
     field: 'time',
     headerName: 'Time',
     width: 100,
-   
+
   },
   {
     field: 'location',
     headerName: 'Location',
     width: 100,
-   
+
   },
   {
     field: 'court',
@@ -43,27 +43,29 @@ const columns = [
 
 export default function DataTable() {
 
-    const userGames = useSelector(state => state.auth.loggedUser.gamesList);
-    
-    const games = userGames.map((game, index) => {
-        return {
-          id: index + 1,
-          date: game.date,
-          time: game.time,
-          location: game.location,
-          court: game.court,
-          type: game.type,
-          players: game.players,
-     } })
+  const userGames = useSelector(state => state.auth.loggedUser.gamesList);
+
+
+  const games = userGames.map((game, index) => {
+    return {
+      id: index + 1,
+      date: game.date,
+      time: game.time,
+      location: game.location,
+      court: game.court,
+      type: game.type,
+      players: game.players,
+    }
+  })
 
 
   return (
-    <div style={{ height: 300, width: '80%', backgroundColor:'#F2C67D', borderRadius: '10px' }}>
+    <div style={{ height: 300, width: '80%', backgroundColor: '#F2C67D', borderRadius: '10px' }}>
       <DataGrid
         rows={games}
         columns={columns}
         pageSize={5}
-       
+
       />
     </div>
   );
