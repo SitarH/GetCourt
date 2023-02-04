@@ -5,7 +5,6 @@ import Wrapper from '../Components/UI/Wrapper';
 import Card from '../Components/UI/Card';
 import Title from '../Components/UI/Title';
 import { useDispatch } from 'react-redux';
-
 import Court from '../Pages/Court';
 import PurchaseButton from '../Components/UI/PurchaseButton';
 import { apiAddress } from '../api';

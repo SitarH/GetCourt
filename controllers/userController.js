@@ -136,11 +136,10 @@ exports.AddFriendToUser = async (req, res) => {
 
     let { friend } = req.body;
     let { id } = req.params;
-
     try {
         let user = await new User().GetUserByID(id);
         let friendsArr = user.friendsList || []
-        friendsArr.push(friend);
+        friendsArr.push(req.body._id);
         user.friendsList = friendsArr;
         await new User().UpdateUserById(id, user);
         res.status(201).json(user);

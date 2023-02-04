@@ -18,7 +18,6 @@ server.use('/api/GetCourt/gameOrder', require('./Routers/gameOrder'));
 
 server.use('/api/GetCourt/location', require('./Routers/location'));
 
-server.use('/api/GetCourt/product', require('./Routers/product'));
 
 server.use('/api/GetCourt/user', require('./Routers/user'));
 

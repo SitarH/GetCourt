@@ -2,7 +2,7 @@
 import { apiAddress } from '../api';
 
 export const fetchUserData = async (phone, pass) => {
-console.log(phone, pass)
+
     const loginDetails = {
         method: 'POST',
         headers: {
