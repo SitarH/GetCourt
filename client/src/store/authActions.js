@@ -2,7 +2,7 @@
 import { apiAddress } from '../api';
 
 export const fetchUserData = async (phone, pass) => {
-
+console.log(phone, pass)
     const loginDetails = {
         method: 'POST',
         headers: {
@@ -14,7 +14,7 @@ export const fetchUserData = async (phone, pass) => {
     try {
         const response = await fetch(`${apiAddress}/api/GetCourt/user/login`, loginDetails);
         const data = await response.json();
-
+        console.log(data)
         return data;
     } catch (e) {
         return e;

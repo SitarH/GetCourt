@@ -12,8 +12,8 @@ function Order({ game }) {
             {Object.entries(game).map(([key, val], i) => (
                 key === 'players' && val.length > 0 ? players.map((player, index) => {
 
-                    return <h2 key={index}>
-                        {player.firstName}
+                    return<h2 key={index}>
+                        PLAYER: {player.firstName}
                     </h2>
                 }) : <h2 key={i}>{key.toUpperCase()}: {val}</h2>
 

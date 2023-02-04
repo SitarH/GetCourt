@@ -96,7 +96,7 @@ function Register() {
         else {
             alert('OOPS something went wrong, please try again')
         }
-
+ 
         ResetFirstName();
         ResetLastName();
         ResetPhoneNumber();
@@ -112,6 +112,7 @@ function Register() {
             <Title>Register</Title>
             <div>
                 <input type="text" placeholder="First Name"
+                required={true} pattern="[A-Za-z]+"
                 
                     style={{ marginRight: '50px' }}
                     value={enteredFirstName}
@@ -120,6 +121,7 @@ function Register() {
                 {firstNameHasError && <p>Please enter a first name</p>}
 
                 <input type="text" placeholder="Last Name"
+                required={true} pattern="[A-Za-z]+"
                 
                     value={enteredLastName}
                     onChange={LastNameChangeHandler}

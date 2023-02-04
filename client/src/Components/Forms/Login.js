@@ -41,7 +41,7 @@ function Login() {
         event.preventDefault();
         
         const user = await fetchUserData(enteredPhoneNumber, enteredPassword);
-        
+        console.log(user)
         if (user === null) {
             alert('wrong details try again')
         }

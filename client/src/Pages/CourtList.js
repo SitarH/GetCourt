@@ -161,9 +161,6 @@ function Courts() {
             {courtObject.map((court, index) => {
               return takenCourtsByHour.includes(court.courtId) ?
                 <Button className='disabled' disabled={true} width={'90px'} padding={'3px'}>{court.courtId}</Button> :
-                // <img src={courtImg1}
-                //   style={{ height: '80px', cursor: 'pointer' }}
-                //   onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}></img>
                 <Button width={'90px'} padding={'3px'}
                 onClick={() => { setGameOrder({ ...gameOrder, court: court.courtId }); setTogglePopUp(true) }}>{court.courtId}</Button>
             })}

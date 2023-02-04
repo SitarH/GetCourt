@@ -12,8 +12,8 @@ align-items: center;
 padding-top: 20px;
 position: fixed;
 z-index: 1;
-margin-top: 20%;
 border: 10px solid;
+ transform: translate(70%, 0px);
 `;
 
 

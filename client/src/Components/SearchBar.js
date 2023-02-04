@@ -53,8 +53,8 @@ export default function Tags() {
           )}
         />
 
+      <PurchaseButton valid={'pointer'} width='70px' onClick={(user)=>AddFriendHandler(user)}>Add</PurchaseButton>
       </Stack>
-      <PurchaseButton valid={'pointer'} width='70px' onClick={()=>AddFriendHandler(params)}>Add</PurchaseButton>
     </>
   );
 }

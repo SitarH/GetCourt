@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gameOrderActions } from '../../store/gameOrder';
 import { useNavigate } from 'react-router-dom'
 import {apiAddress} from '../../api';
+import Wrapper from '../UI/Wrapper';
 
 export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj }) {
 
@@ -29,23 +30,22 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
 
   useEffect(() => {
 
-    // fetchFriendsList('62d1400d207bc314b4355c9b');
     mapFriends();
 
   }, [])
 
-  const fetchFriendsList = async (id) => {
-    try {
-      const respone = await fetch(`${apiAddress}/api/GetCourt/user/${id}`);
-      if (respone.status === 200) {
-        const data = await respone.json();
-        console.log(data)
-        setFriendsList(data.friendsList);
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const fetchFriendsList = async (id) => {
+  //   try {
+  //     const respone = await fetch(`${apiAddress}/api/GetCourt/user/${id}`);
+  //     if (respone.status === 200) {
+  //       const data = await respone.json();
+  //       console.log(data)
+  //       setFriendsList(data.friendsList);
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   const mapFriends = async () => {
 
@@ -91,10 +91,11 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
   }
 
   return (
+    <Wrapper>
     <PopUp>
       {friendsList.length === 0? 
       <>
-      <h2 style={{fontWeight: 'lighter'}}>No friends in your list..</h2>
+      <h2 style={{fontWeight: 'lighter'}}>Loading..</h2>
       <Button onClick={AddToGame} width={'150px'} padding={'3px'}>Continue</Button>
       </>:
       <>
@@ -115,12 +116,6 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
               disablePadding
             >
               <ListItemButton>
-                <ListItemAvatar>
-                  <Avatar
-                    alt={`Avatar n°${value + 1}`}
-                    src={`/static/images/avatar/${value + 1}.jpg`}
-                  />
-                </ListItemAvatar>
                 <ListItemText id={labelId} primary={value.firstName + ' ' + value.lastName} />
               </ListItemButton>
             </ListItem>
@@ -130,5 +125,6 @@ export default function CheckboxListSecondary({ toggleVal, setToggle, gameObj })
       <Button onClick={AddToGame}>Add to game</Button>
       </>}
     </PopUp>
+    </Wrapper>
   );
 }

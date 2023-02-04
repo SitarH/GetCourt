@@ -36,12 +36,10 @@ function Payment({ game }) {
                 backgroundColor={'#F2C67D'}
                 direction={'column'}>
                 <Form>
-                    <input placeholder='Card name' />
-                    <input placeholder='Card number' />
-                    <input placeholder='CVV' />
+                    <input placeholder='Card name' pattern="[A-Za-z]" />
+                    <input type="number" placeholder='Card number' pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$" />
+                    <input type="number" max="999" pattern="([0-9]|[0-9]|[0-9]{3}" placeholder='CVV' />
                 </Form>
-                {/* <Button width={'130px'}
-                    padding={'10px'} onClick={() => { setOpenCards(true) }}>Use saved card</Button> */}
                 <PurchaseButton width={'200px'} valid={'pointer'}
                     onClick={PurchaseHandler}>Confirm</PurchaseButton>
             </Card>
