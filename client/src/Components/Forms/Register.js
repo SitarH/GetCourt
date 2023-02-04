@@ -106,7 +106,6 @@ function Register() {
 
     }
 
-
     return (
         <Form onSubmit={FormSubmitHandler}>
             <Title>Register</Title>

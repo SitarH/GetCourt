@@ -4,12 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Card from '../Components/UI/Card';
 import Title from '../Components/UI/Title';
 import lottie from 'lottie-web';
-
 function Location({ locationObj, game, setGame }) {
-
   const navigate = useNavigate();
   const container = useRef(null);
-
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current,
@@ -22,7 +19,6 @@ function Location({ locationObj, game, setGame }) {
   }, [])
 
   const LocationHandler = () => {
-
     navigate('/courts', { state: { gameOrder: game, location: locationObj } });
   }
 

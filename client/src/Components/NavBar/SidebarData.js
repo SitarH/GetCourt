@@ -31,7 +31,4 @@ export const SidebarData = [
     title: 'Contact',
     path: '/Contact',
     icon: <AiIcons.AiFillContacts />,
-
-  },
-
-];
+  }]
