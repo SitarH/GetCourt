@@ -32,14 +32,14 @@ function Row(props) {
             size="small"
             onClick={() => setOpen(!open)}
           >
-            <DeleteIcon />
+            
           </IconButton>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
           >
-            <EditIcon />
+            
           </IconButton>
         </TableCell>
       </TableRow>

@@ -50,6 +50,7 @@ function AddFriends({ toggleVal, setToggle, gameObj }) {
               <Button value={"no"} width={'150px'} padding={'3px'}
                 onClick={AddFriendHandler}>No
               </Button>
+              <Button width={'150px'} padding={'3px'} onClick={()=>{navigate('/friends')}}>Add friend</Button>
             </div>
           </PopUp>
         </Wrapper>}

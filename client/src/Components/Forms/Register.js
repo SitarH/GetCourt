@@ -9,7 +9,7 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 
 function Register() {
-
+ 
  
     const navigate = useNavigate();
 
@@ -145,7 +145,6 @@ function Register() {
             </div>
             <div>
                 <input type="date" placeholder="Birth Date"
-                pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
                     style={{ marginRight: '50px', fontSize: '17px' }}
                     value={enteredBirthDate}
                     onChange={BirthDateChangeHandler}
@@ -162,7 +161,7 @@ function Register() {
                 </select>
                 {levelHasError && <p>Please select a level</p>}
             </div>
-            <PurchaseButton size={'20px'} width={'200px'} type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
+            <PurchaseButton style={{cursor: 'pointer'}} size={'20px'} width={'200px'} type="submit" disabled={!formIsValid}>Submit</PurchaseButton>
         </Form>
     )
 }
